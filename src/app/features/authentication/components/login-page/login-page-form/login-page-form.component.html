@@ -1,0 +1,21 @@
+<div class="login-page-form" [formGroup]="form">
+    <form class="p-4" [formGroup]="form">
+        <p>
+            <mat-form-field appearance="fill">
+                <mat-label>Username</mat-label>
+                <input type="text" matInput formControlName="username" required>
+                <mat-error *ngIf="form.get('username')?.invalid">Username is required</mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="fill">
+                <mat-label>Password</mat-label>
+                <input type="password" matInput formControlName="password" required>
+                <mat-error *ngIf="form.get('password')?.invalid">Password is required</mat-error>
+            </mat-form-field>
+        </p>
+        <p class="d-flex justify-content-center">
+            <button mat-raised-button color="primary" (click)="onSubmit()">Login</button>
+        </p>
+    </form>
+</div>
