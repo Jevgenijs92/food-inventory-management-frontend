@@ -3,11 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CoreModule } from '@fim/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { AuthModule } from '@fim/features/auth';
 import { ShellModule } from '@fim/features/shell';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,12 +18,23 @@ import { ShellModule } from '@fim/features/shell';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+      defaultLanguage: 'en',
+    }),
     CoreModule,
     AuthModule,
     MatProgressBarModule,
     ShellModule,
   ],
-  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}

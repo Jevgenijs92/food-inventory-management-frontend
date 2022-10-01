@@ -1,0 +1,11 @@
+{
+  "auth": {
+    "login": "Login",
+    "username": "Username",
+    "password": "Password",
+    "errors": {
+      "required": "Field is required",
+      "invalidCredentials": "Invalid credentials"
+    }
+  }
+}

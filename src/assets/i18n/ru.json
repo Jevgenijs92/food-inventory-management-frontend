@@ -1,0 +1,11 @@
+{
+  "auth": {
+    "login": "Вход",
+    "username": "Имя",
+    "password": "Пароль",
+    "errors": {
+      "required": "Обязательное поле",
+      "invalidCredentials": "Недействительные учётные данные"
+    }
+  }
+}

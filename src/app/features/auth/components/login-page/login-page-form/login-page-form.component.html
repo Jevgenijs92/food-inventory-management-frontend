@@ -2,23 +2,27 @@
     <form class="p-4" [formGroup]="form">
         <p>
             <mat-form-field appearance="fill">
-                <mat-label>Username</mat-label>
+                <mat-label>{{'auth.username' | translate}}</mat-label>
                 <input type="text" matInput formControlName="username" required>
-                <mat-error *ngIf="form.get('username')?.invalid">Username is required</mat-error>
+                <mat-error *ngIf="username?.errors?.['required']">
+                    {{'auth.errors.required' | translate}}
+                </mat-error>
             </mat-form-field>
         </p>
         <p>
             <mat-form-field appearance="fill">
-                <mat-label>Password</mat-label>
+                <mat-label>{{'auth.password' | translate}}</mat-label>
                 <input type="password" matInput formControlName="password" required>
-                <mat-error *ngIf="form.get('password')?.invalid">Password is required</mat-error>
+                <mat-error *ngIf="password?.errors?.['required']">
+                    {{'auth.errors.required' | translate}}
+                </mat-error>
             </mat-form-field>
         </p>
         <p class="d-flex justify-content-center">
             <button type="submit" mat-raised-button color="primary" (click)="onSubmit()"
-                    [disabled]="isLoading | async">Login
+                    [disabled]="isLoading | async">{{'auth.login' | translate}}
             </button>
         </p>
-        <mat-error *ngIf="invalidCredentials">Invalid credentials</mat-error>
+        <mat-error *ngIf="invalidCredentials">{{'auth.errors.invalidCredentials' | translate}}</mat-error>
     </form>
 </div>

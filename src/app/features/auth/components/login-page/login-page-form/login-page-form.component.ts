@@ -44,4 +44,12 @@ export class LoginPageFormComponent implements OnInit {
   get isLoading(): Observable<boolean> {
     return this.loadingService.isLoading$;
   }
+
+  get username() {
+    return this.form.get("username");
+  }
+
+  get password() {
+    return this.form.get("password");
+  }
 }

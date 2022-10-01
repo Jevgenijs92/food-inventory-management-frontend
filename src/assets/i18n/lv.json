@@ -1,0 +1,11 @@
+{
+  "auth": {
+    "login": "Ielogoties",
+    "username": "Lietotājvārds",
+    "password": "Parole",
+    "errors": {
+      "required": "Obligāts lauks",
+      "invalidCredentials": "Nepareizs lietotājvārds un/vai parole"
+    }
+  }
+}
