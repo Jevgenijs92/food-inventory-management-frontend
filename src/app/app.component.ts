@@ -12,5 +12,6 @@ export class AppComponent {
   get isLoading$() {
     return this.loadingService.isLoading$;
   }
+
   title = 'Food inventory management';
 }

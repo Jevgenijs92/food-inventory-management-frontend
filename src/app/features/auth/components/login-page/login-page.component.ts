@@ -1,14 +1,23 @@
 import { Component } from '@angular/core';
-import { LoginService } from '../../core';
+import { AuthService } from '../../core';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'fim-login-page',
   templateUrl: './login-page.component.html',
 })
 export class LoginPageComponent {
-  constructor(protected loginService: LoginService) {}
+  constructor(protected loginService: AuthService) {}
 
-  login($event: { username: string; password: string }) {
-    this.loginService.login($event).subscribe(console.log);
+  invalidCredentials: boolean = false;
+
+  login($event: { username: string; password: string }): void {
+    this.loginService
+      .login($event)
+      .pipe(take(1))
+      .subscribe({
+        next: () => (this.invalidCredentials = false),
+        error: () => (this.invalidCredentials = true),
+      });
   }
 }

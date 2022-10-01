@@ -2,7 +2,8 @@
     <mat-card>
         <mat-card-title>Login</mat-card-title>
         <mat-card-content>
-            <fim-login-page-form (submitForm)="login($event)"></fim-login-page-form>
+            <fim-login-page-form (submitForm)="login($event)"
+                                 [invalidCredentials]="invalidCredentials"></fim-login-page-form>
         </mat-card-content>
     </mat-card>
 </div>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadingService } from '@fim/core';
 import { Observable } from 'rxjs';
@@ -8,10 +8,16 @@ import { Observable } from 'rxjs';
   templateUrl: './login-page-form.component.html',
 })
 export class LoginPageFormComponent implements OnInit {
-  constructor(protected formBuilder: FormBuilder,
-              protected loadingService: LoadingService) {}
+  constructor(
+    protected formBuilder: FormBuilder,
+    protected loadingService: LoadingService
+  ) {}
 
-  @Output() submitForm = new EventEmitter<{
+  @Input()
+  invalidCredentials: boolean = false;
+
+  @Output()
+  submitForm = new EventEmitter<{
     username: string;
     password: string;
   }>();

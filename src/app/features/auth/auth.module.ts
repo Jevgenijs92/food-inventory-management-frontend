@@ -3,6 +3,6 @@ import { AuthComponentsModule } from './components';
 import { AuthCoreModule } from './core';
 
 @NgModule({
-  imports: [AuthComponentsModule, AuthCoreModule]
+  imports: [AuthComponentsModule, AuthCoreModule],
 })
 export class AuthModule {}

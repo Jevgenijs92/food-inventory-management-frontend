@@ -19,5 +19,6 @@
                     [disabled]="isLoading | async">Login
             </button>
         </p>
+        <mat-error *ngIf="invalidCredentials">Invalid credentials</mat-error>
     </form>
 </div>
