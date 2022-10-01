@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginPageComponent } from './login-page.component';
-import { LoginPageFormModule } from './login-page-form/login-page-form.module';
+import { LoginPageComponent, LoginPageFormModule } from './';
 import { MatCardModule } from '@angular/material/card';
 
 @NgModule({

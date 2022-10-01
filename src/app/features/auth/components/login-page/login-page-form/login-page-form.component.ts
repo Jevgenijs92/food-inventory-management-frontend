@@ -1,12 +1,15 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LoadingService } from '@fim/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'fim-login-page-form',
   templateUrl: './login-page-form.component.html',
 })
 export class LoginPageFormComponent implements OnInit {
-  constructor(protected formBuilder: FormBuilder) {}
+  constructor(protected formBuilder: FormBuilder,
+              protected loadingService: LoadingService) {}
 
   @Output() submitForm = new EventEmitter<{
     username: string;
@@ -30,5 +33,9 @@ export class LoginPageFormComponent implements OnInit {
     if (this.form.valid) {
       this.submitForm.emit({ ...this.form.value });
     }
+  }
+
+  get isLoading(): Observable<boolean> {
+    return this.loadingService.isLoading$;
   }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoginService } from '../../core/facades/login.service';
+import { LoginService } from '../../core';
 
 @Component({
   selector: 'fim-login-page',

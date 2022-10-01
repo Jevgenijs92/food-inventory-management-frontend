@@ -15,7 +15,9 @@
             </mat-form-field>
         </p>
         <p class="d-flex justify-content-center">
-            <button mat-raised-button color="primary" (click)="onSubmit()">Login</button>
+            <button type="submit" mat-raised-button color="primary" (click)="onSubmit()"
+                    [disabled]="isLoading | async">Login
+            </button>
         </p>
     </form>
 </div>
