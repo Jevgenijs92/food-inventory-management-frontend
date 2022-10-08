@@ -1,11 +1,11 @@
 <p class="header">
     <mat-toolbar color="primary">
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-            <mat-icon>menu</mat-icon>
+        <button mat-icon-button aria-label="home icon" [routerLink]="['/']">
+            <mat-icon>home</mat-icon>
         </button>
-        <span>Food Inventory Management</span>
+        <span>{{'header.title' | translate}}</span>
         <span class="spacer"></span>
-        <button mat-icon-button class="example-icon favorite-icon" aria-label="icon-logout" (click)="logout()">
+        <button mat-icon-button aria-label="logout icon" (click)="logout()">
             <mat-icon>logout</mat-icon>
         </button>
     </mat-toolbar>

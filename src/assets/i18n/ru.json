@@ -7,5 +7,13 @@
       "required": "Обязательное поле",
       "invalidCredentials": "Недействительные учётные данные"
     }
+  },
+  "header": {
+    "title": "Управление Производством"
+  },
+  "homepage": {
+    "ingredients": "Ингредиенты",
+    "products": "Продукты",
+    "orders": "Заказы"
   }
 }

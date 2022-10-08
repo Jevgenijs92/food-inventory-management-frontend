@@ -7,5 +7,13 @@
       "required": "Field is required",
       "invalidCredentials": "Invalid credentials"
     }
+  },
+  "header": {
+    "title": "Inventory Management"
+  },
+  "homepage": {
+    "ingredients": "Ingredients",
+    "products": "Products",
+    "orders": "Orders"
   }
 }

@@ -7,5 +7,13 @@
       "required": "Obligāts lauks",
       "invalidCredentials": "Nepareizs lietotājvārds un/vai parole"
     }
+  },
+  "header": {
+    "title": "Ražošanas Vadība"
+  },
+  "homepage": {
+    "ingredients": "Izejvielas",
+    "products": "Produkti",
+    "orders": "Pasūtījumi"
   }
 }

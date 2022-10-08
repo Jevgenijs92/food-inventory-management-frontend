@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginPageComponent, AuthGuard } from '@fim/features/auth';
+import { AuthGuard, LoginPageComponent } from '@fim/features/auth';
 import { ShellComponent } from '@fim/features/shell';
 
 const routes: Routes = [
@@ -8,6 +8,15 @@ const routes: Routes = [
     path: '',
     component: ShellComponent,
     canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('@fim-features/homepage/homepage.module').then(
+            (m) => m.HomepageModule
+          ),
+      },
+    ],
   },
   {
     path: 'login',

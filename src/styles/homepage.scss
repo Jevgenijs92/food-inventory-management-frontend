@@ -1,0 +1,20 @@
+fim-homepage-card {
+  mat-card {
+    min-height: 320px;
+
+    .mat-icon {
+      &.homepage-card__icon {
+        height: 100px;
+        width: 100px;
+      }
+    }
+
+    &.mat-card {
+      &:hover,
+      &:focus {
+        cursor: pointer;
+        background-color: var(--fim-hover-color);
+      }
+    }
+  }
+}
