@@ -2,6 +2,16 @@ body {
   --fim-hover-color: #F2F4FF;
 }
 
+.page {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+main {
+  overflow-y: auto;
+}
+
 .mat-progress-bar {
   &.fim-progress-bar {
     height: 2px;
