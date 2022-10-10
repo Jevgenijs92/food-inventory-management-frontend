@@ -14,15 +14,15 @@ export class LoadingInterceptor implements HttpInterceptor {
   constructor(private loadingService: LoadingService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler) {
-    if(!request.url.includes('/assets/')) {
+    if (!request.url.includes('/assets/')) {
       this.totalRequests++;
-      this.loadingService.isLoading = true;
+      this.loadingService.setLoading(true);
 
       return next.handle(request).pipe(
         finalize(() => {
           this.totalRequests--;
           if (this.totalRequests === 0) {
-            this.loadingService.isLoading = false;
+            this.loadingService.setLoading(false);
           }
         })
       );

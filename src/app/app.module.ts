@@ -10,6 +10,7 @@ import { AuthModule } from '@fim/features/auth';
 import { ShellModule } from '@fim/features/shell';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from '@fim/shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +28,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
       defaultLanguage: 'en',
     }),
     CoreModule,
+    SharedModule,
     AuthModule,
     MatProgressBarModule,
     ShellModule,

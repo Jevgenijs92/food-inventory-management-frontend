@@ -15,5 +15,25 @@
     "ingredients": "Ингредиенты",
     "products": "Продукты",
     "orders": "Заказы"
+  },
+  "ingredients": {
+    "title": "Список ингредиентов",
+    "add": "Добавить",
+    "table": {
+      "name": "Название",
+      "quantityPerPackaging": "Кол-во в упаковке",
+      "pricePerPackaging": "Цена за упаковку",
+      "pricePerUnit": "Цена за единицу",
+      "unitOfMeasurement": "Единицы измерения",
+      "noData": "Результаты не найдены по критерию \"{{filter}}\""
+    }
+  },
+  "paginator": {
+    "firstPageLabel": "Первая страница",
+    "itemsPerPageLabel": "Показать на странице",
+    "lastPageLabel": "Последняя страница",
+    "nextPageLabel": "Следующая страница",
+    "previousPageLabel": "Предыдущая страница",
+    "rangeLabel": "{{start}} - {{end}} из {{length}}"
   }
 }

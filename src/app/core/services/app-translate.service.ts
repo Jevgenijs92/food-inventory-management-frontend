@@ -3,6 +3,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { LanguageStorageService } from '@fim/core/services/language-storage.service';
 import { Observable } from 'rxjs';
 
+export const LANGUAGES = ['en', 'ru', 'lv'];
+
 @Injectable({
   providedIn: 'root',
 })
@@ -11,11 +13,12 @@ export class AppTranslateService {
     protected translate: TranslateService,
     protected languageStorage: LanguageStorageService
   ) {
-    this.use(this.languageStorage.language);
+    this.init();
   }
 
-  addLangs(langs: string[]): void {
-    this.translate.addLangs(langs);
+  init(): void {
+    this.use(this.languageStorage.language);
+    this.translate.addLangs(LANGUAGES);
   }
 
   use(lang: string): Observable<any> {

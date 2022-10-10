@@ -15,5 +15,25 @@
     "ingredients": "Ingredients",
     "products": "Products",
     "orders": "Orders"
+  },
+  "ingredients": {
+    "title": "Ingredients List",
+    "add": "Add",
+    "table": {
+      "name": "Name",
+      "quantityPerPackaging": "Quantity per packaging",
+      "pricePerPackaging": "Price per packaging",
+      "pricePerUnit": "Price per unit",
+      "unitOfMeasurement": "Unit of measurement",
+      "noData": "No data matching the filter \"{{filter}}\""
+    }
+  },
+  "paginator": {
+    "firstPageLabel": "First page",
+    "itemsPerPageLabel": "Items per page",
+    "lastPageLabel": "Last page",
+    "nextPageLabel": "Next page",
+    "previousPageLabel": "Previous page",
+    "rangeLabel": "{{startIndex}} - {{endIndex}} of {{length}}"
   }
 }

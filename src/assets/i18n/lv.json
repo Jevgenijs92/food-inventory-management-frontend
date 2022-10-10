@@ -15,5 +15,25 @@
     "ingredients": "Izejvielas",
     "products": "Produkti",
     "orders": "Pasūtījumi"
+  },
+  "ingredients": {
+    "title": "Izejvielu saraksts",
+    "add": "Pievienot",
+    "table": {
+      "name": "Nosaukums",
+      "quantityPerPackaging": "Daudzums iepakojumā",
+      "pricePerPackaging": "Cena par iepakojumu",
+      "pricePerUnit": "Cena par vienību",
+      "unitOfMeasurement": "Mērvienības",
+      "noData": "Nekas netika atrasts pēc kritērija \"{{filter}}\""
+    }
+  },
+  "paginator": {
+    "firstPageLabel": "Pirmā lapa",
+    "itemsPerPageLabel": "Rādīt lapā",
+    "lastPageLabel": "Pēdējā lapa",
+    "nextPageLabel": "Nākamā lapa",
+    "previousPageLabel": "Iepriekšējā lapa",
+    "rangeLabel": "{{start}} - {{end}} no {{length}}"
   }
 }

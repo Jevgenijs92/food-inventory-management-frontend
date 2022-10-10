@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { LoadingService } from '@fim/core';
 import { AppTranslateService } from '@fim/core/services/app-translate.service';
 
-export const LANGUAGES = ['en', 'ru', 'lv'];
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,12 +11,10 @@ export class AppComponent {
     protected loadingService: LoadingService,
     protected translate: AppTranslateService
   ) {
-    this.translate.addLangs(LANGUAGES);
+    this.translate.init();
   }
 
-  get isLoading$() {
-    return this.loadingService.isLoading$;
-  }
+  isLoading$ = this.loadingService.isLoading$;
 
   title = 'Food inventory management';
 }
