@@ -1,5 +1,8 @@
 <div class="login-page d-flex justify-content-center align-items-center h-100">
     <mat-card>
+        <mat-card-header class="d-flex justify-content-end">
+            <fim-language-selector></fim-language-selector>
+        </mat-card-header>
         <mat-card-title>{{'auth.login' | translate}}</mat-card-title>
         <mat-card-content>
             <fim-login-page-form (submitForm)="login($event)"
