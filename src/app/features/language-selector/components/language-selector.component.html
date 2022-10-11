@@ -1,5 +1,5 @@
 <mat-form-field class="language-selector">
-    <mat-select *ngIf="languages$ | async as languages" [value]="language" (valueChange)="onChangeLanguage($event)">
+    <mat-select *ngIf="languages$ | async as languages" [value]="language$ | async" (valueChange)="onChangeLanguage($event)">
         <mat-option *ngFor="let lang of languages" [value]="lang">{{lang.toUpperCase()}}</mat-option>
     </mat-select>
 </mat-form-field>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AppTranslateService } from '@fim/core/services/app-translate.service';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'fim-language-selector',
@@ -11,10 +11,9 @@ export class LanguageSelectorComponent {
 
   languages$ = of(this.translateService.languages);
 
-  language: string = this.translateService.currentLanguage;
+  language$: Observable<string> = this.translateService.language$;
 
   onChangeLanguage(lang: any) {
-    this.translateService.use(lang);
-    this.language = lang;
+    this.translateService.language = lang;
   }
 }

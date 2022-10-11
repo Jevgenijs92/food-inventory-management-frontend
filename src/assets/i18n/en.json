@@ -34,6 +34,6 @@
     "lastPageLabel": "Last page",
     "nextPageLabel": "Next page",
     "previousPageLabel": "Previous page",
-    "rangeLabel": "{{startIndex}} - {{endIndex}} of {{length}}"
+    "rangeLabel": "{{start}} - {{end}} of {{length}}"
   }
 }

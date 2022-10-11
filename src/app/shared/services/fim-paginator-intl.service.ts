@@ -1,6 +1,7 @@
 import { MatPaginatorIntl } from '@angular/material/paginator';
-import { TranslateParser, TranslateService } from '@ngx-translate/core';
+import { TranslateParser } from '@ngx-translate/core';
 import { Injectable } from '@angular/core';
+import { AppTranslateService } from '@fim/core/services/app-translate.service';
 
 enum PaginatorIntl {
   FIRST_PAGE_LABEL = 'paginator.firstPageLabel',
@@ -16,7 +17,7 @@ enum PaginatorIntl {
 })
 export class FimPaginatorIntl extends MatPaginatorIntl {
   constructor(
-    protected translate: TranslateService,
+    protected translate: AppTranslateService,
     protected translateParser: TranslateParser
   ) {
     super();
@@ -27,7 +28,7 @@ export class FimPaginatorIntl extends MatPaginatorIntl {
 
   getTranslations() {
     this.translate
-      .get([
+      .translate([
         PaginatorIntl.FIRST_PAGE_LABEL,
         PaginatorIntl.ITEMS_PER_PAGE_LABEL,
         PaginatorIntl.LAST_PAGE_LABEL,
