@@ -35,5 +35,11 @@
     "nextPageLabel": "Next page",
     "previousPageLabel": "Previous page",
     "rangeLabel": "{{start}} - {{end}} of {{length}}"
+  },
+  "unitOfMeasurement": {
+    "kg": "kg",
+    "g": "g",
+    "pcs": "PCs",
+    "l": "l"
   }
 }

@@ -17,7 +17,12 @@
         <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
             <mat-header-cell *matHeaderCellDef
                              [mat-sort-header]="column"> {{'ingredients.table.' + column | translate}} </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element[column]}} </mat-cell>
+            <ng-container *ngIf="column !== 'unitOfMeasurement'">
+                <mat-cell *matCellDef="let element"> {{element[column]}} </mat-cell>
+            </ng-container>
+            <ng-container *ngIf="column === 'unitOfMeasurement'">
+                <mat-cell *matCellDef="let element"> {{'unitOfMeasurement.' + element[column] | translate}} </mat-cell>
+            </ng-container>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

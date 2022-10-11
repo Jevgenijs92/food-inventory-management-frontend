@@ -35,5 +35,11 @@
     "nextPageLabel": "Следующая страница",
     "previousPageLabel": "Предыдущая страница",
     "rangeLabel": "{{start}} - {{end}} из {{length}}"
+  },
+  "unitOfMeasurement": {
+    "kg": "кг",
+    "g": "г",
+    "pcs": "шт.",
+    "l": "л"
   }
 }

@@ -35,5 +35,11 @@
     "nextPageLabel": "Nākamā lapa",
     "previousPageLabel": "Iepriekšējā lapa",
     "rangeLabel": "{{start}} - {{end}} no {{length}}"
+  },
+  "unitOfMeasurement": {
+    "kg": "kg",
+    "g": "g",
+    "pcs": "gb",
+    "l": "l"
   }
 }
