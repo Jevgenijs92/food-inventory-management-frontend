@@ -11,9 +11,11 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
+import { IngredientsFormComponent } from './ingredients-form/ingredients-form.component';
+import { IngredientsTableComponent } from './ingredients-table/ingredients-table.component';
 
 @NgModule({
-  declarations: [IngredientsPageComponent],
+  declarations: [IngredientsPageComponent, IngredientsFormComponent, IngredientsTableComponent],
   imports: [
     CommonModule,
     MatTableModule,
