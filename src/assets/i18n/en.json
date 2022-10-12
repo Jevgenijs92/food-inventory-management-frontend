@@ -26,6 +26,16 @@
       "pricePerUnit": "Price per unit",
       "unitOfMeasurement": "Unit of measurement",
       "noData": "No data matching the filter \"{{filter}}\""
+    },
+    "form": {
+      "newIngredient": "New ingredient",
+      "name": "Name",
+      "qtyPerPack": "Quantity per packaging",
+      "pricePerPack": "Price per packaging",
+      "pricePerUnit": "Price per unit",
+      "uom": "Unit of measurement",
+      "create": "Create",
+      "cancel": "Cancel"
     }
   },
   "paginator": {

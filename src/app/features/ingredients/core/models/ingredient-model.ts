@@ -11,5 +11,5 @@ export enum UnitOfMeasurement {
   KG = 'kg',
   G = 'g',
   L = 'l',
-  PCs = 'pcs',
+  Pcs = 'pcs',
 }

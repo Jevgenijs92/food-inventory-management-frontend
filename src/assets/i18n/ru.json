@@ -26,6 +26,16 @@
       "pricePerUnit": "Цена за единицу",
       "unitOfMeasurement": "Единицы измерения",
       "noData": "Результаты не найдены по критерию \"{{filter}}\""
+    },
+    "form": {
+      "newIngredient": "Новый ингредиент",
+      "name": "Название",
+      "qtyPerPack": "Количество в упаковке",
+      "pricePerPack": "Цена за упаковку",
+      "pricePerUnit": "Цена за единицу",
+      "uom": "Единицы измерения",
+      "create": "Создать",
+      "cancel": "Отмена"
     }
   },
   "paginator": {

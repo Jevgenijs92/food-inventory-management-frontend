@@ -10,12 +10,19 @@ import { CdkColumnDef } from '@angular/cdk/table';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IngredientsFormComponent } from './ingredients-form/ingredients-form.component';
 import { IngredientsTableComponent } from './ingredients-table/ingredients-table.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
-  declarations: [IngredientsPageComponent, IngredientsFormComponent, IngredientsTableComponent],
+  declarations: [
+    IngredientsPageComponent,
+    IngredientsFormComponent,
+    IngredientsTableComponent,
+  ],
   imports: [
     CommonModule,
     MatTableModule,
@@ -27,6 +34,10 @@ import { IngredientsTableComponent } from './ingredients-table/ingredients-table
     MatIconModule,
     MatButtonModule,
     FormsModule,
+    MatDialogModule,
+    MatCardModule,
+    MatSelectModule,
+    ReactiveFormsModule,
   ],
   providers: [CdkColumnDef],
 })

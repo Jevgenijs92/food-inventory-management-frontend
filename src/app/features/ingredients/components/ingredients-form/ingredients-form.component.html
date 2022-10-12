@@ -1,1 +1,43 @@
-<p>ingredients-form works!</p>
+<h2>{{'ingredients.form.newIngredient' | translate}}</h2>
+<form [formGroup]="form" (ngSubmit)="onCreate()">
+    <mat-dialog-content>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>{{'ingredients.form.name' | translate}}</mat-label>
+                <input formControlName="name" type="text" matInput/>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>{{'ingredients.form.qtyPerPack' | translate}}</mat-label>
+                <input formControlName="quantityPerPackaging" type="number" matInput/>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>{{'ingredients.form.uom' | translate}}</mat-label>
+                <mat-select formControlName="unitOfMeasurement">
+                    <mat-option *ngFor="let option of uom"
+                                [value]="option">{{'unitOfMeasurement.' + option | translate}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>{{'ingredients.form.pricePerPack' | translate}}</mat-label>
+                <input formControlName="pricePerPackaging" type="number" matInput/>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>{{'ingredients.form.pricePerUnit' | translate}}</mat-label>
+                <input type="number" matInput [disabled]="true"/>
+            </mat-form-field>
+        </p>
+    </mat-dialog-content>
+    <p matDialogActions class="d-flex justify-content-center">
+        <button type="submit" mat-raised-button color="primary">{{'ingredients.form.create' | translate}}</button>
+        <button type="button" mat-raised-button class="ms-3"
+                (click)="onCancel()">{{'ingredients.form.cancel' | translate}}</button>
+    </p>
+</form>
