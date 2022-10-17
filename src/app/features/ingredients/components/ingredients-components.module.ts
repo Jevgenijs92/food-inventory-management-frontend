@@ -16,6 +16,7 @@ import { IngredientsTableComponent } from './ingredients-table/ingredients-table
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatCardModule,
     MatSelectModule,
     ReactiveFormsModule,
+    MatTooltipModule,
   ],
   providers: [CdkColumnDef],
 })
