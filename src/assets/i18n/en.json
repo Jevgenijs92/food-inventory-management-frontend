@@ -35,7 +35,10 @@
       "pricePerUnit": "Price per unit",
       "uom": "Unit of measurement",
       "create": "Create",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "close": "Close",
+      "error": "Cannot add ingredient",
+      "success": "Successfully added ingredient!"
     }
   },
   "paginator": {
@@ -50,6 +53,7 @@
     "kg": "kg",
     "g": "g",
     "pcs": "pcs",
-    "l": "l"
+    "l": "l",
+    "ml": "ml"
   }
 }

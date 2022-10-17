@@ -35,7 +35,10 @@
       "pricePerUnit": "Cena par vienību",
       "uom": "Mērvienības",
       "create": "Pievienot",
-      "cancel": "Atcelt"
+      "cancel": "Atcelt",
+      "close": "Aizvērt",
+      "error": "Neizdevās pievienot izejvielu",
+      "success": "Izejviela tika pievienota!"
     }
   },
   "paginator": {
@@ -50,6 +53,7 @@
     "kg": "kg",
     "g": "g",
     "pcs": "gb",
-    "l": "l"
+    "l": "l",
+    "ml": "ml"
   }
 }
