@@ -25,16 +25,19 @@
       "pricePerPackaging": "Cena par iepakojumu",
       "pricePerUnit": "Cena par vienību",
       "unitOfMeasurement": "Mērvienības",
-      "noData": "Nekas netika atrasts pēc kritērija \"{{filter}}\""
+      "noData": "Nekas netika atrasts pēc kritērija \"{{filter}}\"",
+      "action": "Darbības"
     },
     "form": {
       "newIngredient": "Jauna izejviela",
+      "updateIngredient": "Labot izejvielu",
       "name": "Nosaukums",
       "qtyPerPack": "Daudzums iepakojumā",
       "pricePerPack": "Cena par iepakojumu",
       "pricePerUnit": "Cena par vienību",
       "uom": "Mērvienības",
       "create": "Pievienot",
+      "update": "Labot",
       "cancel": "Atcelt",
       "close": "Aizvērt",
       "error": "Neizdevās pievienot izejvielu",

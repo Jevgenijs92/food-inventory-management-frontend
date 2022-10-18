@@ -25,16 +25,19 @@
       "pricePerPackaging": "Price per packaging",
       "pricePerUnit": "Price per unit",
       "unitOfMeasurement": "Unit of measurement",
-      "noData": "No data matching the filter \"{{filter}}\""
+      "noData": "No data matching the filter \"{{filter}}\"",
+      "action": "Action"
     },
     "form": {
       "newIngredient": "New ingredient",
+      "updateIngredient": "Update ingredient",
       "name": "Name",
       "qtyPerPack": "Quantity per packaging",
       "pricePerPack": "Price per packaging",
       "pricePerUnit": "Price per unit",
       "uom": "Unit of measurement",
       "create": "Create",
+      "update": "Update",
       "cancel": "Cancel",
       "close": "Close",
       "error": "Cannot add ingredient",

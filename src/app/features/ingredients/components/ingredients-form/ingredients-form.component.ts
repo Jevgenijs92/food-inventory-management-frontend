@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import {
+  Ingredient,
   UnitOfMeasurement,
   UnitOfMeasurementMapping,
 } from '@fim/features/ingredients/core/models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { filter, map, switchMap } from 'rxjs/operators';
 import { AppTranslateService } from '@fim/core/services/app-translate.service';
 import { IngredientsService } from '@fim/features/ingredients/core/facades/ingredients.service';
 import { calculatePricePerUnit } from '@fim/shared/utils';
@@ -15,9 +16,11 @@ import { calculatePricePerUnit } from '@fim/shared/utils';
   selector: 'fim-ingredients-form',
   templateUrl: './ingredients-form.component.html',
 })
-export class IngredientsFormComponent {
+export class IngredientsFormComponent implements AfterViewInit {
   unitsOfMeasurement = Object.values(UnitOfMeasurement);
   form: FormGroup;
+  ingredient: Ingredient | undefined;
+
   pricePerUnit$: Observable<string>;
 
   submittedSource: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
@@ -40,17 +43,14 @@ export class IngredientsFormComponent {
       unitOfMeasurement: [null, Validators.required],
       pricePerPackaging: [0, [Validators.required, Validators.min(0)]],
     });
-    this.pricePerUnit$ = combineLatest([
-      this.form.get('quantityPerPackaging')!.valueChanges,
-      this.form.get('pricePerPackaging')!.valueChanges,
-      this.form.get('unitOfMeasurement')!.valueChanges,
-    ]).pipe(
+    this.pricePerUnit$ = this.form.valueChanges.pipe(
+      filter(({ unitOfMeasurement }) => Boolean(unitOfMeasurement)),
       map(
-        ([quantityPerPackaging, pricePerPackaging, unitOfMeasurement]: [
-          number,
-          number,
-          UnitOfMeasurement
-        ]): [number, UnitOfMeasurement] => [
+        ({
+          quantityPerPackaging,
+          pricePerPackaging,
+          unitOfMeasurement,
+        }): [number, UnitOfMeasurement] => [
           calculatePricePerUnit(quantityPerPackaging, pricePerPackaging),
           unitOfMeasurement,
         ]
@@ -61,10 +61,29 @@ export class IngredientsFormComponent {
     );
   }
 
-  onCreate() {
+  ngAfterViewInit(): void {
+    if (this.ingredient) {
+      setTimeout(() =>
+        this.form.patchValue({
+          ...this.ingredient,
+        })
+      );
+    }
+  }
+
+  onSubmit() {
     if (this.form.valid) {
       this.submittedSource.next(true);
-      this.ingredientsService.createIngredient(this.form.value).subscribe(
+      let ingredient$: Observable<Ingredient>;
+      if (this.ingredient) {
+        ingredient$ = this.ingredientsService.updateIngredient(
+          this.ingredient.id,
+          this.form.value
+        );
+      } else {
+        ingredient$ = this.ingredientsService.createIngredient(this.form.value);
+      }
+      ingredient$.subscribe(
         () => this.errorsSource.next(false),
         () => this.errorsSource.next(true)
       );

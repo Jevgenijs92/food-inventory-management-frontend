@@ -1,5 +1,5 @@
-<h2>{{'ingredients.form.newIngredient' | translate}}</h2>
-<form [formGroup]="form" (ngSubmit)="onCreate()">
+<h2>{{('ingredients.form.' + (ingredient ? 'updateIngredient' :'newIngredient')) | translate}}</h2>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
     <mat-dialog-content>
         <mat-form-field appearance="outline" class="px-1 col-12 col-lg-3">
             <mat-label>{{'ingredients.form.name' | translate}}</mat-label>
@@ -35,7 +35,7 @@
             </span>
         </ng-container>
         <button type="submit" mat-raised-button color="primary" [disabled]="submitted$ | async">
-            {{'ingredients.form.create' | translate}}
+            {{(ingredient ? 'ingredients.form.update' : 'ingredients.form.create') | translate}}
         </button>
         <button type="button" mat-raised-button class="ms-3"
                 (click)="onClose()">{{'ingredients.form.close' | translate}}</button>

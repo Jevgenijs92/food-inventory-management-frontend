@@ -23,6 +23,13 @@ export class IngredientsService {
     );
   }
 
+  updateIngredient(id: string, ingredient: Ingredient): Observable<Ingredient> {
+    return this.http.patch<Ingredient>(
+      `${this.ingredientsUrl}/${id}`,
+      this.serializeIngredient(ingredient)
+    )
+  }
+
   serializeIngredient(ingredient: Ingredient): Ingredient {
     const { unit, multiplier } =
       UnitOfMeasurementMapping[ingredient.unitOfMeasurement];
