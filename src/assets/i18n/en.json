@@ -41,7 +41,8 @@
       "cancel": "Cancel",
       "close": "Close",
       "error": "Cannot add ingredient",
-      "success": "Successfully added ingredient!"
+      "success": "Successfully added ingredient!",
+      "deleted": "Successfully deleted ingredient!"
     }
   },
   "paginator": {
@@ -58,5 +59,6 @@
     "pcs": "pcs",
     "l": "l",
     "ml": "ml"
-  }
+  },
+  "CONFLICT_INGREDIENT_ASSIGNED_TO_PRODUCT": "Cannot delete ingredient because it is assigned to product"
 }

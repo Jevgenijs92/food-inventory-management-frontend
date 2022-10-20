@@ -41,7 +41,8 @@
       "cancel": "Atcelt",
       "close": "Aizvērt",
       "error": "Neizdevās pievienot izejvielu",
-      "success": "Izejviela tika pievienota!"
+      "success": "Izejviela tika pievienota!",
+      "deleted": "izejviela tika izdzēsta!"
     }
   },
   "paginator": {
@@ -58,5 +59,6 @@
     "pcs": "gb",
     "l": "l",
     "ml": "ml"
-  }
+  },
+  "CONFLICT_INGREDIENT_ASSIGNED_TO_PRODUCT": "Nav iespējams izdzēst izejvielu, jo tā ir pievienota produktam"
 }

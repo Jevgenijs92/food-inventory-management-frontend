@@ -27,7 +27,11 @@ export class IngredientsService {
     return this.http.patch<Ingredient>(
       `${this.ingredientsUrl}/${id}`,
       this.serializeIngredient(ingredient)
-    )
+    );
+  }
+
+  deleteIngredient(id: string): Observable<Ingredient> {
+    return this.http.delete<Ingredient>(`${this.ingredientsUrl}/${id}`);
   }
 
   serializeIngredient(ingredient: Ingredient): Ingredient {

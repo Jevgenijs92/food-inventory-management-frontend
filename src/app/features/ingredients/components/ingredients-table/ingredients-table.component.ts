@@ -10,9 +10,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Ingredient } from '@fim/features/ingredients/core/models';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatDialog } from '@angular/material/dialog';
-import { IngredientsFormComponent } from '@fim/features/ingredients/components/ingredients-form';
-import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'fim-ingredients-table',
@@ -20,7 +17,6 @@ import { take } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IngredientsTableComponent {
-  constructor(protected dialog: MatDialog) {}
 
   @Input()
   set data(ingredients: Ingredient[] | null) {
@@ -30,7 +26,10 @@ export class IngredientsTableComponent {
   }
 
   @Output()
-  ingredientChange: EventEmitter<void> = new EventEmitter<void>();
+  ingredientUpdate: EventEmitter<Ingredient> = new EventEmitter<Ingredient>();
+
+  @Output()
+  ingredientDelete: EventEmitter<Ingredient> = new EventEmitter<Ingredient>();
 
   dataSource!: MatTableDataSource<Ingredient>;
   filter: string | null = null;
@@ -56,15 +55,10 @@ export class IngredientsTableComponent {
   }
 
   onUpdateIngredient(ingredient: Ingredient) {
-    const dialogRef = this.dialog.open(IngredientsFormComponent);
-    dialogRef.componentInstance.ingredient = ingredient;
-    dialogRef
-      .afterClosed()
-      .pipe(take(1))
-      .subscribe(() => this.ingredientChange.emit());
+    this.ingredientUpdate.emit(ingredient);
   }
 
   onDeleteIngredient(ingredient: Ingredient) {
-    console.log(ingredient.id);
+    this.ingredientDelete.emit(ingredient);
   }
 }
