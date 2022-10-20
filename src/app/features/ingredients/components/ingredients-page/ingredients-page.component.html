@@ -3,4 +3,4 @@
     <mat-icon>add</mat-icon>
     <span>{{'ingredients.add' | translate}}</span>
 </button>
-<fim-ingredients-table [data]="ingredients$ | async"></fim-ingredients-table>
+<fim-ingredients-table [data]="ingredients$ | async" (ingredientChange)="loadIngredients()"></fim-ingredients-table>

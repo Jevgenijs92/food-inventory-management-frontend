@@ -1,7 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   Input,
+  Output,
   ViewChild,
 } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
@@ -10,6 +12,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { IngredientsFormComponent } from '@fim/features/ingredients/components/ingredients-form';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'fim-ingredients-table',
@@ -26,6 +29,9 @@ export class IngredientsTableComponent {
     this.dataSource.sort = this.sort;
   }
 
+  @Output()
+  ingredientChange: EventEmitter<void> = new EventEmitter<void>();
+
   dataSource!: MatTableDataSource<Ingredient>;
   filter: string | null = null;
   displayedColumns: string[] = [
@@ -34,7 +40,7 @@ export class IngredientsTableComponent {
     'pricePerPackaging',
     'pricePerUnit',
     'unitOfMeasurement',
-    'action'
+    'action',
   ];
 
   @ViewChild(MatSort) sort!: MatSort;
@@ -52,6 +58,10 @@ export class IngredientsTableComponent {
   onUpdateIngredient(ingredient: Ingredient) {
     const dialogRef = this.dialog.open(IngredientsFormComponent);
     dialogRef.componentInstance.ingredient = ingredient;
+    dialogRef
+      .afterClosed()
+      .pipe(take(1))
+      .subscribe(() => this.ingredientChange.emit());
   }
 
   onDeleteIngredient(ingredient: Ingredient) {
