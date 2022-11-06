@@ -45,6 +45,31 @@
       "deleted": "Successfully deleted ingredient!"
     }
   },
+  "products": {
+    "title": "Products List",
+    "add": "Add",
+    "table": {
+      "name": "Name",
+      "price": "Price",
+      "noData": "No data matching the filter \"{{filter}}\"",
+      "action": "Action"
+    },
+    "form": {
+      "newProduct": "New product",
+      "updateProduct": "Update product",
+      "name": "Name",
+      "price": "Price",
+      "ingredient": "Ingredient",
+      "quantity": "Quantity",
+      "create": "Create",
+      "update": "Update",
+      "cancel": "Cancel",
+      "close": "Close",
+      "error": "Cannot add product",
+      "success": "Successfully added product!",
+      "deleted": "Successfully deleted product!"
+    }
+  },
   "paginator": {
     "firstPageLabel": "First page",
     "itemsPerPageLabel": "Items per page",

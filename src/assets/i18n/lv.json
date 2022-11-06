@@ -45,6 +45,31 @@
       "deleted": "izejviela tika izdzēsta!"
     }
   },
+  "products": {
+    "title": "Produktu saraksts",
+    "add": "Pievienot",
+    "table": {
+      "name": "Nosaukums",
+      "price": "Cena",
+      "noData": "Nekas netika atrasts pēc kritērija \"{{filter}}\"",
+      "action": "Darbības"
+    },
+    "form": {
+      "newProduct": "Jauns produkts",
+      "updateProduct": "Labot produktu",
+      "name": "Nosaukums",
+      "price": "Cena",
+      "ingredient": "Izejviela",
+      "quantity": "Daudzums",
+      "create": "Izveidot",
+      "update": "Labot",
+      "cancel": "Atcelt",
+      "close": "Aizvērt",
+      "error": "Neizdevās pievienot produktu",
+      "success": "Produkts tika pievienots!",
+      "deleted": "Produkts tika izdzēsts!"
+    }
+  },
   "paginator": {
     "firstPageLabel": "Pirmā lapa",
     "itemsPerPageLabel": "Rādīt lapā",

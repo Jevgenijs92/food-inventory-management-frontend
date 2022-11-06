@@ -1,1 +1,8 @@
-<p>products-page works!</p>
+<h1 class="pt-2 fw-semibold">{{'products.title' | translate}}</h1>
+<button mat-raised-button color="primary" class="my-3" (click)="onClickAddProduct()">
+    <mat-icon>add</mat-icon>
+    <span>{{'products.add' | translate}}</span>
+</button>
+<fim-products-table [data]="products$ | async"
+                       (productUpdate)="onClickUpdateProduct($event)"
+                       (productDelete)="onClickDeleteProduct($event)"></fim-products-table>

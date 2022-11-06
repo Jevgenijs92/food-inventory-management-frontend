@@ -1,0 +1,58 @@
+<h2>{{('products.form.' + (product ? 'updateProduct' : 'newProduct')) | translate}}</h2>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-dialog-content>
+        <mat-form-field appearance="outline" class="px-1 col-12">
+            <mat-label>{{'products.form.name' | translate}}</mat-label>
+            <input formControlName="name" type="text" matInput/>
+        </mat-form-field>
+        <div formArrayName="ingredients" *ngIf="ingredients$ | async as ingredients">
+            <ng-container *ngFor="let ingredientControl of ingredientsArray.controls; index as i">
+                <div class="col-12" [formGroupName]="i">
+                    <mat-form-field appearance="outline" class="px-1 col-6">
+                        <mat-label>{{'products.form.ingredient' | translate}}</mat-label>
+                        <mat-select formControlName="ingredient" [value]="ingredientControl.get('ingredient')?.value">
+                            <mat-option *ngFor="let ingredient of ingredients"
+                                        [value]="ingredient.id">{{ ingredient.name }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="px-1 col-2">
+                        <mat-label>{{'products.form.quantity' | translate}}</mat-label>
+                        <input formControlName="quantity" type="number" matInput>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="px-1 col-2">
+                        <mat-label>{{'products.form.price' | translate}}</mat-label>
+                        <input formControlName="price" type="number" matInput>
+                    </mat-form-field>
+                    <button type="button" color="primary" mat-icon-button class="px-1 col-2"
+                            (click)="onAddIngredient()">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                    <button type="button" color="primary" mat-icon-button class="px-1 col-2"
+                            (click)="onRemoveIngredient(i)"
+                            [disabled]="ingredientsArray.controls.length <= 1">
+                        <mat-icon>remove</mat-icon>
+                    </button>
+                </div>
+            </ng-container>
+        </div>
+        <mat-form-field appearance="outline" class="px-1 col-12">
+            <mat-label>{{'products.form.price' | translate}}</mat-label>
+            <input formControlName="total" type="text" matInput>
+        </mat-form-field>
+    </mat-dialog-content>
+    <p matDialogActions class="d-flex justify-content-center">
+        <ng-container *ngIf="submitted$ | async">
+            <span class="px-1" *ngIf="!(errors$ | async)">
+                <mat-icon class="text-success" matTooltip="{{'products.form.success' | translate}}">done</mat-icon>
+            </span>
+            <span class="px-1" *ngIf="errors$ | async">
+                <mat-icon class="text-danger" matTooltip="{{'products.form.error' | translate}}">error</mat-icon>
+            </span>
+        </ng-container>
+        <button type="submit" mat-raised-button color="primary" [disabled]="submitted$ | async">
+            {{(product ? 'products.form.update' : 'products.form.create') | translate}}
+        </button>
+        <button type="button" mat-raised-button class="ms-3"
+                (click)="onClose()">{{'products.form.close' | translate}}</button>
+    </p>
+</form>
