@@ -17,6 +17,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CdkColumnDef } from '@angular/cdk/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackBarModule } from '@fim/features/snack-bar/snack-bar.module';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatDialogModule,
     MatSelectModule,
     MatTooltipModule,
+    SnackBarModule
   ],
   providers: [CdkColumnDef, MatSnackBar],
 })

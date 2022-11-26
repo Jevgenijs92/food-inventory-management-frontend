@@ -1,0 +1,53 @@
+<div class="container mat-elevation-z8">
+    <div class="d-flex">
+        <mat-form-field appearance="standard" class="w-25 ps-3">
+            <mat-icon matPrefix>search</mat-icon>
+            <input matInput [ngModel]="filter" (ngModelChange)="applyFilter($event)" #input class="fs-5">
+            <button *ngIf="filter" matSuffix mat-icon-button aria-label="clear filter" (click)="applyFilter('')">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+    <mat-table [dataSource]="dataSource" matSort class="w-100">
+        <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
+            <mat-header-cell *matHeaderCellDef
+                             [mat-sort-header]="column"> {{'products.table.' + column | translate}} </mat-header-cell>
+            <ng-container [ngSwitch]="column">
+                <ng-container *ngSwitchCase="'action'">
+                    <mat-cell *matCellDef="let element">
+                        <button mat-icon-button color="primary" (click)="onUpdateOrder(element)">
+                            <mat-icon>update</mat-icon>
+                        </button>
+                        <button mat-icon-button color="warn" (click)="onDeleteOrder(element)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </mat-cell>
+                </ng-container>
+                <ng-container *ngSwitchCase="'deliveryDate'">
+                    <mat-cell *matCellDef="let element">
+                        {{element[column] | date: 'dd/MM/yyyy'}}</mat-cell>
+                </ng-container>
+                <ng-container *ngSwitchCase="'products'">
+                    <mat-cell *matCellDef="let element">
+                        {{element[column]}}
+                    </mat-cell>
+                </ng-container>
+                <ng-container *ngSwitchDefault>
+                    <mat-cell *matCellDef="let element"> {{element[column]}} </mat-cell>
+                </ng-container>
+            </ng-container>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+        <!-- Row shown when there is no matching data. -->
+        <div class="mat-row d-flex justify-content-center" *matNoDataRow>
+            <p class="pt-2 fw-semibold">{{'products.table.noData' | translate: {filter: input.value} }}</p>
+        </div>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                   showFirstLastButtons
+                   aria-label="Select page of ingredients">
+    </mat-paginator>
+</div>

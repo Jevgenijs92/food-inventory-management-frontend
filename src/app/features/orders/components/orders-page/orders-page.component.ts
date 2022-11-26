@@ -9,6 +9,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import {
   OrdersFormComponent
 } from '@fim/features/orders/components/orders-form/orders-form.component';
+import {
+  SnackBarService
+} from '@fim/features/snack-bar/services/snack-bar.service';
 
 @Component({
   selector: 'fim-orders-page',
@@ -17,14 +20,36 @@ import {
 export class OrdersPageComponent {
   constructor(
     protected ordersService: OrdersService,
-    protected dialog: MatDialog
-  ) {}
+    protected dialog: MatDialog,
+    protected snackBarService: SnackBarService
+  ) {
+    this.loadOrders();
+  }
 
   ordersSource: BehaviorSubject<Order[]> = new BehaviorSubject<Order[]>([]);
   orders$: Observable<Order[]> = this.ordersSource.asObservable();
 
   onClickAddOrder() {
     this.openOrdersFormDialog();
+  }
+
+  onClickUpdateOrder(order: Order) {
+    this.openOrdersFormDialog(order);
+  }
+
+  onClickDeleteOrder(order: Order) {
+    this.ordersService
+      .deleteOrder(order.id)
+      .pipe(take(1))
+      .subscribe(
+        () => {
+          this.loadOrders();
+          this.openSnackBar('orders.form.deleted');
+        },
+        (error) => {
+          this.openSnackBar(error);
+        }
+      );
   }
 
   openOrdersFormDialog(order?: Order) {
@@ -35,10 +60,10 @@ export class OrdersPageComponent {
     dialogRef
       .afterClosed()
       .pipe(take(1))
-      .subscribe(() => this.loadProducts());
+      .subscribe(() => this.loadOrders());
   }
 
-  loadProducts() {
+  loadOrders() {
     this.ordersService
       .getOrders()
       .pipe(
@@ -46,5 +71,9 @@ export class OrdersPageComponent {
         tap((orders) => this.ordersSource.next(orders))
       )
       .subscribe();
+  }
+
+  private openSnackBar(message: string) {
+    this.snackBarService.openSnackBar(message);
   }
 }

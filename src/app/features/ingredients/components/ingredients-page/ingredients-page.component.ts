@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
-import { IngredientsService } from '@fim/features/ingredients/core/facades/ingredients.service';
+import {
+  IngredientsService
+} from '@fim/features/ingredients/core/facades/ingredients.service';
 import { Ingredient } from '@fim/features/ingredients/core/models';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { IngredientsFormComponent } from '../ingredients-form';
 import { take, tap } from 'rxjs/operators';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { AppTranslateService } from '@fim/core/services/app-translate.service';
+import {
+  SnackBarService
+} from '@fim/features/snack-bar/services/snack-bar.service';
 
 @Component({
   selector: 'fim-ingredients-page',
@@ -16,15 +19,13 @@ export class IngredientsPageComponent {
   constructor(
     protected ingredientsService: IngredientsService,
     protected dialog: MatDialog,
-    protected matSnackBar: MatSnackBar,
-    protected translateService: AppTranslateService
+    protected snackBarService: SnackBarService
   ) {
     this.loadIngredients();
   }
 
-  ingredientsSource: BehaviorSubject<Ingredient[]> = new BehaviorSubject<
-    Ingredient[]
-  >([]);
+  ingredientsSource: BehaviorSubject<Ingredient[]> = new BehaviorSubject<Ingredient[]>(
+    []);
   ingredients$: Observable<Ingredient[]> =
     this.ingredientsSource.asObservable();
 
@@ -63,15 +64,7 @@ export class IngredientsPageComponent {
   }
 
   openSnackBar(message: string) {
-    const close = 'ingredients.form.close';
-    this.translateService
-      .translate([message, close])
-      .pipe(take(1))
-      .subscribe((translations) =>
-        this.matSnackBar.open(translations[message], translations[close], {
-          duration: 5000,
-        })
-      );
+    this.snackBarService.openSnackBar(message);
   }
 
   loadIngredients() {

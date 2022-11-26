@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { AppTranslateService } from '@fim/core/services/app-translate.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Product } from '../../core/models';
 import { take, tap } from 'rxjs/operators';
@@ -11,6 +9,9 @@ import {
 import {
   ProductsService
 } from '@fim/features/products/core/facades/products.service';
+import {
+  SnackBarService
+} from '@fim/features/snack-bar/services/snack-bar.service';
 
 @Component({
   selector: 'fim-products-page',
@@ -20,8 +21,7 @@ export class ProductsPageComponent {
   constructor(
     protected productsService: ProductsService,
     protected dialog: MatDialog,
-    protected matSnackBar: MatSnackBar,
-    protected translateService: AppTranslateService
+    protected snackBarService: SnackBarService
   ) {
     this.loadProducts();
   }
@@ -66,15 +66,7 @@ export class ProductsPageComponent {
   }
 
   openSnackBar(message: string) {
-    const close = 'products.form.close';
-    this.translateService
-      .translate([message, close])
-      .pipe(take(1))
-      .subscribe((translations) =>
-        this.matSnackBar.open(translations[message], translations[close], {
-          duration: 5000,
-        })
-      );
+    this.snackBarService.openSnackBar(message);
   }
 
   loadProducts() {

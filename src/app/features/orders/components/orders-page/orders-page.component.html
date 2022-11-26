@@ -3,4 +3,7 @@
     <mat-icon>add</mat-icon>
     <span>{{'orders.add' | translate}}</span>
 </button>
+<fim-orders-table [data]="orders$ | async"
+                  (orderUpdate)="onClickUpdateOrder($event)"
+                  (orderDelete)="onClickDeleteOrder($event)"></fim-orders-table>
 

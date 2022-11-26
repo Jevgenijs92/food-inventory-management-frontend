@@ -83,7 +83,8 @@
       "error": "Cannot add order",
       "create": "Create",
       "update": "Update",
-      "close": "Close"
+      "close": "Close",
+      "deleted": "Successfully deleted order!"
     }
   },
   "paginator": {
@@ -101,5 +102,8 @@
     "l": "l",
     "ml": "ml"
   },
-  "CONFLICT_INGREDIENT_ASSIGNED_TO_PRODUCT": "Cannot delete ingredient because it is assigned to product"
+  "CONFLICT_INGREDIENT_ASSIGNED_TO_PRODUCT": "Cannot delete ingredient because it is assigned to product",
+  "snackBar": {
+    "close": "Close"
+  }
 }
