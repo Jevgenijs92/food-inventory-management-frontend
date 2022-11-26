@@ -1,0 +1,52 @@
+<h2>{{('orders.form.' + (order ? 'updateOrder' : 'newOrder')) | translate}}</h2>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-dialog-content>
+        <mat-form-field appearance="outline" class="px-1 col-12">
+            <mat-label>{{'orders.form.date' | translate}}</mat-label>
+            <input formControlName="deliveryDate" matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <div formArrayName="products" *ngIf="products$ | async as products">
+            <ng-container *ngFor="let productControl of productsArray.controls; index as i">
+                <div class="col-12" [formGroupName]="i">
+                    <mat-form-field appearance="outline" class="px-1 col-6">
+                        <mat-label>{{'orders.form.product' | translate}}</mat-label>
+                        <mat-select formControlName="id" [value]="productControl.get('id')?.value">
+                            <mat-option *ngFor="let product of products"
+                                        [value]="product.id">{{ product.name }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="px-1 col-2">
+                        <mat-label>{{'orders.form.quantity' | translate}}</mat-label>
+                        <input formControlName="deliveryQuantity" type="number" matInput>
+                    </mat-form-field>
+                    <button type="button" color="primary" mat-icon-button class="px-1 col-2"
+                            (click)="onAddProduct()">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                    <button type="button" color="primary" mat-icon-button class="px-1 col-2"
+                            (click)="onRemoveProduct(i)"
+                            [disabled]="productsArray.controls.length <= 1">
+                        <mat-icon>remove</mat-icon>
+                    </button>
+                </div>
+            </ng-container>
+        </div>
+    </mat-dialog-content>
+    <p matDialogActions class="d-flex justify-content-center">
+        <ng-container *ngIf="submitted$ | async">
+            <span class="px-1" *ngIf="!(errors$ | async)">
+                <mat-icon class="text-success" matTooltip="{{'orders.form.success' | translate}}">done</mat-icon>
+            </span>
+            <span class="px-1" *ngIf="errors$ | async">
+                <mat-icon class="text-danger" matTooltip="{{'orders.form.error' | translate}}">error</mat-icon>
+            </span>
+        </ng-container>
+        <button type="submit" mat-raised-button color="primary" [disabled]="submitted$ | async">
+            {{(order ? 'orders.form.update' : 'orders.form.create') | translate}}
+        </button>
+        <button type="button" mat-raised-button class="ms-3"
+                (click)="onClose()">{{'orders.form.close' | translate}}</button>
+    </p>
+</form>

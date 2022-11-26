@@ -70,6 +70,22 @@
       "deleted": "Successfully deleted product!"
     }
   },
+  "orders": {
+    "title": "Orders",
+    "add": "Add",
+    "form": {
+      "newOrder": "New Order",
+      "updateOrder": "Update Order",
+      "date": "Date",
+      "product": "Product",
+      "quantity": "Quantity",
+      "success": "Successfully added order",
+      "error": "Cannot add order",
+      "create": "Create",
+      "update": "Update",
+      "close": "Close"
+    }
+  },
   "paginator": {
     "firstPageLabel": "First page",
     "itemsPerPageLabel": "Items per page",

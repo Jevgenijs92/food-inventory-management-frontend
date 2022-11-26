@@ -70,6 +70,22 @@
       "deleted": "Продукт удалён!"
     }
   },
+  "orders": {
+    "title": "Заказы",
+    "add": "Добавить",
+    "form": {
+      "newOrder": "Новый Заказ",
+      "updateOrder": "Изменить Заказ",
+      "date": "Дата",
+      "product": "Продукт",
+      "quantity": "Количество",
+      "success": "Заказ добавлен!",
+      "error": "Не удалось добавить заказ",
+      "create": "Создать",
+      "update": "Изменить",
+      "close": "Закрыть"
+    }
+  },
   "paginator": {
     "firstPageLabel": "Первая страница",
     "itemsPerPageLabel": "Показать на странице",

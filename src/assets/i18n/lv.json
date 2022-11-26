@@ -70,6 +70,22 @@
       "deleted": "Produkts tika izdzēsts!"
     }
   },
+  "orders": {
+    "title": "Pasūtījumi",
+    "add": "Pievienot",
+    "form": {
+      "newOrder": "Jauns Pasūtījums",
+      "updateOrder": "Labot Pasūtījumu",
+      "date": "Datums",
+      "product": "Produkts",
+      "quantity": "Daudzums",
+      "success": "Pasūtījums tika pievienots",
+      "error": "Neizdevās pievienot pasūtījumu",
+      "create": "Izveidot",
+      "update": "Labot",
+      "close": "Aizvērt"
+    }
+  },
   "paginator": {
     "firstPageLabel": "Pirmā lapa",
     "itemsPerPageLabel": "Rādīt lapā",

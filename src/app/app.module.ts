@@ -4,13 +4,13 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { CoreModule } from '@fim/core';
+import { CoreModule, dateProviders } from '@fim/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { AuthModule } from '@fim/features/auth';
-import { ShellModule } from '@fim/features/shell';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '@fim/shared/shared.module';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,8 +31,9 @@ import { SharedModule } from '@fim/shared/shared.module';
     SharedModule,
     AuthModule,
     MatProgressBarModule,
-    ShellModule,
+    MatMomentDateModule,
   ],
+  providers: [...dateProviders],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
