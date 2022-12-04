@@ -12,6 +12,10 @@ import {
 import {
   SnackBarService
 } from '@fim/features/snack-bar/services/snack-bar.service';
+import { Ingredient } from '@fim/features/ingredients/core/models';
+import {
+  IngredientsService
+} from '@fim/features/ingredients/core/facades/ingredients.service';
 
 @Component({
   selector: 'fim-products-page',
@@ -21,9 +25,11 @@ export class ProductsPageComponent implements OnDestroy {
   constructor(
     protected productsService: ProductsService,
     protected dialog: MatDialog,
-    protected snackBarService: SnackBarService
+    protected snackBarService: SnackBarService,
+    protected ingredientsService: IngredientsService
   ) {
     this.loadProducts();
+    this.loadIngredients();
   }
 
   dialogRef: MatDialogRef<ProductsFormComponent> | null = null;
@@ -32,6 +38,8 @@ export class ProductsPageComponent implements OnDestroy {
     []
   );
   products$: Observable<Product[]> = this.productsSource.asObservable();
+
+  ingredients: Ingredient[] = [];
 
   onClickAddProduct() {
     this.openProductsFormDialog();
@@ -58,6 +66,7 @@ export class ProductsPageComponent implements OnDestroy {
 
   openProductsFormDialog(product?: Product) {
     this.dialogRef = this.dialog.open(ProductsFormComponent);
+    this.dialogRef.componentInstance.ingredients = this.ingredients;
     if (product) {
       this.dialogRef.componentInstance.product = product;
     }
@@ -88,5 +97,10 @@ export class ProductsPageComponent implements OnDestroy {
     this.dialogRef?.close();
   }
 
-
+  private loadIngredients() {
+    this.ingredientsService
+      .getIngredients()
+      .pipe(take(1))
+      .subscribe((ingredients) => (this.ingredients = ingredients));
+  }
 }

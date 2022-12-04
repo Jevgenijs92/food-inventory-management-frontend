@@ -5,7 +5,7 @@
             <mat-label>{{'products.form.name' | translate}}</mat-label>
             <input formControlName="name" type="text" matInput/>
         </mat-form-field>
-        <div formArrayName="ingredients" *ngIf="ingredients$ | async as ingredients">
+        <div formArrayName="ingredients">
             <ng-container *ngFor="let ingredientControl of ingredientsArray.controls; index as i">
                 <div class="col-12" [formGroupName]="i">
                     <mat-form-field appearance="outline" class="px-1 col-6">

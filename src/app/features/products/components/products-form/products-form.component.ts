@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -7,10 +7,7 @@ import {
 } from '@fim/features/products/core/facades/products.service';
 import { Product } from '@fim/features/products/core/models';
 import { Ingredient } from '@fim/features/ingredients/core/models';
-import {
-  IngredientsService
-} from '@fim/features/ingredients/core/facades/ingredients.service';
-import { debounceTime, takeUntil, tap } from 'rxjs/operators';
+import { debounceTime, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'fim-products-form',
@@ -28,9 +25,7 @@ export class ProductsFormComponent implements AfterViewInit, OnDestroy {
   errorsSource: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   errors$: Observable<boolean> = this.errorsSource.asObservable();
 
-  ingredients$: Observable<Ingredient[]> = this.ingredientsService
-    .getIngredients()
-    .pipe(tap((ingredients) => (this.ingredients = ingredients)));
+  @Input()
   ingredients: Ingredient[] = [];
 
   endSubs$: Subject<void> = new Subject<void>();
@@ -38,8 +33,7 @@ export class ProductsFormComponent implements AfterViewInit, OnDestroy {
   constructor(
     protected formBuilder: FormBuilder,
     protected dialogRef: MatDialogRef<ProductsFormComponent>,
-    protected productsService: ProductsService,
-    protected ingredientsService: IngredientsService
+    protected productsService: ProductsService
   ) {
     this.form = this.formBuilder.group({
       name: [null, Validators.required],

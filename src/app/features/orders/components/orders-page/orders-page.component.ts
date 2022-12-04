@@ -16,6 +16,10 @@ import {
 import {
   SnackBarService
 } from '@fim/features/snack-bar/services/snack-bar.service';
+import {
+  ProductsService
+} from '@fim/features/products/core/facades/products.service';
+import { Product } from '@fim/features/products/core/models';
 
 @Component({
   selector: 'fim-orders-page',
@@ -25,10 +29,14 @@ export class OrdersPageComponent implements OnDestroy {
   constructor(
     protected ordersService: OrdersService,
     protected dialog: MatDialog,
-    protected snackBarService: SnackBarService
+    protected snackBarService: SnackBarService,
+    protected productsService: ProductsService
   ) {
     this.loadOrders();
+    this.loadProducts();
   }
+
+  private products: Product[] = [];
 
   dialogRef: MatDialogRef<OrdersFormComponent> | null = null;
 
@@ -57,23 +65,9 @@ export class OrdersPageComponent implements OnDestroy {
     );
   }
 
-  onClickDeleteOrder(orderId: string) {
-    this.ordersService
-      .deleteOrder(orderId)
-      .pipe(take(1))
-      .subscribe(
-        () => {
-          this.loadOrders();
-          this.openSnackBar('orders.form.deleted');
-        },
-        (error) => {
-          this.openSnackBar(error);
-        }
-      );
-  }
-
   protected openOrdersFormDialog(order?: Order) {
     this.dialogRef = this.dialog.open(OrdersFormComponent);
+    this.dialogRef.componentInstance.products = this.products;
     if (order) {
       this.dialogRef.componentInstance.order = order;
     }
@@ -94,10 +88,6 @@ export class OrdersPageComponent implements OnDestroy {
         tap((orders) => this.ordersSource.next(orders))
       )
       .subscribe();
-  }
-
-  private openSnackBar(message: string) {
-    this.snackBarService.openSnackBar(message);
   }
 
   protected convertToOrderedProducts(orders: Order[]) {
@@ -194,5 +184,12 @@ export class OrdersPageComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this.dialogRef?.close();
+  }
+
+  private loadProducts() {
+    this.productsService
+      .getProducts()
+      .pipe(take(1))
+      .subscribe((products) => (this.products = products));
   }
 }

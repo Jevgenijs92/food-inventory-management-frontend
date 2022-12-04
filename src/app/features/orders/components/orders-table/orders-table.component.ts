@@ -27,9 +27,6 @@ export class OrdersTableComponent {
   @Output()
   orderUpdate: EventEmitter<string> = new EventEmitter<string>();
 
-  @Output()
-  orderDelete: EventEmitter<string> = new EventEmitter<string>();
-
   dataSource!: MatTableDataSource<OrderedProduct>;
   displayedColumns: string[] = [
     'deliveryDate',
@@ -45,10 +42,6 @@ export class OrdersTableComponent {
 
   onUpdateOrder(orderedProduct: OrderedProduct) {
     this.orderUpdate.emit(orderedProduct.orderId);
-  }
-
-  onDeleteOrder(orderedProduct: OrderedProduct) {
-    this.orderDelete.emit(orderedProduct.orderId);
   }
 
   getTotalAmount(): number {
