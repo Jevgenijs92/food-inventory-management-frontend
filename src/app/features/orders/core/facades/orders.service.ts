@@ -21,7 +21,7 @@ export class OrdersService {
   }
 
   updateOrder(id: string, order: OrderForm): Observable<Order> {
-    return this.http.patch<Order>(`${this.ordersUrl}/${id}`, order);
+    return this.http.put<Order>(`${this.ordersUrl}/${id}`, order);
   }
 
   deleteOrder(id: string): Observable<Order> {

@@ -24,7 +24,7 @@ export class IngredientsService {
   }
 
   updateIngredient(id: string, ingredient: Ingredient): Observable<Ingredient> {
-    return this.http.patch<Ingredient>(
+    return this.http.put<Ingredient>(
       `${this.ingredientsUrl}/${id}`,
       this.serializeIngredient(ingredient)
     );
