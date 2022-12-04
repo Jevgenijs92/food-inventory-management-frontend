@@ -6,21 +6,20 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AuthStorageService } from '@fim/features/auth/core/services/auth-storage.service';
+import { AuthService } from '@fim/features/auth';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-  constructor(protected authStorageService: AuthStorageService) {}
+  constructor(protected authService: AuthService) {}
 
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const token = this.authStorageService.token;
-    if (token.access_token) {
+    if (!req.headers.has('Authorization')) {
       req = req.clone({
         setHeaders: {
-          Authorization: `Bearer ${token.access_token}`,
+          Authorization: this.authService.authorizationHeader,
         },
       });
     }

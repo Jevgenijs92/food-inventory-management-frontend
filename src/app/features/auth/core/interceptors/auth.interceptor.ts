@@ -7,7 +7,7 @@ import {
   HttpStatusCode,
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AuthService } from '@fim/features/auth';
 
@@ -21,15 +21,38 @@ export class AuthInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       catchError((err) => {
+        const error = err.error.message || err.statusText;
         if (
-          err.status === HttpStatusCode.Unauthorized &&
+          err?.status === HttpStatusCode.Unauthorized &&
+          err?.url !== this.authService.refreshTokenUrl &&
           this.router.url !== '/login'
         ) {
-          //TODO: handle expired token
-          this.authService.logout();
+          return this._refreshTokenOrLogout(req, next, error);
+        } else {
+          return throwError(error);
         }
-        const error = err.error.message || err.statusText;
-        return throwError(error);
+      })
+    );
+  }
+
+  private _refreshTokenOrLogout(
+    req: HttpRequest<any>,
+    next: HttpHandler,
+    error: any
+  ): Observable<HttpEvent<any>> {
+    return this.authService.refreshToken().pipe(
+      switchMap((success) => {
+        if (success) {
+          req = req.clone({
+            setHeaders: {
+              Authorization: this.authService.authorizationHeader,
+            },
+          });
+          return next.handle(req);
+        } else {
+          this.authService.logout();
+          return throwError(error);
+        }
       })
     );
   }
