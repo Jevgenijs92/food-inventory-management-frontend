@@ -1,6 +1,8 @@
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { FimDateAdapter } from '@fim/core/services/fim-date-adapter';
-import { MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
+import {
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS
+} from '@angular/material-moment-adapter';
 
 export const dateProviders = [
   {
@@ -9,7 +11,7 @@ export const dateProviders = [
   },
   {
     provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS,
-    useValue: { strict: true, useUtc: true },
+    useValue: { strict: true, useUtc: false },
   },
   {
     provide: MAT_DATE_FORMATS,
