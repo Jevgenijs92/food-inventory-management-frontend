@@ -85,6 +85,22 @@
       "update": "Update",
       "close": "Close",
       "deleted": "Successfully deleted order!"
+    },
+    "table": {
+      "name": "Name",
+      "deliveryDate": "Date",
+      "deliveryQuantity": "Quantity",
+      "price": "Price",
+      "total": "Total",
+      "totals": "Total:",
+      "noData": "No data found",
+      "action": "Action"
+    },
+    "filters": {
+      "fromYearStart": "From beginning of the year",
+      "currentMonth": "Current month",
+      "lastYear": "Previous year",
+      "dateRangeLabel": "Choose a date range"
     }
   },
   "paginator": {

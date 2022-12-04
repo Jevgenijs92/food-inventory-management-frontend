@@ -85,6 +85,22 @@
       "update": "Labot",
       "close": "Aizvērt",
       "deleted": "Pasūtījums tika izdzēsts!"
+    },
+    "table": {
+      "name": "Nosaukums",
+      "deliveryDate": "Datums",
+      "deliveryQuantity": "Daudzums",
+      "price": "Cena",
+      "total": "Summa",
+      "totals": "Kopā:",
+      "noData": "Nekas netika atrasts",
+      "action": "Darbības"
+    },
+    "filters": {
+      "fromYearStart": "No gada sākuma",
+      "currentMonth": "Tekošais mēnesis",
+      "lastYear": "Iepriekšējais gads",
+      "dateRangeLabel": "Izvēlēties laika periodu"
     }
   },
   "paginator": {

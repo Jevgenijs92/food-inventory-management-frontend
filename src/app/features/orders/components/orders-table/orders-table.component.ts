@@ -8,7 +8,7 @@ import {
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { Order } from '@fim/features/orders/core/models';
+import { OrderedProduct } from '@fim/features/orders/core/models';
 
 @Component({
   selector: 'fim-orders-table',
@@ -16,39 +16,52 @@ import { Order } from '@fim/features/orders/core/models';
 })
 export class OrdersTableComponent {
   @Input()
-  set data(orders: Order[] | null) {
-    this.dataSource = new MatTableDataSource<Order>(orders ?? []);
+  set data(orderedProducts: OrderedProduct[] | null) {
+    this.dataSource = new MatTableDataSource<OrderedProduct>(
+      orderedProducts ?? []
+    );
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
   @Output()
-  orderUpdate: EventEmitter<Order> = new EventEmitter<Order>();
+  orderUpdate: EventEmitter<string> = new EventEmitter<string>();
 
   @Output()
-  orderDelete: EventEmitter<Order> = new EventEmitter<Order>();
+  orderDelete: EventEmitter<string> = new EventEmitter<string>();
 
-  dataSource!: MatTableDataSource<Order>;
-  filter: string | null = null;
-  displayedColumns: string[] = ['id', 'deliveryDate', 'products', 'action'];
+  dataSource!: MatTableDataSource<OrderedProduct>;
+  displayedColumns: string[] = [
+    'deliveryDate',
+    'name',
+    'price',
+    'deliveryQuantity',
+    'total',
+    'action',
+  ];
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  applyFilter(searchText: string) {
-    this.filter = searchText;
-    this.dataSource.filter = searchText.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+  onUpdateOrder(orderedProduct: OrderedProduct) {
+    this.orderUpdate.emit(orderedProduct.orderId);
   }
 
-  onUpdateOrder(order: Order) {
-    this.orderUpdate.emit(order);
+  onDeleteOrder(orderedProduct: OrderedProduct) {
+    this.orderDelete.emit(orderedProduct.orderId);
   }
 
-  onDeleteOrder(order: Order) {
-    this.orderDelete.emit(order);
+  getTotalAmount(): number {
+    return this.dataSource.data.reduce(
+      (acc, orderedProduct) => acc + orderedProduct.total,
+      0
+    );
+  }
+
+  getTotalQuantity(): number {
+    return this.dataSource.data.reduce(
+      (acc, orderedProduct) => acc + orderedProduct.deliveryQuantity,
+      0
+    );
   }
 }

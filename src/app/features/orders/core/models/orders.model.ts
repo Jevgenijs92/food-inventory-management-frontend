@@ -10,6 +10,12 @@ export interface OrderProduct extends Product {
   deliveryQuantity: number;
 }
 
+export interface OrderedProduct extends OrderProduct {
+  orderId?: string;
+  deliveryDate?: Date;
+  total: number;
+}
+
 export interface OrderForm {
   id?: string;
   deliveryDate: Date;
@@ -17,4 +23,9 @@ export interface OrderForm {
     id: string;
     deliveryQuantity: number;
   }[];
+}
+
+export interface OrderFilters {
+  fromDate: Date;
+  toDate: Date;
 }

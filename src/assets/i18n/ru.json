@@ -85,6 +85,22 @@
       "update": "Изменить",
       "close": "Закрыть",
       "deleted": "Заказ удалён!"
+    },
+    "table": {
+      "name": "Название",
+      "deliveryDate": "Дата",
+      "deliveryQuantity": "Количество",
+      "price": "Цена",
+      "total": "Сумма",
+      "totals": "Итого:",
+      "noData": "Результаты не найдены",
+      "action": "Действия"
+    },
+    "filters": {
+      "fromYearStart": "С начала года",
+      "currentMonth": "Текущий месяц",
+      "lastYear": "Предыдущий год",
+      "dateRangeLabel": "Выбрать период времени"
     }
   },
   "paginator": {

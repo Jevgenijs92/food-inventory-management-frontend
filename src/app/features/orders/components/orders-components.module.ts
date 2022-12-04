@@ -22,12 +22,14 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { SnackBarModule } from '@fim/features/snack-bar/snack-bar.module';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DateRangeFilterComponent } from './date-range-filter/date-range-filter.component';
 
 @NgModule({
   declarations: [
     OrdersPageComponent,
     OrdersFormComponent,
     OrdersTableComponent,
+    DateRangeFilterComponent,
   ],
   imports: [
     CommonModule,

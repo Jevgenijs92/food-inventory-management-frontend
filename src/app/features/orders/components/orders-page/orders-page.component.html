@@ -3,7 +3,22 @@
     <mat-icon>add</mat-icon>
     <span>{{'orders.add' | translate}}</span>
 </button>
-<fim-orders-table [data]="orders$ | async"
+<div class="row">
+    <div class="col">
+        <fim-date-range-filter [filters]="filters$ | async"
+                               (fromDateChange)="onFromDateChange($event)"
+                               (toDateChange)="onToDateChange($event)"></fim-date-range-filter>
+    </div>
+</div>
+<div class="row">
+    <div class="col mb-3">
+        <button mat-stroked-button color="primary" class="me-2"
+                (click)="onClickFilterFromYearStart()">{{'orders.filters.fromYearStart' | translate}}</button>
+        <button mat-stroked-button color="primary" class="me-2" (click)="onClickFilterCurrentMonth()">{{'orders.filters.currentMonth' | translate}}</button>
+        <button mat-stroked-button color="primary" class="me-2" (click)="onClickFilterLastYear()">{{'orders.filters.lastYear' | translate}}</button>
+    </div>
+</div>
+<fim-orders-table [data]="orderedProducts$ | async"
                   (orderUpdate)="onClickUpdateOrder($event)"
                   (orderDelete)="onClickDeleteOrder($event)"></fim-orders-table>
 
