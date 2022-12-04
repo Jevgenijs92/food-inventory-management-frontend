@@ -25,7 +25,7 @@
       "pricePerPackaging": "Price per packaging",
       "pricePerUnit": "Price per unit",
       "unitOfMeasurement": "Unit of measurement",
-      "noData": "No data matching the filter \"{{filter}}\"",
+      "noData": "No data found",
       "action": "Action"
     },
     "form": {
@@ -51,7 +51,7 @@
     "table": {
       "name": "Name",
       "price": "Price",
-      "noData": "No data matching the filter \"{{filter}}\"",
+      "noData": "No data found",
       "action": "Action"
     },
     "form": {

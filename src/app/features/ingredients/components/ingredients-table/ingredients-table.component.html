@@ -26,6 +26,12 @@
                         </button>
                     </mat-cell>
                 </ng-container>
+                <ng-container *ngSwitchCase="'pricePerPackaging'">
+                    <mat-cell *matCellDef="let element"> {{element[column] | currency: 'EUR'}} </mat-cell>
+                </ng-container>
+                <ng-container *ngSwitchCase="'pricePerUnit'">
+                    <mat-cell *matCellDef="let element"> {{element[column] | currency: 'EUR'}} </mat-cell>
+                </ng-container>
                 <ng-container *ngSwitchDefault>
                     <mat-cell *matCellDef="let element"> {{element[column]}} </mat-cell>
                 </ng-container>

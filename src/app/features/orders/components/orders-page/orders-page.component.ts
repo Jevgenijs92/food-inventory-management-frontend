@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import {
   OrdersService
 } from '@fim/features/orders/core/facades/orders.service';
 import { map, take, tap } from 'rxjs/operators';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import {
   Order,
   OrderedProduct,
@@ -21,7 +21,7 @@ import {
   selector: 'fim-orders-page',
   templateUrl: './orders-page.component.html',
 })
-export class OrdersPageComponent {
+export class OrdersPageComponent implements OnDestroy {
   constructor(
     protected ordersService: OrdersService,
     protected dialog: MatDialog,
@@ -29,6 +29,8 @@ export class OrdersPageComponent {
   ) {
     this.loadOrders();
   }
+
+  dialogRef: MatDialogRef<OrdersFormComponent> | null = null;
 
   private filtersSource: BehaviorSubject<OrderFilters> =
     new BehaviorSubject<OrderFilters>(this.getInitialFilters());
@@ -71,14 +73,17 @@ export class OrdersPageComponent {
   }
 
   protected openOrdersFormDialog(order?: Order) {
-    const dialogRef = this.dialog.open(OrdersFormComponent);
+    this.dialogRef = this.dialog.open(OrdersFormComponent);
     if (order) {
-      dialogRef.componentInstance.order = order;
+      this.dialogRef.componentInstance.order = order;
     }
-    dialogRef
+    this.dialogRef
       .afterClosed()
       .pipe(take(1))
-      .subscribe(() => this.loadOrders());
+      .subscribe(() => {
+        this.dialogRef = null;
+        this.loadOrders();
+      });
   }
 
   protected loadOrders() {
@@ -185,5 +190,9 @@ export class OrdersPageComponent {
       fromDate,
       toDate,
     });
+  }
+
+  ngOnDestroy(): void {
+    this.dialogRef?.close();
   }
 }

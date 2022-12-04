@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import {
   IngredientsService
 } from '@fim/features/ingredients/core/facades/ingredients.service';
 import { Ingredient } from '@fim/features/ingredients/core/models';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { IngredientsFormComponent } from '../ingredients-form';
 import { take, tap } from 'rxjs/operators';
 import {
@@ -15,7 +15,7 @@ import {
   selector: 'fim-ingredients-page',
   templateUrl: './ingredients-page.component.html',
 })
-export class IngredientsPageComponent {
+export class IngredientsPageComponent implements OnDestroy {
   constructor(
     protected ingredientsService: IngredientsService,
     protected dialog: MatDialog,
@@ -23,6 +23,8 @@ export class IngredientsPageComponent {
   ) {
     this.loadIngredients();
   }
+
+  dialogRef: MatDialogRef<IngredientsFormComponent> | null = null;
 
   ingredientsSource: BehaviorSubject<Ingredient[]> = new BehaviorSubject<Ingredient[]>(
     []);
@@ -53,14 +55,17 @@ export class IngredientsPageComponent {
   }
 
   openIngredientsFormDialog(ingredient?: Ingredient) {
-    const dialogRef = this.dialog.open(IngredientsFormComponent);
+    this.dialogRef = this.dialog.open(IngredientsFormComponent);
     if (ingredient) {
-      dialogRef.componentInstance.ingredient = ingredient;
+      this.dialogRef.componentInstance.ingredient = ingredient;
     }
-    dialogRef
+    this.dialogRef
       .afterClosed()
       .pipe(take(1))
-      .subscribe(() => this.loadIngredients());
+      .subscribe(() => {
+        this.dialogRef = null;
+        this.loadIngredients();
+      });
   }
 
   openSnackBar(message: string) {
@@ -75,5 +80,9 @@ export class IngredientsPageComponent {
         tap((ingredients) => this.ingredientsSource.next(ingredients))
       )
       .subscribe();
+  }
+
+  ngOnDestroy(): void {
+    this.dialogRef?.close();
   }
 }

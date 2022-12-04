@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, OnDestroy } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Product } from '../../core/models';
 import { take, tap } from 'rxjs/operators';
@@ -17,7 +17,7 @@ import {
   selector: 'fim-products-page',
   templateUrl: './products-page.component.html',
 })
-export class ProductsPageComponent {
+export class ProductsPageComponent implements OnDestroy {
   constructor(
     protected productsService: ProductsService,
     protected dialog: MatDialog,
@@ -25,6 +25,8 @@ export class ProductsPageComponent {
   ) {
     this.loadProducts();
   }
+
+  dialogRef: MatDialogRef<ProductsFormComponent> | null = null;
 
   productsSource: BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>(
     []
@@ -55,14 +57,17 @@ export class ProductsPageComponent {
   }
 
   openProductsFormDialog(product?: Product) {
-    const dialogRef = this.dialog.open(ProductsFormComponent);
+    this.dialogRef = this.dialog.open(ProductsFormComponent);
     if (product) {
-      dialogRef.componentInstance.product = product;
+      this.dialogRef.componentInstance.product = product;
     }
-    dialogRef
+    this.dialogRef
       .afterClosed()
       .pipe(take(1))
-      .subscribe(() => this.loadProducts());
+      .subscribe(() => {
+        this.dialogRef = null;
+        this.loadProducts();
+      });
   }
 
   openSnackBar(message: string) {
@@ -78,4 +83,10 @@ export class ProductsPageComponent {
       )
       .subscribe();
   }
+
+  ngOnDestroy(): void {
+    this.dialogRef?.close();
+  }
+
+
 }
