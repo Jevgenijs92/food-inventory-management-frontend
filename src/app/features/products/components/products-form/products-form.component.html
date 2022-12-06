@@ -1,44 +1,50 @@
 <h2>{{('products.form.' + (product ? 'updateProduct' : 'newProduct')) | translate}}</h2>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <mat-dialog-content>
-        <mat-form-field appearance="outline" class="px-1 col-12">
-            <mat-label>{{'products.form.name' | translate}}</mat-label>
-            <input formControlName="name" type="text" matInput/>
-        </mat-form-field>
+        <div class="row">
+            <mat-form-field appearance="outline" class="px-1 col-12">
+                <mat-label>{{'products.form.name' | translate}}</mat-label>
+                <input formControlName="name" type="text" matInput/>
+            </mat-form-field>
+        </div>
         <div formArrayName="ingredients">
             <ng-container *ngFor="let ingredientControl of ingredientsArray.controls; index as i">
-                <div class="col-12" [formGroupName]="i">
-                    <mat-form-field appearance="outline" class="px-1 col-6">
+                <div class="row" [formGroupName]="i">
+                    <mat-form-field appearance="outline" class="px-1 col-12 col-lg-6">
                         <mat-label>{{'products.form.ingredient' | translate}}</mat-label>
                         <mat-select formControlName="ingredient" [value]="ingredientControl.get('ingredient')?.value">
                             <mat-option *ngFor="let ingredient of ingredients"
                                         [value]="ingredient.id">{{ ingredient.name }}</mat-option>
                         </mat-select>
                     </mat-form-field>
-                    <mat-form-field appearance="outline" class="px-1 col-2">
+                    <mat-form-field appearance="outline" class="px-1 col-6 col-lg-2">
                         <mat-label>{{'products.form.quantity' | translate}}</mat-label>
                         <input formControlName="quantity" type="number" matInput>
                     </mat-form-field>
-                    <mat-form-field appearance="outline" class="px-1 col-2">
+                    <mat-form-field appearance="outline" class="px-1 col-6 col-lg-2">
                         <mat-label>{{'products.form.price' | translate}}</mat-label>
                         <input formControlName="price" type="number" matInput>
                     </mat-form-field>
-                    <button type="button" color="primary" mat-icon-button class="px-1 col-2"
-                            (click)="onAddIngredient()">
-                        <mat-icon>add</mat-icon>
-                    </button>
-                    <button type="button" color="primary" mat-icon-button class="px-1 col-2"
-                            (click)="onRemoveIngredient(i)"
-                            [disabled]="ingredientsArray.controls.length <= 1">
-                        <mat-icon>remove</mat-icon>
-                    </button>
+                    <div class="px-1 col-12 col-lg-2 d-flex justify-content-center justify-content-lg-start">
+                        <button type="button" color="primary" mat-icon-button class="px-1"
+                                (click)="onAddIngredient()">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                        <button type="button" color="primary" mat-icon-button class="px-1"
+                                (click)="onRemoveIngredient(i)"
+                                [disabled]="ingredientsArray.controls.length <= 1">
+                            <mat-icon>remove</mat-icon>
+                        </button>
+                    </div>
                 </div>
             </ng-container>
         </div>
-        <mat-form-field appearance="outline" class="px-1 col-12">
-            <mat-label>{{'products.form.price' | translate}}</mat-label>
-            <input formControlName="total" type="text" matInput>
-        </mat-form-field>
+        <div class="row">
+            <mat-form-field appearance="outline" class="px-1 col-12">
+                <mat-label>{{'products.form.price' | translate}}</mat-label>
+                <input formControlName="total" type="text" matInput>
+            </mat-form-field>
+        </div>
     </mat-dialog-content>
     <p matDialogActions class="d-flex justify-content-center">
         <ng-container *ngIf="submitted$ | async">
