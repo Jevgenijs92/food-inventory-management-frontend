@@ -98,6 +98,7 @@ export class OrdersPageComponent implements OnDestroy {
           ...product,
           orderId: order.id,
           deliveryDate: order.deliveryDate,
+          documentNumber: order.documentNumber,
           total: product.price * product.deliveryQuantity,
         })
       );

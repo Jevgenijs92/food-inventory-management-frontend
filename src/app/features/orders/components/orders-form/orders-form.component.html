@@ -7,6 +7,10 @@
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
+        <mat-form-field appearance="outline" class="px-1 col-12">
+            <mat-label>{{'orders.form.documentNumber' | translate}}</mat-label>
+            <input formControlName="documentNumber" type="text" matInput>
+        </mat-form-field>
         <div formArrayName="products">
             <ng-container *ngFor="let productControl of productsArray.controls; index as i">
                 <div class="col-12" [formGroupName]="i">

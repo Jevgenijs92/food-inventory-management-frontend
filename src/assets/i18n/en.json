@@ -84,7 +84,8 @@
       "create": "Create",
       "update": "Update",
       "close": "Close",
-      "deleted": "Successfully deleted order!"
+      "deleted": "Successfully deleted order!",
+      "documentNumber": "Document number"
     },
     "table": {
       "name": "Name",
@@ -94,7 +95,8 @@
       "total": "Total",
       "totals": "Total:",
       "noData": "No data found",
-      "action": "Action"
+      "action": "Action",
+      "documentNumber": "Document number"
     },
     "filters": {
       "fromYearStart": "From beginning of the year",

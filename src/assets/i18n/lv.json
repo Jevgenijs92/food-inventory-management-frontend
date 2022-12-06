@@ -84,7 +84,8 @@
       "create": "Izveidot",
       "update": "Labot",
       "close": "Aizvērt",
-      "deleted": "Pasūtījums tika izdzēsts!"
+      "deleted": "Pasūtījums tika izdzēsts!",
+      "documentNumber": "Dokumenta numurs"
     },
     "table": {
       "name": "Nosaukums",
@@ -94,7 +95,8 @@
       "total": "Summa",
       "totals": "Kopā:",
       "noData": "Nekas netika atrasts",
-      "action": "Darbības"
+      "action": "Darbības",
+      "documentNumber": "Dokumenta numurs"
     },
     "filters": {
       "fromYearStart": "No gada sākuma",

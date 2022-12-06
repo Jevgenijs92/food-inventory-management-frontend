@@ -30,6 +30,7 @@ export class OrdersTableComponent {
   dataSource!: MatTableDataSource<OrderedProduct>;
   displayedColumns: string[] = [
     'deliveryDate',
+    'documentNumber',
     'name',
     'price',
     'deliveryQuantity',

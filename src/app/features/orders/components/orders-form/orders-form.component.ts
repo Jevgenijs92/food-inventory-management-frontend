@@ -35,6 +35,7 @@ export class OrdersFormComponent implements AfterViewInit {
   ) {
     this.form = this.formBuilder.group({
       deliveryDate: [null, Validators.required],
+      documentNumber: [null],
       products: this.formBuilder.array([]),
     });
   }
@@ -47,6 +48,7 @@ export class OrdersFormComponent implements AfterViewInit {
     setTimeout(() => {
       if (this.order) {
         this.form.get('deliveryDate')?.patchValue(this.order.deliveryDate);
+        this.form.get('documentNumber')?.patchValue(this.order.documentNumber);
         this.order.products.forEach((product) => {
           this.productsArray.push(
             this.getProductGroup(

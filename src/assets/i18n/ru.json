@@ -84,7 +84,8 @@
       "create": "Создать",
       "update": "Изменить",
       "close": "Закрыть",
-      "deleted": "Заказ удалён!"
+      "deleted": "Заказ удалён!",
+      "documentNumber": "Номер документа"
     },
     "table": {
       "name": "Название",
@@ -94,7 +95,8 @@
       "total": "Сумма",
       "totals": "Итого:",
       "noData": "Результаты не найдены",
-      "action": "Действия"
+      "action": "Действия",
+      "documentNumber": "Номер документа"
     },
     "filters": {
       "fromYearStart": "С начала года",
