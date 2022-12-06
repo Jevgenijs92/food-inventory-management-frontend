@@ -11,11 +11,11 @@
     </div>
 </div>
 <div class="row">
-    <div class="col mb-3">
-        <button mat-stroked-button color="primary" class="me-2"
+    <div class="col">
+        <button mat-stroked-button color="primary" class="me-2  mb-3"
                 (click)="onClickFilterFromYearStart()">{{'orders.filters.fromYearStart' | translate}}</button>
-        <button mat-stroked-button color="primary" class="me-2" (click)="onClickFilterCurrentMonth()">{{'orders.filters.currentMonth' | translate}}</button>
-        <button mat-stroked-button color="primary" class="me-2" (click)="onClickFilterLastYear()">{{'orders.filters.lastYear' | translate}}</button>
+        <button mat-stroked-button color="primary" class="me-2  mb-3" (click)="onClickFilterCurrentMonth()">{{'orders.filters.currentMonth' | translate}}</button>
+        <button mat-stroked-button color="primary" class="me-2  mb-3" (click)="onClickFilterLastYear()">{{'orders.filters.lastYear' | translate}}</button>
     </div>
 </div>
 <fim-orders-table [data]="orderedProducts$ | async"

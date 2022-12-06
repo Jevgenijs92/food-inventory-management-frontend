@@ -17,3 +17,9 @@ main {
     height: 2px;
   }
 }
+
+@media(min-width: 992px) {
+  .w-25-lg {
+    width: 25% !important;
+  }
+}
