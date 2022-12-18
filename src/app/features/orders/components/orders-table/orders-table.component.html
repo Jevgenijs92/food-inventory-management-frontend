@@ -1,5 +1,5 @@
 <div class="container mat-elevation-z8 pt-2 mb-2 table-responsive">
-    <mat-table [dataSource]="dataSource" matSort class="w-100">
+    <mat-table [dataSource]="dataSource" matSort matSortActive="deliveryDate" matSortDirection="desc" class="w-100">
         <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
             <mat-header-cell *matHeaderCellDef
                              [mat-sort-header]="column"> {{'orders.table.' + column | translate}} </mat-header-cell>
