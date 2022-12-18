@@ -23,11 +23,17 @@
                     </mat-cell>
                     <mat-footer-cell *matFooterCellDef class="fw-bold">{{'orders.table.totals' | translate}}</mat-footer-cell>
                 </ng-container>
-                <ng-container *ngSwitchCase="'total'">
+                <ng-container *ngSwitchCase="'totalCost'">
                     <mat-cell *matCellDef="let element">
                         {{element[column] | currency: 'EUR'}}
                     </mat-cell>
-                    <mat-footer-cell *matFooterCellDef class="fw-bold">{{getTotalAmount() | currency: 'EUR'}}</mat-footer-cell>
+                    <mat-footer-cell *matFooterCellDef class="fw-bold">{{getTotalAmount('totalCost') | currency: 'EUR'}}</mat-footer-cell>
+                </ng-container>
+                <ng-container *ngSwitchCase="'sellPrice'">
+                    <mat-cell *matCellDef="let element">
+                        {{element[column] | currency: 'EUR'}}
+                    </mat-cell>
+                    <mat-footer-cell *matFooterCellDef class="fw-bold">{{getTotalAmount('sellPrice') | currency: 'EUR'}}</mat-footer-cell>
                 </ng-container>
                 <ng-container *ngSwitchCase="'deliveryQuantity'">
                     <mat-cell *matCellDef="let element"> {{element[column]}} </mat-cell>

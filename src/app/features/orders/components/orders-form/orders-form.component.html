@@ -29,11 +29,15 @@
                             </mat-select>
                         </ng-container>
                     </mat-form-field>
-                    <mat-form-field appearance="outline" class="px-1 col-12 col-lg-3">
+                    <mat-form-field appearance="outline" class="px-1 col-12 col-lg-2">
                         <mat-label>{{'orders.form.quantity' | translate}}</mat-label>
                         <input formControlName="deliveryQuantity" type="number" matInput>
                     </mat-form-field>
-                    <div class="col-12 col-lg-3 d-flex justify-content-center justify-content-lg-start">
+                    <mat-form-field appearance="outline" class="px-1 col-12 col-lg-2">
+                        <mat-label>{{'orders.form.sellPrice' | translate}}</mat-label>
+                        <input formControlName="sellPrice" type="number" matInput>
+                    </mat-form-field>
+                    <div class="col-12 col-lg-2 d-flex justify-content-center justify-content-lg-start">
                         <ng-container *ngIf="order">
                             <button type="button" color="primary" mat-icon-button class="px-1"
                                     (click)="onRemoveProduct(i)">

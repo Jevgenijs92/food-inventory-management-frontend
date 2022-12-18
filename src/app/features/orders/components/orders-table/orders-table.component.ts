@@ -34,7 +34,8 @@ export class OrdersTableComponent {
     'name',
     'price',
     'deliveryQuantity',
-    'total',
+    'totalCost',
+    'sellPrice',
     'action',
   ];
 
@@ -45,9 +46,9 @@ export class OrdersTableComponent {
     this.orderUpdate.emit(orderedProduct.orderId);
   }
 
-  getTotalAmount(): number {
+  getTotalAmount(field: 'totalCost' | 'sellPrice'): number {
     return this.dataSource.data.reduce(
-      (acc, orderedProduct) => acc + orderedProduct.total,
+      (acc, orderedProduct) => acc + orderedProduct[field],
       0
     );
   }

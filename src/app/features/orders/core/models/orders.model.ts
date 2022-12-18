@@ -9,13 +9,14 @@ export interface Order {
 
 export interface OrderProduct extends Product {
   deliveryQuantity: number;
+  sellPrice: number;
 }
 
 export interface OrderedProduct extends OrderProduct {
   orderId?: string;
   deliveryDate?: Date;
   documentNumber?: string;
-  total: number;
+  totalCost: number;
 }
 
 export interface OrderForm {

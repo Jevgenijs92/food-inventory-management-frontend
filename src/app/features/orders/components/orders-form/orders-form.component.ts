@@ -54,7 +54,8 @@ export class OrdersFormComponent implements AfterViewInit {
             this.getProductGroup(
               product.id,
               product.name,
-              product.deliveryQuantity
+              product.deliveryQuantity,
+              product.sellPrice,
             )
           );
         });
@@ -114,7 +115,8 @@ export class OrdersFormComponent implements AfterViewInit {
   private getProductGroup(
     productId: string | null = null,
     productName: string | null = null,
-    deliveryQuantity: number = 0
+    deliveryQuantity: number = 0,
+    sellPrice: number = 0,
   ): FormGroup {
     return this.formBuilder.group({
       id: [productId, Validators.required],
@@ -123,6 +125,7 @@ export class OrdersFormComponent implements AfterViewInit {
         deliveryQuantity,
         [Validators.required, Validators.min(0)],
       ],
+      sellPrice: [sellPrice, [Validators.required, Validators.min(0)]]
     });
   }
 }
