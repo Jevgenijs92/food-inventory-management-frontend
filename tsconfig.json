@@ -14,16 +14,21 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2017",
+    "target": "ES2022",
     "module": "es2020",
     "lib": [
       "es2018",
       "dom"
     ],
     "paths": {
-      "@fim/*": ["src/app/*"],
-      "@fim-features/*": ["src/app/features/*"],
-    }
+      "@fim/*": [
+        "src/app/*"
+      ],
+      "@fim-features/*": [
+        "src/app/features/*"
+      ]
+    },
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

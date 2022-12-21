@@ -1,5 +1,10 @@
 import { AfterViewInit, Component, Input } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormGroup,
+  NonNullableFormBuilder,
+  Validators,
+} from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Product } from '@fim/features/products/core/models';
@@ -28,7 +33,7 @@ export class OrdersFormComponent implements AfterViewInit {
   products: Product[] = [];
 
   constructor(
-    protected formBuilder: FormBuilder,
+    protected formBuilder: NonNullableFormBuilder,
     protected dialogRef: MatDialogRef<OrdersFormComponent>,
     protected ordersService: OrdersService,
     protected snackBarService: SnackBarService
@@ -55,7 +60,7 @@ export class OrdersFormComponent implements AfterViewInit {
               product.id,
               product.name,
               product.deliveryQuantity,
-              product.sellPrice,
+              product.sellPrice
             )
           );
         });
@@ -116,7 +121,7 @@ export class OrdersFormComponent implements AfterViewInit {
     productId: string | null = null,
     productName: string | null = null,
     deliveryQuantity: number = 0,
-    sellPrice: number = 0,
+    sellPrice: number = 0
   ): FormGroup {
     return this.formBuilder.group({
       id: [productId, Validators.required],
@@ -125,7 +130,7 @@ export class OrdersFormComponent implements AfterViewInit {
         deliveryQuantity,
         [Validators.required, Validators.min(0)],
       ],
-      sellPrice: [sellPrice, [Validators.required, Validators.min(0)]]
+      sellPrice: [sellPrice, [Validators.required, Validators.min(0)]],
     });
   }
 }

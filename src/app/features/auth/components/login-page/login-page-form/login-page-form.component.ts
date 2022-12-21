@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, NonNullableFormBuilder, Validators, } from '@angular/forms';
 import { LoadingService } from '@fim/core';
 import { Observable } from 'rxjs';
 
@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class LoginPageFormComponent implements OnInit {
   constructor(
-    protected formBuilder: FormBuilder,
+    protected formBuilder: NonNullableFormBuilder,
     protected loadingService: LoadingService
   ) {}
 

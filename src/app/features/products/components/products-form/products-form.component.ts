@@ -1,5 +1,10 @@
 import { AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormGroup,
+  NonNullableFormBuilder,
+  Validators,
+} from '@angular/forms';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { MatDialogRef } from '@angular/material/dialog';
 import {
@@ -31,12 +36,12 @@ export class ProductsFormComponent implements AfterViewInit, OnDestroy {
   endSubs$: Subject<void> = new Subject<void>();
 
   constructor(
-    protected formBuilder: FormBuilder,
+    protected formBuilder: NonNullableFormBuilder,
     protected dialogRef: MatDialogRef<ProductsFormComponent>,
     protected productsService: ProductsService
   ) {
     this.form = this.formBuilder.group({
-      name: [null, Validators.required],
+      name: ['', Validators.required],
       ingredients: this.formBuilder.array([]),
       total: [{ value: 0, disabled: true }],
     });

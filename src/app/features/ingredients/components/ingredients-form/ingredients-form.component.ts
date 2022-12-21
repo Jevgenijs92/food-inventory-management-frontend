@@ -4,7 +4,7 @@ import {
   UnitOfMeasurement,
   UnitOfMeasurementMapping,
 } from '@fim/features/ingredients/core/models';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
@@ -32,15 +32,15 @@ export class IngredientsFormComponent implements AfterViewInit {
   errors$: Observable<boolean> = this.errorsSource.asObservable();
 
   constructor(
-    protected formBuilder: FormBuilder,
+    protected formBuilder: NonNullableFormBuilder,
     protected dialogRef: MatDialogRef<IngredientsFormComponent>,
     protected translateService: AppTranslateService,
     protected ingredientsService: IngredientsService
   ) {
     this.form = this.formBuilder.group({
-      name: [null, Validators.required],
+      name: ['', Validators.required],
       quantityPerPackaging: [0, [Validators.required, Validators.min(0)]],
-      unitOfMeasurement: [null, Validators.required],
+      unitOfMeasurement: ['', Validators.required],
       pricePerPackaging: [0, [Validators.required, Validators.min(0)]],
     });
     this.pricePerUnit$ = this.form.valueChanges.pipe(
