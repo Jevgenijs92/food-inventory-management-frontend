@@ -1,6 +1,19 @@
 .language-selector {
-  width: 45px;
-  .mat-form-field-underline {
+  width: 70px;
+  .mat-mdc-text-field-wrapper {
+    background-color: unset;
+  }
+
+  .mat-mdc-form-field-subscript-wrapper {
     display: none;
   }
+
+  .mdc-line-ripple::before, .mdc-line-ripple::after {
+    border: none;
+  }
+
+  .mat-mdc-select-value, .mat-mdc-select-arrow {
+    color: unset;
+  }
+
 }

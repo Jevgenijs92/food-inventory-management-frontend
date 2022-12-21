@@ -1,4 +1,4 @@
-<h2>{{('ingredients.form.' + (ingredient ? 'updateIngredient' :'newIngredient')) | translate}}</h2>
+<h2 class="p-2">{{('ingredients.form.' + (ingredient ? 'updateIngredient' :'newIngredient')) | translate}}</h2>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <mat-dialog-content>
         <mat-form-field appearance="outline" class="px-1 col-12 col-lg-3">

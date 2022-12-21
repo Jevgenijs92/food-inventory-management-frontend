@@ -2,21 +2,21 @@
   display: block;
   width: 100%;
   overflow-x: auto;
-  .mat-table {
+  .mat-mdc-table {
     width: 100%;
     max-width: 100%;
     margin-bottom: 1rem;
     display: table;
     border-collapse: collapse;
   }
-  .mat-row,
-  .mat-header-row,
-  .mat-footer-row {
+  .mat-mdc-row,
+  .mat-mdc-header-row,
+  .mat-mdc-footer-row {
     display: table-row;
   }
-  .mat-cell,
-  .mat-header-cell,
-  .mat-footer-cell {
+  .mat-mdc-cell,
+  .mat-mdc-header-cell,
+  .mat-mdc-footer-cell {
     word-wrap: initial;
     display: table-cell;
     padding: 0 5px;

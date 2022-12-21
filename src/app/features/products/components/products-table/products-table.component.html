@@ -1,6 +1,6 @@
 <div class="container mat-elevation-z8 table-responsive">
     <div class="d-flex">
-        <mat-form-field appearance="standard" class="w-25-lg ps-3">
+        <mat-form-field appearance="outline" class="w-25-lg mt-3">
             <mat-icon matPrefix>search</mat-icon>
             <input matInput [ngModel]="filter" (ngModelChange)="applyFilter($event)" #input class="fs-5">
             <button *ngIf="filter" matSuffix mat-icon-button aria-label="clear filter" (click)="applyFilter('')">
