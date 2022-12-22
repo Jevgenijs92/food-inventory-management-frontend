@@ -4,5 +4,7 @@
     <span>{{'ingredients.add' | translate}}</span>
 </button>
 <fim-ingredients-table [data]="ingredients$ | async"
+                       [dataLoadErrors]="loadIngredientsError$ | async"
+                       [isLoadingData]="isLoadingIngredients$ | async"
                        (ingredientUpdate)="onClickUpdateIngredient($event)"
                        (ingredientDelete)="onClickDeleteIngredient($event)"></fim-ingredients-table>

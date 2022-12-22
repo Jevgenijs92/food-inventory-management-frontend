@@ -14,7 +14,8 @@
                              [mat-sort-header]="column"> {{'ingredients.table.' + column | translate}} </mat-header-cell>
             <ng-container [ngSwitch]="column">
                 <ng-container *ngSwitchCase="'unitOfMeasurement'">
-                    <mat-cell *matCellDef="let element"> {{'unitOfMeasurement.' + element[column] | translate}} </mat-cell>
+                    <mat-cell
+                            *matCellDef="let element"> {{'unitOfMeasurement.' + element[column] | translate}} </mat-cell>
                 </ng-container>
                 <ng-container *ngSwitchCase="'action'">
                     <mat-cell *matCellDef="let element">
@@ -42,12 +43,30 @@
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 
         <!-- Row shown when there is no matching data. -->
-        <div class="mat-row d-flex justify-content-center" *matNoDataRow>
-            <p class="pt-2 fw-semibold">{{'ingredients.table.noData' | translate: {filter: input.value} }}</p>
-        </div>
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell pt-3" [attr.colspan]="displayedColumns.length">
+                <ng-container *ngIf="!isLoadingData; else loading">
+                    <div class="d-flex justify-content-center p-2">
+                        <p class="pt-2 fw-semibold">
+                            <ng-container *ngIf="dataLoadErrors?.hasError;else noData">
+                                {{dataLoadErrors?.errorMessage}}
+                            </ng-container>
+                        </p>
+                    </div>
+                </ng-container>
+            </td>
+        </tr>
     </mat-table>
     <mat-paginator [pageSizeOptions]="[5, 10, 20]"
                    showFirstLastButtons
-                   aria-label="Select page of ingredients">
+                   aria-label="Select page of ingredients" [hidden]="isLoadingData">
     </mat-paginator>
 </div>
+
+<ng-template #loading>
+    <ngx-skeleton-loader count="5" appearance="line"></ngx-skeleton-loader>
+</ng-template>
+
+<ng-template #noData>
+    {{'ingredients.table.noData' | translate: {filter: input.value} }}
+</ng-template>

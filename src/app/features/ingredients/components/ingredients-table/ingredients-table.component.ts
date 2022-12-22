@@ -17,13 +17,20 @@ import { MatPaginator } from '@angular/material/paginator';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IngredientsTableComponent {
-
   @Input()
-  set data(ingredients: Ingredient[] | null) {
-    this.dataSource = new MatTableDataSource<Ingredient>(ingredients ?? []);
+  set data(ingredients: ReadonlyArray<Ingredient> | null) {
+    this.dataSource = new MatTableDataSource<Ingredient>(
+      ingredients ? [...ingredients] : []
+    );
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
+
+  @Input()
+  dataLoadErrors: { hasError: boolean; errorMessage: string } | null = null;
+
+  @Input()
+  isLoadingData: boolean | null = null;
 
   @Output()
   ingredientUpdate: EventEmitter<Ingredient> = new EventEmitter<Ingredient>();

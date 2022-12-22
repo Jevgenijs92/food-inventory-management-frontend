@@ -19,6 +19,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackBarModule } from '@fim/features/snack-bar/snack-bar.module';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { SnackBarModule } from '@fim/features/snack-bar/snack-bar.module';
     MatSelectModule,
     ReactiveFormsModule,
     MatTooltipModule,
-    SnackBarModule
+    SnackBarModule,
+    MatProgressSpinnerModule,
+    NgxSkeletonLoaderModule,
   ],
   providers: [CdkColumnDef, MatSnackBar],
 })
