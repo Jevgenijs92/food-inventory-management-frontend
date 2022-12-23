@@ -50,7 +50,7 @@
         </mat-dialog-content>
         <p matDialogActions class="d-flex justify-content-center">
             <ng-container *ngIf="submitted$ | async">
-            <span class="px-1" *ngIf="!(errors$ | async)">
+            <span class="px-1" *ngIf="(errors$ | async) !== true">
                 <mat-icon class="text-success" matTooltip="{{'products.form.success' | translate}}">done</mat-icon>
             </span>
                 <span class="px-1" *ngIf="errors$ | async">

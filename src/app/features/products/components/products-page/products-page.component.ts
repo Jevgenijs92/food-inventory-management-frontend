@@ -3,19 +3,11 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Product } from '../../core/models';
 import { take, tap } from 'rxjs/operators';
-import {
-  ProductsFormComponent
-} from '@fim/features/products/components/products-form/products-form.component';
-import {
-  ProductsService
-} from '@fim/features/products/core/facades/products.service';
-import {
-  SnackBarService
-} from '@fim/features/snack-bar/services/snack-bar.service';
+import { ProductsFormComponent } from '@fim/features/products/components/products-form/products-form.component';
+import { ProductsService } from '@fim/features/products/core/facades/products.service';
+import { SnackBarService } from '@fim/features/snack-bar/services/snack-bar.service';
 import { Ingredient } from '@fim/features/ingredients/core/models';
-import {
-  IngredientsService
-} from '@fim/features/ingredients/core/facades/ingredients.service';
+import { IngredientsService } from '@fim/features/ingredients/core/facades/ingredients.service';
 
 @Component({
   selector: 'fim-products-page',

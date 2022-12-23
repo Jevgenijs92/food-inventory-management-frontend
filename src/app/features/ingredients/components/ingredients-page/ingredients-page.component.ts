@@ -4,9 +4,7 @@ import { Observable } from 'rxjs';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { IngredientsFormComponent } from '../ingredients-form';
 import { take } from 'rxjs/operators';
-import {
-  IngredientsFacade
-} from '@fim/features/ingredients/core/ingredients.facade';
+import { IngredientsFacade } from '@fim/features/ingredients/core/ingredients.facade';
 import { ErrorModel } from '@fim/shared/models';
 
 @Component({

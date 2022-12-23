@@ -40,7 +40,7 @@ import { SnackBarModule } from '@fim/features/snack-bar/snack-bar.module';
     MatDialogModule,
     MatSelectModule,
     MatTooltipModule,
-    SnackBarModule
+    SnackBarModule,
   ],
   providers: [CdkColumnDef, MatSnackBar],
 })

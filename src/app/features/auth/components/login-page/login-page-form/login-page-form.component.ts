@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup, NonNullableFormBuilder, Validators, } from '@angular/forms';
+import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { LoadingService } from '@fim/core';
 import { Observable } from 'rxjs';
 
@@ -46,10 +46,10 @@ export class LoginPageFormComponent implements OnInit {
   }
 
   get username() {
-    return this.form.get("username");
+    return this.form.get('username');
   }
 
   get password() {
-    return this.form.get("password");
+    return this.form.get('password');
   }
 }

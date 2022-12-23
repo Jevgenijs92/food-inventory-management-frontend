@@ -5,7 +5,6 @@ import { AuthToken } from '@fim/features/auth';
   providedIn: 'root',
 })
 export class AuthStorageService {
-
   get token(): AuthToken {
     const token = localStorage.getItem(TOKEN);
     if (token) {

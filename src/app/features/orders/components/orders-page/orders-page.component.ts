@@ -1,7 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import {
-  OrdersService
-} from '@fim/features/orders/core/facades/orders.service';
+import { OrdersService } from '@fim/features/orders/core/facades/orders.service';
 import { map, take, tap } from 'rxjs/operators';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import {
@@ -10,15 +8,9 @@ import {
   OrderFilters,
 } from '@fim/features/orders/core/models';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import {
-  OrdersFormComponent
-} from '@fim/features/orders/components/orders-form/orders-form.component';
-import {
-  SnackBarService
-} from '@fim/features/snack-bar/services/snack-bar.service';
-import {
-  ProductsService
-} from '@fim/features/products/core/facades/products.service';
+import { OrdersFormComponent } from '@fim/features/orders/components/orders-form/orders-form.component';
+import { SnackBarService } from '@fim/features/snack-bar/services/snack-bar.service';
+import { ProductsService } from '@fim/features/products/core/facades/products.service';
 import { Product } from '@fim/features/products/core/models';
 
 @Component({

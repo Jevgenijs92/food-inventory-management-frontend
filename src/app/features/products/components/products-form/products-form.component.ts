@@ -7,9 +7,7 @@ import {
 } from '@angular/forms';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { MatDialogRef } from '@angular/material/dialog';
-import {
-  ProductsService
-} from '@fim/features/products/core/facades/products.service';
+import { ProductsService } from '@fim/features/products/core/facades/products.service';
 import { Product } from '@fim/features/products/core/models';
 import { Ingredient } from '@fim/features/ingredients/core/models';
 import { debounceTime, takeUntil } from 'rxjs/operators';

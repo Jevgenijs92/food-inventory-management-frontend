@@ -1,10 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import {
-  INGREDIENTS_FEATURE
-} from '@fim/features/ingredients/core/store/ingredients-store.module';
-import {
-  IngredientsState
-} from '@fim/features/ingredients/core/store/reducers/ingredients.reducer';
+import { INGREDIENTS_FEATURE } from '@fim/features/ingredients/core/store/ingredients-store.module';
+import { IngredientsState } from '@fim/features/ingredients/core/store/reducers/ingredients.reducer';
 import { ErrorModel, ErrorType } from '@fim/shared/models';
 
 export const selectIngredientsState =
@@ -25,12 +21,11 @@ export const loadingIngredientsFailure = createSelector(
   (state): ErrorModel =>
     state.error?.errorType === ErrorType.COLLECTION
       ? {
-        hasError: state.error.hasError,
-        errorMessage: state.error.errorMessage,
-      }
+          hasError: state.error.hasError,
+          errorMessage: state.error.errorMessage,
+        }
       : {
-        hasError: false,
-        errorMessage: '',
-      }
+          hasError: false,
+          errorMessage: '',
+        }
 );
-

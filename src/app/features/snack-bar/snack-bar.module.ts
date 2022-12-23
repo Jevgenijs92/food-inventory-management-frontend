@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
-import {
-  SnackBarService
-} from '@fim/features/snack-bar/services/snack-bar.service';
+import { SnackBarService } from '@fim/features/snack-bar/services/snack-bar.service';
 
 @NgModule({
-  providers: [SnackBarService]
+  providers: [SnackBarService],
 })
 export class SnackBarModule {}

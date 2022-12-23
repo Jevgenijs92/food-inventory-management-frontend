@@ -24,8 +24,8 @@
                 <ng-container *ngSwitchCase="'action'">
                     <mat-cell *matCellDef="let element">
                         <fim-table-actions [element]="element"
-                                           (onUpdateChange)="onUpdateIngredient($event)"
-                                           (onDeleteChange)="onDeleteIngredient($event)">
+                                           (updateChange)="onUpdateIngredient($event)"
+                                           (deleteChange)="onDeleteIngredient($event)">
                         </fim-table-actions>
                     </mat-cell>
                 </ng-container>

@@ -12,17 +12,17 @@ export class TableActionsComponent {
   deleteClicked: boolean = false;
 
   @Output()
-  onUpdateChange: EventEmitter<any> = new EventEmitter<any>();
+  updateChange: EventEmitter<any> = new EventEmitter<any>();
 
   @Output()
-  onDeleteChange: EventEmitter<any> = new EventEmitter<any>();
+  deleteChange: EventEmitter<any> = new EventEmitter<any>();
 
   onUpdate(element: any) {
-    this.onUpdateChange.emit(element);
+    this.updateChange.emit(element);
   }
 
   onDelete(element: any) {
     this.deleteClicked = true;
-    this.onDeleteChange.emit(element);
+    this.deleteChange.emit(element);
   }
 }

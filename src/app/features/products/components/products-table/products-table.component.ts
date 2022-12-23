@@ -30,11 +30,7 @@ export class ProductsTableComponent {
 
   dataSource!: MatTableDataSource<Product>;
   filter: string | null = null;
-  displayedColumns: string[] = [
-    'name',
-    'price',
-    'action',
-  ];
+  displayedColumns: string[] = ['name', 'price', 'action'];
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;

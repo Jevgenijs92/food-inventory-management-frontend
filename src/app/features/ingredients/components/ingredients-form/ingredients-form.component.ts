@@ -67,7 +67,10 @@ export class IngredientsFormComponent implements AfterViewInit {
     if (this.form.valid) {
       this.form.disable();
       if (this.ingredient) {
-        this.ingredientsFacade.updateIngredient(this.ingredient.id, this.form.value);
+        this.ingredientsFacade.updateIngredient(
+          this.ingredient.id,
+          this.form.value
+        );
       } else {
         this.ingredientsFacade.addIngredient(this.form.value);
       }

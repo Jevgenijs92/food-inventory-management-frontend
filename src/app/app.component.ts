@@ -3,7 +3,7 @@ import { LoadingService } from '@fim/core';
 import { AppTranslateService } from '@fim/core/services/app-translate.service';
 
 @Component({
-  selector: 'app-root',
+  selector: 'fim-root',
   templateUrl: './app.component.html',
 })
 export class AppComponent {

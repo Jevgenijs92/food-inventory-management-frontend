@@ -5,7 +5,7 @@ export interface ErrorModel {
 
 export enum ErrorType {
   COLLECTION = 'collection',
-  ELEMENT = 'element'
+  ELEMENT = 'element',
 }
 
 export interface ErrorState extends ErrorModel {
