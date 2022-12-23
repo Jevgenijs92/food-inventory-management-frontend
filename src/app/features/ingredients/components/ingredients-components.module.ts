@@ -21,6 +21,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackBarModule } from '@fim/features/snack-bar/snack-bar.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { SharedComponentsModule } from '@fim/shared/components';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     SnackBarModule,
     MatProgressSpinnerModule,
     NgxSkeletonLoaderModule,
+    SharedComponentsModule,
   ],
   providers: [CdkColumnDef, MatSnackBar],
 })

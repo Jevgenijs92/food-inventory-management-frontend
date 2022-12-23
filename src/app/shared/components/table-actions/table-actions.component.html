@@ -1,0 +1,6 @@
+<button mat-icon-button color="primary" (click)="onUpdate(element)">
+    <mat-icon>update</mat-icon>
+</button>
+<button mat-icon-button color="warn" (click)="onDelete(element)" [disabled]="deleteClicked">
+    <mat-icon>delete</mat-icon>
+</button>

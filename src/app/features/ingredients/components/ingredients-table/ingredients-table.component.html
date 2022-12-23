@@ -13,32 +13,44 @@
             <mat-header-cell *matHeaderCellDef
                              [mat-sort-header]="column"> {{'ingredients.table.' + column | translate}} </mat-header-cell>
             <ng-container [ngSwitch]="column">
+
+                <!-- Unit Of Measurement column -->
                 <ng-container *ngSwitchCase="'unitOfMeasurement'">
                     <mat-cell
                             *matCellDef="let element"> {{'unitOfMeasurement.' + element[column] | translate}} </mat-cell>
                 </ng-container>
+
+                <!-- Action column -->
                 <ng-container *ngSwitchCase="'action'">
                     <mat-cell *matCellDef="let element">
-                        <button mat-icon-button color="primary" (click)="onUpdateIngredient(element)">
-                            <mat-icon>update</mat-icon>
-                        </button>
-                        <button mat-icon-button color="warn" (click)="onDeleteIngredient(element)">
-                            <mat-icon>delete</mat-icon>
-                        </button>
+                        <fim-table-actions [element]="element"
+                                           (onUpdateChange)="onUpdateIngredient($event)"
+                                           (onDeleteChange)="onDeleteIngredient($event)">
+                        </fim-table-actions>
                     </mat-cell>
                 </ng-container>
+
+                <!-- Price per packaging column -->
                 <ng-container *ngSwitchCase="'pricePerPackaging'">
                     <mat-cell *matCellDef="let element"> {{element[column] | currency: 'EUR'}} </mat-cell>
                 </ng-container>
+
+                <!-- Price per unit column -->
                 <ng-container *ngSwitchCase="'pricePerUnit'">
                     <mat-cell *matCellDef="let element"> {{element[column] | currency: 'EUR'}} </mat-cell>
                 </ng-container>
-                <ng-container *ngSwitchDefault>
+
+                <!-- Name column -->
+                <ng-container *ngSwitchCase="'name'">
+                    <mat-cell *matCellDef="let element"> {{element[column]}} </mat-cell>
+                </ng-container>
+
+                <!-- Quantity per packaging column -->
+                <ng-container *ngSwitchCase="'quantityPerPackaging'">
                     <mat-cell *matCellDef="let element"> {{element[column]}} </mat-cell>
                 </ng-container>
             </ng-container>
         </ng-container>
-
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 

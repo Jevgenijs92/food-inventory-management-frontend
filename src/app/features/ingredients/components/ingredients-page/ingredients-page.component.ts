@@ -1,12 +1,13 @@
 import { Component, OnDestroy } from '@angular/core';
-import { IngredientsService } from '@fim/features/ingredients/core/facades/ingredients.service';
 import { Ingredient } from '@fim/features/ingredients/core/models';
 import { Observable } from 'rxjs';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { IngredientsFormComponent } from '../ingredients-form';
 import { take } from 'rxjs/operators';
-import { SnackBarService } from '@fim/features/snack-bar/services/snack-bar.service';
-import { IngredientsFacade } from '@fim/features/ingredients/core/ingredients.facade';
+import {
+  IngredientsFacade
+} from '@fim/features/ingredients/core/ingredients.facade';
+import { ErrorModel } from '@fim/shared/models';
 
 @Component({
   selector: 'fim-ingredients-page',
@@ -14,25 +15,22 @@ import { IngredientsFacade } from '@fim/features/ingredients/core/ingredients.fa
 })
 export class IngredientsPageComponent implements OnDestroy {
   constructor(
-    protected ingredientsService: IngredientsService,
     protected dialog: MatDialog,
-    protected snackBarService: SnackBarService,
-    protected facade: IngredientsFacade
+    protected ingredientsFacade: IngredientsFacade
   ) {
-    this.facade.loadIngredients();
+    this.ingredientsFacade.loadIngredients();
   }
 
   dialogRef: MatDialogRef<IngredientsFormComponent> | null = null;
 
   ingredients$: Observable<ReadonlyArray<Ingredient> | null> =
-    this.facade.ingredients$;
+    this.ingredientsFacade.ingredients$;
 
-  isLoadingIngredients$: Observable<boolean> = this.facade.isLoadingIngredients$;
+  isLoadingIngredients$: Observable<boolean> =
+    this.ingredientsFacade.isLoadingIngredients$;
 
-  loadIngredientsError$: Observable<{
-    hasError: boolean;
-    errorMessage: string;
-  }> = this.facade.loadingIngredientsError$;
+  loadIngredientsError$: Observable<ErrorModel> =
+    this.ingredientsFacade.loadingIngredientsError$;
 
   onClickAddIngredient() {
     this.openIngredientsFormDialog();
@@ -43,18 +41,7 @@ export class IngredientsPageComponent implements OnDestroy {
   }
 
   onClickDeleteIngredient(ingredient: Ingredient) {
-    this.ingredientsService
-      .deleteIngredient(ingredient.id)
-      .pipe(take(1))
-      .subscribe(
-        () => {
-          this.facade.loadIngredients();
-          this.openSnackBar('ingredients.form.deleted');
-        },
-        (error) => {
-          this.openSnackBar(error);
-        }
-      );
+    this.ingredientsFacade.deleteIngredient(ingredient.id);
   }
 
   openIngredientsFormDialog(ingredient?: Ingredient) {
@@ -67,12 +54,7 @@ export class IngredientsPageComponent implements OnDestroy {
       .pipe(take(1))
       .subscribe(() => {
         this.dialogRef = null;
-        this.facade.loadIngredients();
       });
-  }
-
-  openSnackBar(message: string) {
-    this.snackBarService.openSnackBar(message);
   }
 
   ngOnDestroy(): void {

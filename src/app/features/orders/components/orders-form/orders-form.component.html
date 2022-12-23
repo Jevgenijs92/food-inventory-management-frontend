@@ -1,84 +1,86 @@
-<h2 class="p-2">{{('orders.form.' + (order ? 'updateOrder' : 'newOrder')) | translate}}</h2>
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <mat-dialog-content>
-        <div class="row">
-            <mat-form-field appearance="outline" class="px-1 col-12">
-                <mat-label>{{'orders.form.date' | translate}}</mat-label>
-                <input formControlName="deliveryDate" matInput [matDatepicker]="picker">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="px-1 col-12">
-                <mat-label>{{'orders.form.documentNumber' | translate}}</mat-label>
-                <input formControlName="documentNumber" type="text" matInput>
-            </mat-form-field>
-        </div>
-        <div formArrayName="products">
-            <ng-container *ngFor="let productControl of productsArray.controls; index as i">
-                <div class="row" [formGroupName]="i">
-                    <mat-form-field appearance="outline" class="px-1 col-12 col-lg-6">
-                        <mat-label>{{'orders.form.product' | translate}}</mat-label>
-                        <ng-container *ngIf="order">
-                            <input formControlName="id" type="hidden">
-                            <input type="text" matInput [value]="productControl.get('name')?.value" disabled>
-                        </ng-container>
-                        <ng-container *ngIf="!order">
-                            <mat-select formControlName="id" [value]="productControl.get('id')?.value">
-                                <mat-option *ngFor="let product of products"
-                                            [value]="product.id">{{ product.name }}</mat-option>
-                            </mat-select>
-                        </ng-container>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" class="px-1 col-12 col-lg-2">
-                        <mat-label>{{'orders.form.quantity' | translate}}</mat-label>
-                        <input formControlName="deliveryQuantity" type="number" matInput>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" class="px-1 col-12 col-lg-2">
-                        <mat-label>{{'orders.form.sellPrice' | translate}}</mat-label>
-                        <input formControlName="sellPrice" type="number" matInput>
-                    </mat-form-field>
-                    <div class="col-12 col-lg-2 d-flex justify-content-center justify-content-lg-start">
-                        <ng-container *ngIf="order">
-                            <button type="button" color="primary" mat-icon-button class="px-1"
-                                    (click)="onRemoveProduct(i)">
-                                <mat-icon>remove</mat-icon>
-                            </button>
-                        </ng-container>
-                        <ng-container *ngIf="!order">
-                            <button type="button" color="primary" mat-icon-button class="px-1"
-                                    (click)="onAddProduct()">
-                                <mat-icon>add</mat-icon>
-                            </button>
-                            <button type="button" color="primary" mat-icon-button class="px-1"
-                                    (click)="onRemoveProduct(i)"
-                                    [disabled]="productsArray.controls.length <= 1">
-                                <mat-icon>remove</mat-icon>
-                            </button>
-                        </ng-container>
+<div class="p-lg-3">
+    <h2 class="p-2">{{('orders.form.' + (order ? 'updateOrder' : 'newOrder')) | translate}}</h2>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <mat-dialog-content>
+            <div class="row">
+                <mat-form-field appearance="outline" class="px-1 col-12">
+                    <mat-label>{{'orders.form.date' | translate}}</mat-label>
+                    <input formControlName="deliveryDate" matInput [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="px-1 col-12">
+                    <mat-label>{{'orders.form.documentNumber' | translate}}</mat-label>
+                    <input formControlName="documentNumber" type="text" matInput>
+                </mat-form-field>
+            </div>
+            <div formArrayName="products">
+                <ng-container *ngFor="let productControl of productsArray.controls; index as i">
+                    <div class="row" [formGroupName]="i">
+                        <mat-form-field appearance="outline" class="px-1 col-12 col-lg-6">
+                            <mat-label>{{'orders.form.product' | translate}}</mat-label>
+                            <ng-container *ngIf="order">
+                                <input formControlName="id" type="hidden">
+                                <input type="text" matInput [value]="productControl.get('name')?.value" disabled>
+                            </ng-container>
+                            <ng-container *ngIf="!order">
+                                <mat-select formControlName="id" [value]="productControl.get('id')?.value">
+                                    <mat-option *ngFor="let product of products"
+                                                [value]="product.id">{{ product.name }}</mat-option>
+                                </mat-select>
+                            </ng-container>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="px-1 col-12 col-lg-2">
+                            <mat-label>{{'orders.form.quantity' | translate}}</mat-label>
+                            <input formControlName="deliveryQuantity" type="number" matInput>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="px-1 col-12 col-lg-2">
+                            <mat-label>{{'orders.form.sellPrice' | translate}}</mat-label>
+                            <input formControlName="sellPrice" type="number" matInput>
+                        </mat-form-field>
+                        <div class="col-12 col-lg-2 d-flex justify-content-center justify-content-lg-start">
+                            <ng-container *ngIf="order">
+                                <button type="button" color="primary" mat-icon-button class="px-1"
+                                        (click)="onRemoveProduct(i)">
+                                    <mat-icon>remove</mat-icon>
+                                </button>
+                            </ng-container>
+                            <ng-container *ngIf="!order">
+                                <button type="button" color="primary" mat-icon-button class="px-1"
+                                        (click)="onAddProduct()">
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                                <button type="button" color="primary" mat-icon-button class="px-1"
+                                        (click)="onRemoveProduct(i)"
+                                        [disabled]="productsArray.controls.length <= 1">
+                                    <mat-icon>remove</mat-icon>
+                                </button>
+                            </ng-container>
+                        </div>
                     </div>
-                </div>
-            </ng-container>
-        </div>
-    </mat-dialog-content>
-    <p matDialogActions class="d-flex justify-content-center">
-        <ng-container *ngIf="submitted$ | async">
+                </ng-container>
+            </div>
+        </mat-dialog-content>
+        <p matDialogActions class="d-flex justify-content-center">
+            <ng-container *ngIf="submitted$ | async">
             <span class="px-1" *ngIf="!(errors$ | async)">
                 <mat-icon class="text-success" matTooltip="{{'orders.form.success' | translate}}">done</mat-icon>
             </span>
-            <span class="px-1" *ngIf="errors$ | async">
+                <span class="px-1" *ngIf="errors$ | async">
                 <mat-icon class="text-danger" matTooltip="{{'orders.form.error' | translate}}">error</mat-icon>
             </span>
-        </ng-container>
-        <button type="submit" mat-raised-button color="primary" [disabled]="submitted$ | async">
-            {{(order ? 'orders.form.update' : 'orders.form.create') | translate}}
-        </button>
-        <button type="button" mat-raised-button class="ms-3"
-                (click)="onClose()">{{'orders.form.close' | translate}}</button>
-        <ng-container *ngIf="order">
-            <button type="button" color="warn" mat-icon-button class="ms-3"
-                    (click)="onClickDeleteOrder(order.id)">
-                <mat-icon>delete</mat-icon>
+            </ng-container>
+            <button type="submit" mat-raised-button color="primary" [disabled]="submitted$ | async">
+                {{(order ? 'orders.form.update' : 'orders.form.create') | translate}}
             </button>
-        </ng-container>
-    </p>
-</form>
+            <button type="button" mat-raised-button class="ms-3"
+                    (click)="onClose()">{{'orders.form.close' | translate}}</button>
+            <ng-container *ngIf="order">
+                <button type="button" color="warn" mat-icon-button class="ms-3"
+                        (click)="onClickDeleteOrder(order.id)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </ng-container>
+        </p>
+    </form>
+</div>

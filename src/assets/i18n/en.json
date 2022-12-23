@@ -40,9 +40,20 @@
       "update": "Update",
       "cancel": "Cancel",
       "close": "Close",
-      "error": "Cannot add ingredient",
-      "success": "Successfully added ingredient!",
-      "deleted": "Successfully deleted ingredient!"
+      "action": {
+        "add": {
+          "success": "Successfully added ingredient!",
+          "error": "Cannot add ingredient"
+        },
+        "update": {
+          "success": "Successfully updated ingredient!",
+          "error": "Cannot update ingredient"
+        },
+        "delete": {
+          "success": "Successfully deleted ingredient!",
+          "error": "Cannot delete ingredient"
+        }
+      }
     }
   },
   "products": {

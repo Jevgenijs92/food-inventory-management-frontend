@@ -1,43 +1,37 @@
-<h2 class="p-2">{{('ingredients.form.' + (ingredient ? 'updateIngredient' :'newIngredient')) | translate}}</h2>
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <mat-dialog-content>
-        <mat-form-field appearance="outline" class="px-1 col-12 col-lg-3">
-            <mat-label>{{'ingredients.form.name' | translate}}</mat-label>
-            <input formControlName="name" type="text" matInput/>
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="px-1 col-12 col-lg-2">
-            <mat-label>{{'ingredients.form.qtyPerPack' | translate}}</mat-label>
-            <input formControlName="quantityPerPackaging" type="number" matInput/>
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="px-1 col-12 col-lg-2">
-            <mat-label>{{'ingredients.form.uom' | translate}}</mat-label>
-            <mat-select formControlName="unitOfMeasurement">
-                <mat-option *ngFor="let option of unitsOfMeasurement"
-                            [value]="option">{{'unitOfMeasurement.' + option | translate}}</mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="px-1 col-12 col-lg-2">
-            <mat-label>{{'ingredients.form.pricePerPack' | translate}}</mat-label>
-            <input formControlName="pricePerPackaging" type="number" matInput/>
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="px-1 col-12 col-lg-2">
-            <mat-label>{{'ingredients.form.pricePerUnit' | translate}}</mat-label>
-            <input type="text" matInput [disabled]="true" [value]="pricePerUnit$ | async"/>
-        </mat-form-field>
-    </mat-dialog-content>
-    <p matDialogActions class="d-flex justify-content-center">
-        <ng-container *ngIf="submitted$ | async">
-            <span class="px-1" *ngIf="!(errors$ | async)">
-                <mat-icon class="text-success" matTooltip="{{'ingredients.form.success' | translate}}">done</mat-icon>
-            </span>
-            <span class="px-1" *ngIf="errors$ | async">
-                <mat-icon class="text-danger" matTooltip="{{'ingredients.form.error' | translate}}">error</mat-icon>
-            </span>
-        </ng-container>
-        <button type="submit" mat-raised-button color="primary" [disabled]="submitted$ | async">
-            {{(ingredient ? 'ingredients.form.update' : 'ingredients.form.create') | translate}}
-        </button>
-        <button type="button" mat-raised-button class="ms-3"
-                (click)="onClose()">{{'ingredients.form.close' | translate}}</button>
-    </p>
-</form>
+<div class="p-lg-3">
+    <h2 class="p-2">{{('ingredients.form.' + (ingredient ? 'updateIngredient' :'newIngredient')) | translate}}</h2>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <mat-dialog-content>
+            <mat-form-field appearance="outline" class="px-1 col-12 col-lg-3">
+                <mat-label>{{'ingredients.form.name' | translate}}</mat-label>
+                <input formControlName="name" type="text" matInput/>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="px-1 col-12 col-lg-2">
+                <mat-label>{{'ingredients.form.qtyPerPack' | translate}}</mat-label>
+                <input formControlName="quantityPerPackaging" type="number" matInput/>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="px-1 col-12 col-lg-2">
+                <mat-label>{{'ingredients.form.uom' | translate}}</mat-label>
+                <mat-select formControlName="unitOfMeasurement">
+                    <mat-option *ngFor="let option of unitsOfMeasurement"
+                                [value]="option">{{'unitOfMeasurement.' + option | translate}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="px-1 col-12 col-lg-2">
+                <mat-label>{{'ingredients.form.pricePerPack' | translate}}</mat-label>
+                <input formControlName="pricePerPackaging" type="number" matInput/>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="px-1 col-12 col-lg-2">
+                <mat-label>{{'ingredients.form.pricePerUnit' | translate}}</mat-label>
+                <input type="text" matInput [disabled]="true" [value]="pricePerUnit$ | async"/>
+            </mat-form-field>
+        </mat-dialog-content>
+        <p matDialogActions class="d-flex justify-content-center">
+            <button type="submit" mat-raised-button color="primary">
+                {{(ingredient ? 'ingredients.form.update' : 'ingredients.form.create') | translate}}
+            </button>
+            <button type="button" mat-raised-button class="ms-3"
+                    (click)="onClose()">{{'ingredients.form.close' | translate}}</button>
+        </p>
+    </form>
+</div>

@@ -40,9 +40,20 @@
       "update": "Labot",
       "cancel": "Atcelt",
       "close": "Aizvērt",
-      "error": "Neizdevās pievienot izejvielu",
-      "success": "Izejviela tika pievienota!",
-      "deleted": "izejviela tika izdzēsta!"
+      "action": {
+        "add": {
+          "success": "Izejviela tika pievienota!",
+          "error": "Neizdevās pievienot izejvielu"
+        },
+        "update": {
+          "success": "Izejviela tika atjaunota!",
+          "error": "Neizdevās atjaunot izejvielu"
+        },
+        "delete": {
+          "success": "Izejviela tika izdzēsta!",
+          "error": "Neizdevās izdzēst izejvielu"
+        }
+      }
     }
   },
   "products": {
