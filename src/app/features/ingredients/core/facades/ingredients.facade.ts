@@ -6,7 +6,7 @@ import {
   loadingIngredientsFailure,
   selectIngredients,
 } from '@fim/features/ingredients/core/store/selectors/ingredients.selectors';
-import * as IngredientsActions from './store/actions/ingredients.actions';
+import * as IngredientsActions from '../store/actions/ingredients.actions';
 import { IngredientsService } from '@fim/features/ingredients/core/facades/ingredients.service';
 import { Injectable } from '@angular/core';
 import { ErrorModel } from '@fim/shared/models';

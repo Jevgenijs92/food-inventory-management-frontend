@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
 import { AppTranslateService } from '@fim/core/services/app-translate.service';
 import { calculatePricePerUnit } from '@fim/shared/utils';
-import { IngredientsFacade } from '@fim/features/ingredients/core/ingredients.facade';
+import { IngredientsFacade } from '@fim/features/ingredients/core/facades/ingredients.facade';
 
 @Component({
   selector: 'fim-ingredients-form',

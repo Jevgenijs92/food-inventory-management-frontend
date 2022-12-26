@@ -29,7 +29,7 @@ export class ProductsFormComponent implements AfterViewInit, OnDestroy {
   errors$: Observable<boolean> = this.errorsSource.asObservable();
 
   @Input()
-  ingredients: Ingredient[] = [];
+  ingredients: ReadonlyArray<Ingredient> = [];
 
   endSubs$: Subject<void> = new Subject<void>();
 

@@ -7,7 +7,7 @@ import { ProductsFormComponent } from '@fim/features/products/components/product
 import { ProductsService } from '@fim/features/products/core/facades/products.service';
 import { SnackBarService } from '@fim/features/snack-bar/services/snack-bar.service';
 import { Ingredient } from '@fim/features/ingredients/core/models';
-import { IngredientsService } from '@fim/features/ingredients/core/facades/ingredients.service';
+import { IngredientsFacade } from '@fim/features/ingredients/core/facades/ingredients.facade';
 
 @Component({
   selector: 'fim-products-page',
@@ -18,7 +18,7 @@ export class ProductsPageComponent implements OnDestroy {
     protected productsService: ProductsService,
     protected dialog: MatDialog,
     protected snackBarService: SnackBarService,
-    protected ingredientsService: IngredientsService
+    protected ingredientsFacade: IngredientsFacade
   ) {
     this.loadProducts();
     this.loadIngredients();
@@ -30,8 +30,15 @@ export class ProductsPageComponent implements OnDestroy {
     []
   );
   products$: Observable<Product[]> = this.productsSource.asObservable();
-
-  ingredients: Ingredient[] = [];
+  ingredients: ReadonlyArray<Ingredient> = [];
+  ingredients$: Observable<ReadonlyArray<Ingredient> | null> =
+    this.ingredientsFacade.ingredients$.pipe(
+      tap((ingredients) => {
+        if (ingredients) {
+          this.ingredients = ingredients;
+        }
+      })
+    );
 
   onClickAddProduct() {
     this.openProductsFormDialog();
@@ -90,9 +97,6 @@ export class ProductsPageComponent implements OnDestroy {
   }
 
   private loadIngredients() {
-    this.ingredientsService
-      .getIngredients()
-      .pipe(take(1))
-      .subscribe((ingredients) => (this.ingredients = ingredients));
+    this.ingredientsFacade.loadIngredients();
   }
 }
