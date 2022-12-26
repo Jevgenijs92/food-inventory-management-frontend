@@ -49,15 +49,7 @@
             </div>
         </mat-dialog-content>
         <p matDialogActions class="d-flex justify-content-center">
-            <ng-container *ngIf="submitted$ | async">
-            <span class="px-1" *ngIf="(errors$ | async) !== true">
-                <mat-icon class="text-success" matTooltip="{{'products.form.success' | translate}}">done</mat-icon>
-            </span>
-                <span class="px-1" *ngIf="errors$ | async">
-                <mat-icon class="text-danger" matTooltip="{{'products.form.error' | translate}}">error</mat-icon>
-            </span>
-            </ng-container>
-            <button type="submit" mat-raised-button color="primary" [disabled]="submitted$ | async">
+            <button type="submit" mat-raised-button color="primary">
                 {{(product ? 'products.form.update' : 'products.form.create') | translate}}
             </button>
             <button type="button" mat-raised-button class="ms-3"

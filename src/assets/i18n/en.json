@@ -76,9 +76,20 @@
       "update": "Update",
       "cancel": "Cancel",
       "close": "Close",
-      "error": "Cannot add product",
-      "success": "Successfully added product!",
-      "deleted": "Successfully deleted product!"
+      "action": {
+        "add": {
+          "success": "Successfully added product!",
+          "error": "Cannot add product"
+        },
+        "update": {
+          "success": "Successfully updated product!",
+          "error": "Cannot update product"
+        },
+        "delete": {
+          "success": "Successfully deleted product!",
+          "error": "Cannot delete product"
+        }
+      }
     }
   },
   "orders": {

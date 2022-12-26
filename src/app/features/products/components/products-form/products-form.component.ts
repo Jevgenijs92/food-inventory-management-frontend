@@ -5,12 +5,12 @@ import {
   NonNullableFormBuilder,
   Validators,
 } from '@angular/forms';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { MatDialogRef } from '@angular/material/dialog';
-import { ProductsService } from '@fim/features/products/core/facades/products.service';
 import { Product } from '@fim/features/products/core/models';
 import { Ingredient } from '@fim/features/ingredients/core/models';
 import { debounceTime, takeUntil } from 'rxjs/operators';
+import { ProductsFacade } from '@fim/features/products/core/facades/products.facade';
 
 @Component({
   selector: 'fim-products-form',
@@ -20,14 +20,6 @@ export class ProductsFormComponent implements AfterViewInit, OnDestroy {
   form: FormGroup;
   product: Product | undefined;
 
-  submittedSource: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
-    false
-  );
-  submitted$: Observable<boolean> = this.submittedSource.asObservable();
-
-  errorsSource: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  errors$: Observable<boolean> = this.errorsSource.asObservable();
-
   @Input()
   ingredients: ReadonlyArray<Ingredient> = [];
 
@@ -36,7 +28,7 @@ export class ProductsFormComponent implements AfterViewInit, OnDestroy {
   constructor(
     protected formBuilder: NonNullableFormBuilder,
     protected dialogRef: MatDialogRef<ProductsFormComponent>,
-    protected productsService: ProductsService
+    protected productsFacade: ProductsFacade
   ) {
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
@@ -74,20 +66,13 @@ export class ProductsFormComponent implements AfterViewInit, OnDestroy {
 
   onSubmit() {
     if (this.form.valid) {
-      this.submittedSource.next(true);
-      let product$: Observable<Product>;
+      this.form.disable();
       if (this.product) {
-        product$ = this.productsService.updateProduct(
-          this.product.id,
-          this.form.value
-        );
+        this.productsFacade.updateProduct(this.product.id, this.form.value);
       } else {
-        product$ = this.productsService.createProduct(this.form.value);
+        this.productsFacade.addProduct(this.form.value);
       }
-      product$.subscribe(
-        () => this.errorsSource.next(false),
-        () => this.errorsSource.next(true)
-      );
+      this.onClose();
     }
   }
 

@@ -18,6 +18,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { CdkColumnDef } from '@angular/cdk/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackBarModule } from '@fim/features/snack-bar/snack-bar.module';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { SharedComponentsModule } from '@fim/shared/components';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { SnackBarModule } from '@fim/features/snack-bar/snack-bar.module';
     MatSelectModule,
     MatTooltipModule,
     SnackBarModule,
+    NgxSkeletonLoaderModule,
+    SharedComponentsModule,
   ],
   providers: [CdkColumnDef, MatSnackBar],
 })

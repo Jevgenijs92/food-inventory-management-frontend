@@ -76,9 +76,20 @@
       "update": "Labot",
       "cancel": "Atcelt",
       "close": "Aizvērt",
-      "error": "Neizdevās pievienot produktu",
-      "success": "Produkts tika pievienots!",
-      "deleted": "Produkts tika izdzēsts!"
+      "action": {
+        "add": {
+          "success": "Produkts tika pievienots!",
+          "error": "Neizdevās pievienot produktu"
+        },
+        "update": {
+          "success": "Produkts tika atjaunots!",
+          "error": "Neizdevās atjaunot produktu"
+        },
+        "delete": {
+          "success": "Produkts tika izdzēsts!",
+          "error": "Neizdevās izdzēst produktu"
+        }
+      }
     }
   },
   "orders": {

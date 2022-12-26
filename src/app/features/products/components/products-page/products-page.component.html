@@ -4,6 +4,9 @@
     <span>{{'products.add' | translate}}</span>
 </button>
 <fim-products-table [data]="products$ | async"
-                       (productUpdate)="onClickUpdateProduct($event)"
-                       (productDelete)="onClickDeleteProduct($event)"></fim-products-table>
+                    [dataLoadErrors]="loadProductsError$ | async"
+                    [isLoadingData]="isLoadingProducts$ | async"
+                    (productUpdate)="onClickUpdateProduct($event)"
+                    (productDelete)="onClickDeleteProduct($event)">
+</fim-products-table>
 <ng-container *ngIf="ingredients$ | async"></ng-container>
