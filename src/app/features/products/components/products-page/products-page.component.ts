@@ -30,12 +30,15 @@ export class ProductsPageComponent implements OnDestroy {
     []
   );
   products$: Observable<Product[]> = this.productsSource.asObservable();
+
   ingredients: ReadonlyArray<Ingredient> = [];
   ingredients$: Observable<ReadonlyArray<Ingredient> | null> =
     this.ingredientsFacade.ingredients$.pipe(
       tap((ingredients) => {
         if (ingredients) {
-          this.ingredients = ingredients;
+          this.ingredients = [...ingredients].sort((a, b) =>
+            a.name?.localeCompare(b.name)
+          );
         }
       })
     );

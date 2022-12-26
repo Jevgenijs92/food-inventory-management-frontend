@@ -13,7 +13,7 @@
   },
   "homepage": {
     "ingredients": "Ингредиенты",
-    "products": "Продукты",
+    "products": "Продукция",
     "orders": "Заказы"
   },
   "ingredients": {
@@ -57,7 +57,7 @@
     }
   },
   "products": {
-    "title": "Список продуктов",
+    "title": "Список продукции",
     "add": "Добавить",
     "table": {
       "name": "Назвение",
