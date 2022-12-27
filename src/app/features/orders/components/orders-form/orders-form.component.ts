@@ -11,6 +11,7 @@ import { Product } from '@fim/features/products/core/models';
 import { Order } from '../../core/models';
 import { OrdersFacade } from '@fim/features/orders/core/facades/orders.facade';
 import { ProductsFacade } from '@fim/features/products/core/facades/products.facade';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'fim-orders-form',
@@ -21,7 +22,13 @@ export class OrdersFormComponent implements AfterViewInit {
   order: Order | undefined;
 
   products$: Observable<ReadonlyArray<Product> | null> =
-    this.productsFacade.products$;
+    this.productsFacade.products$.pipe(
+      map((products) =>
+        products
+          ? [...products].sort((a, b) => a.name?.localeCompare(b.name))
+          : products
+      )
+    );
 
   constructor(
     protected formBuilder: NonNullableFormBuilder,
