@@ -102,13 +102,24 @@
       "product": "Produkts",
       "quantity": "Daudzums",
       "sellPrice": "Pārdošanas summa",
-      "success": "Pasūtījums tika pievienots",
-      "error": "Neizdevās pievienot pasūtījumu",
       "create": "Izveidot",
       "update": "Labot",
       "close": "Aizvērt",
-      "deleted": "Pasūtījums tika izdzēsts!",
-      "documentNumber": "Dokumenta numurs"
+      "documentNumber": "Dokumenta numurs",
+      "action": {
+        "add": {
+          "success": "Pasūtījums tika pievienots!",
+          "error": "Neizdevās pievienot pasūtījumu"
+        },
+        "update": {
+          "success": "Pasūtījums tika atjaunots!",
+          "error": "Neizdevās atjaunot pasūtījumu"
+        },
+        "delete": {
+          "success": "Pasūtījums tika izdzēsts!",
+          "error": "Neizdevās izdzēst pasūtījumu"
+        }
+      }
     },
     "table": {
       "name": "Nosaukums",

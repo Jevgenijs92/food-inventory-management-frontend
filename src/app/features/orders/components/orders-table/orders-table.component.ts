@@ -9,6 +9,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { OrderedProduct } from '@fim/features/orders/core/models';
+import { ErrorModel } from '@fim/shared/models';
 
 @Component({
   selector: 'fim-orders-table',
@@ -16,9 +17,15 @@ import { OrderedProduct } from '@fim/features/orders/core/models';
 })
 export class OrdersTableComponent {
   @Input()
-  set data(orderedProducts: OrderedProduct[] | null) {
+  dataLoadErrors: ErrorModel | null = null;
+
+  @Input()
+  isLoadingData: boolean | null = null;
+
+  @Input()
+  set data(orderedProducts: ReadonlyArray<OrderedProduct> | null) {
     this.dataSource = new MatTableDataSource<OrderedProduct>(
-      orderedProducts ?? []
+      orderedProducts ? [...orderedProducts] : []
     );
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;

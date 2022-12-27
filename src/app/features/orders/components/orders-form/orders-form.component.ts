@@ -1,17 +1,16 @@
-import { AfterViewInit, Component, Input } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import {
   FormArray,
   FormGroup,
   NonNullableFormBuilder,
   Validators,
 } from '@angular/forms';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Product } from '@fim/features/products/core/models';
 import { Order } from '../../core/models';
-import { OrdersService } from '../../core/facades/orders.service';
-import { take } from 'rxjs/operators';
-import { SnackBarService } from '@fim/features/snack-bar/services/snack-bar.service';
+import { OrdersFacade } from '@fim/features/orders/core/facades/orders.facade';
+import { ProductsFacade } from '@fim/features/products/core/facades/products.facade';
 
 @Component({
   selector: 'fim-orders-form',
@@ -21,22 +20,14 @@ export class OrdersFormComponent implements AfterViewInit {
   form: FormGroup;
   order: Order | undefined;
 
-  submittedSource: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
-    false
-  );
-  submitted$: Observable<boolean> = this.submittedSource.asObservable();
-
-  errorsSource: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  errors$: Observable<boolean> = this.errorsSource.asObservable();
-
-  @Input()
-  products: Product[] = [];
+  products$: Observable<ReadonlyArray<Product> | null> =
+    this.productsFacade.products$;
 
   constructor(
     protected formBuilder: NonNullableFormBuilder,
     protected dialogRef: MatDialogRef<OrdersFormComponent>,
-    protected ordersService: OrdersService,
-    protected snackBarService: SnackBarService
+    protected ordersFacade: OrdersFacade,
+    protected productsFacade: ProductsFacade
   ) {
     this.form = this.formBuilder.group({
       deliveryDate: [null, Validators.required],
@@ -72,37 +63,18 @@ export class OrdersFormComponent implements AfterViewInit {
 
   onSubmit() {
     if (this.form.valid) {
-      this.submittedSource.next(true);
-      let order$: Observable<Order>;
       if (this.order) {
-        order$ = this.ordersService.updateOrder(this.order.id, this.form.value);
+        this.ordersFacade.updateOrder(this.order.id, this.form.value);
       } else {
-        order$ = this.ordersService.createOrder(this.form.value);
+        this.ordersFacade.addOrder(this.form.value);
       }
-      order$.subscribe(
-        () => this.errorsSource.next(false),
-        () => this.errorsSource.next(true)
-      );
+      this.onClose();
     }
   }
 
   onClickDeleteOrder(orderId: string) {
-    this.ordersService
-      .deleteOrder(orderId)
-      .pipe(take(1))
-      .subscribe(
-        () => {
-          this.openSnackBar('orders.form.deleted');
-          this.dialogRef.close();
-        },
-        (error) => {
-          this.openSnackBar(error);
-        }
-      );
-  }
-
-  private openSnackBar(message: string) {
-    this.snackBarService.openSnackBar(message);
+    this.ordersFacade.deleteOrder(orderId);
+    this.onClose();
   }
 
   onClose() {

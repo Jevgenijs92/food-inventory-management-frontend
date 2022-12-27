@@ -102,13 +102,24 @@
       "product": "Product",
       "quantity": "Quantity",
       "sellPrice": "Sell Price",
-      "success": "Successfully added order",
-      "error": "Cannot add order",
       "create": "Create",
       "update": "Update",
       "close": "Close",
-      "deleted": "Successfully deleted order!",
-      "documentNumber": "Document number"
+      "documentNumber": "Document number",
+      "action": {
+        "add": {
+          "success": "Successfully added order!",
+          "error": "Cannot add order"
+        },
+        "update": {
+          "success": "Successfully updated order!",
+          "error": "Cannot update order"
+        },
+        "delete": {
+          "success": "Successfully deleted order!",
+          "error": "Cannot delete order"
+        }
+      }
     },
     "table": {
       "name": "Name",

@@ -1,6 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { OrdersService } from '@fim/features/orders/core/facades/orders.service';
-import { map, take, tap } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import {
   Order,
@@ -10,8 +9,9 @@ import {
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { OrdersFormComponent } from '@fim/features/orders/components/orders-form/orders-form.component';
 import { SnackBarService } from '@fim/features/snack-bar/services/snack-bar.service';
-import { ProductsService } from '@fim/features/products/core/facades/products.service';
-import { Product } from '@fim/features/products/core/models';
+import { OrdersFacade } from '@fim/features/orders/core/facades/orders.facade';
+import { ErrorModel } from '@fim/shared/models';
+import { ProductsFacade } from '@fim/features/products/core/facades/products.facade';
 
 @Component({
   selector: 'fim-orders-page',
@@ -19,16 +19,19 @@ import { Product } from '@fim/features/products/core/models';
 })
 export class OrdersPageComponent implements OnDestroy {
   constructor(
-    protected ordersService: OrdersService,
     protected dialog: MatDialog,
     protected snackBarService: SnackBarService,
-    protected productsService: ProductsService
+    protected ordersFacade: OrdersFacade,
+    protected productsFacade: ProductsFacade
   ) {
-    this.loadOrders();
-    this.loadProducts();
+    this.ordersFacade.loadOrders();
+    this.productsFacade.loadProducts();
   }
 
-  private products: Product[] = [];
+  isLoadingOrders$: Observable<boolean> = this.ordersFacade.isLoadingOrders$;
+
+  loadOrdersError$: Observable<ErrorModel> =
+    this.ordersFacade.loadingOrdersError$;
 
   dialogRef: MatDialogRef<OrdersFormComponent> | null = null;
 
@@ -36,30 +39,26 @@ export class OrdersPageComponent implements OnDestroy {
     new BehaviorSubject<OrderFilters>(this.getInitialFilters());
   public filters$: Observable<OrderFilters> = this.filtersSource.asObservable();
 
-  private ordersSource: BehaviorSubject<Order[]> = new BehaviorSubject<Order[]>(
-    []
-  );
-  orderedProducts$: Observable<OrderedProduct[]> = combineLatest([
-    this.ordersSource.asObservable(),
-    this.filters$,
-  ]).pipe(
-    map(([orders, filters]) => this.filterOrders(orders, filters)),
-    map(this.convertToOrderedProducts, this)
-  );
+  orderedProducts$: Observable<ReadonlyArray<OrderedProduct> | null> =
+    combineLatest([this.ordersFacade.orders$, this.filters$]).pipe(
+      map(([orders, filters]) => this.filterOrders(orders, filters)),
+      map(this.convertToOrderedProducts, this)
+    );
 
   onClickAddOrder() {
     this.openOrdersFormDialog();
   }
 
   onClickUpdateOrder(orderId: string) {
-    this.openOrdersFormDialog(
-      this.ordersSource.value.find((order) => order.id === orderId)
-    );
+    this.ordersFacade.orders$.pipe(take(1)).subscribe((orders) => {
+      if (orders) {
+        this.openOrdersFormDialog(orders.find((order) => order.id === orderId));
+      }
+    });
   }
 
   protected openOrdersFormDialog(order?: Order) {
     this.dialogRef = this.dialog.open(OrdersFormComponent);
-    this.dialogRef.componentInstance.products = this.products;
     if (order) {
       this.dialogRef.componentInstance.order = order;
     }
@@ -68,44 +67,44 @@ export class OrdersPageComponent implements OnDestroy {
       .pipe(take(1))
       .subscribe(() => {
         this.dialogRef = null;
-        this.loadOrders();
       });
   }
 
-  protected loadOrders() {
-    this.ordersService
-      .getOrders()
-      .pipe(
-        take(1),
-        tap((orders) => this.ordersSource.next(orders))
-      )
-      .subscribe();
+  protected convertToOrderedProducts(
+    orders: ReadonlyArray<Order> | null
+  ): ReadonlyArray<OrderedProduct> | null {
+    if (orders) {
+      const orderedProducts: OrderedProduct[] = [];
+      orders.forEach((order) => {
+        order.products.forEach((product) =>
+          orderedProducts.push({
+            ...product,
+            orderId: order.id,
+            deliveryDate: order.deliveryDate,
+            documentNumber: order.documentNumber,
+            totalCost: product.price * product.deliveryQuantity,
+          })
+        );
+      });
+      return orderedProducts;
+    }
+    return null;
   }
 
-  protected convertToOrderedProducts(orders: Order[]) {
-    const orderedProducts: OrderedProduct[] = [];
-    orders.forEach((order) => {
-      order.products.forEach((product) =>
-        orderedProducts.push({
-          ...product,
-          orderId: order.id,
-          deliveryDate: order.deliveryDate,
-          documentNumber: order.documentNumber,
-          totalCost: product.price * product.deliveryQuantity,
-        })
-      );
-    });
-    return orderedProducts;
-  }
-
-  protected filterOrders(orders: Order[], filter: OrderFilters): Order[] {
-    return orders.filter((order) => {
-      const date = new Date(order.deliveryDate);
-      return (
-        date.getTime() >= filter.fromDate?.getTime() &&
-        date.getTime() <= filter.toDate?.getTime()
-      );
-    });
+  protected filterOrders(
+    orders: ReadonlyArray<Order> | null,
+    filter: OrderFilters
+  ): ReadonlyArray<Order> | null {
+    if (orders) {
+      return orders.filter((order) => {
+        const date = new Date(order.deliveryDate);
+        return (
+          date.getTime() >= filter.fromDate?.getTime() &&
+          date.getTime() <= filter.toDate?.getTime()
+        );
+      });
+    }
+    return null;
   }
 
   protected getInitialFilters(): OrderFilters {
@@ -177,12 +176,5 @@ export class OrdersPageComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this.dialogRef?.close();
-  }
-
-  private loadProducts() {
-    this.productsService
-      .getProducts()
-      .pipe(take(1))
-      .subscribe((products) => (this.products = products));
   }
 }

@@ -14,7 +14,7 @@
                     <input formControlName="documentNumber" type="text" matInput>
                 </mat-form-field>
             </div>
-            <div formArrayName="products">
+            <div formArrayName="products" *ngIf="products$ | async as products">
                 <ng-container *ngFor="let productControl of productsArray.controls; index as i">
                     <div class="row" [formGroupName]="i">
                         <mat-form-field appearance="outline" class="px-1 col-12 col-lg-6">
@@ -62,15 +62,7 @@
             </div>
         </mat-dialog-content>
         <p matDialogActions class="d-flex justify-content-center">
-            <ng-container *ngIf="submitted$ | async">
-            <span class="px-1" *ngIf="(errors$ | async) !== true">
-                <mat-icon class="text-success" matTooltip="{{'orders.form.success' | translate}}">done</mat-icon>
-            </span>
-                <span class="px-1" *ngIf="errors$ | async">
-                <mat-icon class="text-danger" matTooltip="{{'orders.form.error' | translate}}">error</mat-icon>
-            </span>
-            </ng-container>
-            <button type="submit" mat-raised-button color="primary" [disabled]="submitted$ | async">
+            <button type="submit" mat-raised-button color="primary">
                 {{(order ? 'orders.form.update' : 'orders.form.create') | translate}}
             </button>
             <button type="button" mat-raised-button class="ms-3"

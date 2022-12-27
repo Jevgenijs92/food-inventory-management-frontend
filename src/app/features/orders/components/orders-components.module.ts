@@ -19,6 +19,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { SnackBarModule } from '@fim/features/snack-bar/snack-bar.module';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DateRangeFilterComponent } from './date-range-filter/date-range-filter.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { DateRangeFilterComponent } from './date-range-filter/date-range-filter.
     MatSortModule,
     MatPaginatorModule,
     SnackBarModule,
+    NgxSkeletonLoaderModule,
   ],
   providers: [MatSnackBar],
 })
