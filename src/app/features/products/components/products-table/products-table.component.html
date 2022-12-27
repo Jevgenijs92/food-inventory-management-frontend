@@ -53,14 +53,14 @@
             </td>
         </tr>
     </mat-table>
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+    <mat-paginator [pageSizeOptions]="[100, 500]"
                    showFirstLastButtons
                    aria-label="Select page of ingredients" [hidden]="isLoadingData">
     </mat-paginator>
 </div>
 
 <ng-template #loading>
-    <ngx-skeleton-loader count="5" appearance="line"></ngx-skeleton-loader>
+    <ngx-skeleton-loader count="10" appearance="line"></ngx-skeleton-loader>
 </ng-template>
 
 <ng-template #noData>
