@@ -2,11 +2,10 @@ import { Component, OnDestroy } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { Product } from '../../core/models';
-import { take, tap } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { ProductsFormComponent } from '@fim/features/products/components/products-form/products-form.component';
 import { ProductsService } from '@fim/features/products/core/facades/products.service';
 import { SnackBarService } from '@fim/features/snack-bar/services/snack-bar.service';
-import { Ingredient } from '@fim/features/ingredients/core/models';
 import { IngredientsFacade } from '@fim/features/ingredients/core/facades/ingredients.facade';
 import { ProductsFacade } from '@fim/features/products/core/facades/products.facade';
 import { ErrorModel } from '@fim/shared/models';
@@ -38,18 +37,6 @@ export class ProductsPageComponent implements OnDestroy {
   loadProductsError$: Observable<ErrorModel> =
     this.productsFacade.loadingProductsError$;
 
-  ingredients: ReadonlyArray<Ingredient> = [];
-  ingredients$: Observable<ReadonlyArray<Ingredient> | null> =
-    this.ingredientsFacade.ingredients$.pipe(
-      tap((ingredients) => {
-        if (ingredients) {
-          this.ingredients = [...ingredients].sort((a, b) =>
-            a.name?.localeCompare(b.name)
-          );
-        }
-      })
-    );
-
   onClickAddProduct() {
     this.openProductsFormDialog();
   }
@@ -64,7 +51,6 @@ export class ProductsPageComponent implements OnDestroy {
 
   openProductsFormDialog(product?: Product) {
     this.dialogRef = this.dialog.open(ProductsFormComponent);
-    this.dialogRef.componentInstance.ingredients = this.ingredients;
     if (product) {
       this.dialogRef.componentInstance.product = product;
     }
