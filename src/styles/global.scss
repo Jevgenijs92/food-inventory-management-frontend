@@ -1,5 +1,8 @@
 body {
   --fim-hover-color: #F2F4FF;
+  .mat-mdc-option {
+    min-height: 40px;
+  }
 }
 
 .page {

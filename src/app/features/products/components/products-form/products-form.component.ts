@@ -1,18 +1,17 @@
-import { AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import {
   FormArray,
   FormGroup,
   NonNullableFormBuilder,
   Validators,
 } from '@angular/forms';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { combineLatest, Observable, Subject } from 'rxjs';
 import { MatDialogRef } from '@angular/material/dialog';
-import {
-  ProductsService
-} from '@fim/features/products/core/facades/products.service';
 import { Product } from '@fim/features/products/core/models';
 import { Ingredient } from '@fim/features/ingredients/core/models';
-import { debounceTime, takeUntil } from 'rxjs/operators';
+import { debounceTime, map, shareReplay, takeUntil } from 'rxjs/operators';
+import { ProductsFacade } from '@fim/features/products/core/facades/products.facade';
+import { IngredientsFacade } from '@fim/features/ingredients/core/facades/ingredients.facade';
 
 @Component({
   selector: 'fim-products-form',
@@ -22,34 +21,30 @@ export class ProductsFormComponent implements AfterViewInit, OnDestroy {
   form: FormGroup;
   product: Product | undefined;
 
-  submittedSource: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
-    false
-  );
-  submitted$: Observable<boolean> = this.submittedSource.asObservable();
-
-  errorsSource: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  errors$: Observable<boolean> = this.errorsSource.asObservable();
-
-  @Input()
-  ingredients: Ingredient[] = [];
+  ingredients$: Observable<ReadonlyArray<Ingredient> | null> =
+    this.ingredientsFacade.ingredients$.pipe(
+      map((ingredients) =>
+        ingredients
+          ? [...ingredients].sort((a, b) => a.name?.localeCompare(b.name))
+          : null
+      ),
+      shareReplay({ bufferSize: 1, refCount: true })
+    );
 
   endSubs$: Subject<void> = new Subject<void>();
 
   constructor(
     protected formBuilder: NonNullableFormBuilder,
     protected dialogRef: MatDialogRef<ProductsFormComponent>,
-    protected productsService: ProductsService
+    protected productsFacade: ProductsFacade,
+    protected ingredientsFacade: IngredientsFacade
   ) {
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
       ingredients: this.formBuilder.array([]),
       total: [{ value: 0, disabled: true }],
     });
-    this.ingredientsArray.valueChanges
-      .pipe(debounceTime(200), takeUntil(this.endSubs$))
-      .subscribe((ingredients: { ingredient: string; quantity: number }[]) => {
-        this.updateFormPrices(ingredients);
-      });
+    this.watchIngredientsArrayChange();
   }
 
   get ingredientsArray(): FormArray {
@@ -76,20 +71,13 @@ export class ProductsFormComponent implements AfterViewInit, OnDestroy {
 
   onSubmit() {
     if (this.form.valid) {
-      this.submittedSource.next(true);
-      let product$: Observable<Product>;
+      this.form.disable();
       if (this.product) {
-        product$ = this.productsService.updateProduct(
-          this.product.id,
-          this.form.value
-        );
+        this.productsFacade.updateProduct(this.product.id, this.form.value);
       } else {
-        product$ = this.productsService.createProduct(this.form.value);
+        this.productsFacade.addProduct(this.form.value);
       }
-      product$.subscribe(
-        () => this.errorsSource.next(false),
-        () => this.errorsSource.next(true)
-      );
+      this.onClose();
     }
   }
 
@@ -105,6 +93,22 @@ export class ProductsFormComponent implements AfterViewInit, OnDestroy {
     this.ingredientsArray.push(this.getIngredientGroup());
   }
 
+  private watchIngredientsArrayChange() {
+    combineLatest([
+      this.ingredientsArray.valueChanges.pipe(debounceTime(200)),
+      this.ingredients$,
+    ])
+      .pipe(takeUntil(this.endSubs$))
+      .subscribe(
+        ([ingredientsForm, ingredients]: [
+          { ingredient: string; quantity: number }[],
+          ReadonlyArray<Ingredient> | null
+        ]) => {
+          this.updateFormPrices(ingredients, ingredientsForm);
+        }
+      );
+  }
+
   private getIngredientGroup(
     ingredient: string | null = null,
     quantity: number = 0
@@ -117,23 +121,28 @@ export class ProductsFormComponent implements AfterViewInit, OnDestroy {
   }
 
   private updateFormPrices(
-    ingredients: { ingredient: string; quantity: number }[]
+    ingredients: ReadonlyArray<Ingredient> | null,
+    ingredientsForm: { ingredient: string; quantity: number }[]
   ) {
-    let total = 0;
-    ingredients.forEach((ingredientForm, index) => {
-      const ingredient = this.ingredients.find(
-        (value) => value.id === ingredientForm.ingredient
-      );
-      let price = 0;
-      if (ingredient) {
-        price = ingredient.pricePerUnit * ingredientForm.quantity ?? 0;
-      }
-      this.ingredientsArray.controls[index]
-        .get('price')
-        ?.patchValue(price.toFixed(2), { emitEvent: false });
-      total += price;
-    });
-    this.form.get('total')?.patchValue(total.toFixed(2), { emitEvent: false });
+    if (ingredients) {
+      let total = 0;
+      ingredientsForm.forEach((ingredientForm, index) => {
+        const ingredient = ingredients.find(
+          (value) => value.id === ingredientForm.ingredient
+        );
+        let price = 0;
+        if (ingredient) {
+          price = ingredient.pricePerUnit * ingredientForm.quantity ?? 0;
+        }
+        this.ingredientsArray.controls[index]
+          .get('price')
+          ?.patchValue(price.toFixed(2), { emitEvent: false });
+        total += price;
+      });
+      this.form
+        .get('total')
+        ?.patchValue(total.toFixed(2), { emitEvent: false });
+    }
   }
 
   ngOnDestroy(): void {

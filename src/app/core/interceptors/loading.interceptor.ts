@@ -15,11 +15,14 @@ export class LoadingInterceptor implements HttpInterceptor {
   constructor(private loadingService: LoadingService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler) {
-    if (!request.url.includes('/assets/') && request.url.includes(environment.baseUrl)) {
+    if (
+      !request.url.includes('/assets/') &&
+      request.url.includes(environment.baseUrl)
+    ) {
       setTimeout(() => {
         this.totalRequests++;
         this.loadingService.setLoading(true);
-      })
+      });
 
       return next.handle(request).pipe(
         finalize(() => {

@@ -6,11 +6,11 @@ import {
 } from '@fim/features/ingredients/core/models';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
 import { AppTranslateService } from '@fim/core/services/app-translate.service';
-import { IngredientsService } from '@fim/features/ingredients/core/facades/ingredients.service';
 import { calculatePricePerUnit } from '@fim/shared/utils';
+import { IngredientsFacade } from '@fim/features/ingredients/core/facades/ingredients.facade';
 
 @Component({
   selector: 'fim-ingredients-form',
@@ -23,19 +23,11 @@ export class IngredientsFormComponent implements AfterViewInit {
 
   pricePerUnit$: Observable<string>;
 
-  submittedSource: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
-    false
-  );
-  submitted$: Observable<boolean> = this.submittedSource.asObservable();
-
-  errorsSource: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  errors$: Observable<boolean> = this.errorsSource.asObservable();
-
   constructor(
     protected formBuilder: NonNullableFormBuilder,
     protected dialogRef: MatDialogRef<IngredientsFormComponent>,
     protected translateService: AppTranslateService,
-    protected ingredientsService: IngredientsService
+    protected ingredientsFacade: IngredientsFacade
   ) {
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
@@ -73,20 +65,16 @@ export class IngredientsFormComponent implements AfterViewInit {
 
   onSubmit() {
     if (this.form.valid) {
-      this.submittedSource.next(true);
-      let ingredient$: Observable<Ingredient>;
+      this.form.disable();
       if (this.ingredient) {
-        ingredient$ = this.ingredientsService.updateIngredient(
+        this.ingredientsFacade.updateIngredient(
           this.ingredient.id,
           this.form.value
         );
       } else {
-        ingredient$ = this.ingredientsService.createIngredient(this.form.value);
+        this.ingredientsFacade.addIngredient(this.form.value);
       }
-      ingredient$.subscribe(
-        () => this.errorsSource.next(false),
-        () => this.errorsSource.next(true)
-      );
+      this.onClose();
     }
   }
 

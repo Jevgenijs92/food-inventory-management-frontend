@@ -1,21 +1,14 @@
 import { Component, OnDestroy } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Product } from '../../core/models';
-import { take, tap } from 'rxjs/operators';
-import {
-  ProductsFormComponent
-} from '@fim/features/products/components/products-form/products-form.component';
-import {
-  ProductsService
-} from '@fim/features/products/core/facades/products.service';
-import {
-  SnackBarService
-} from '@fim/features/snack-bar/services/snack-bar.service';
-import { Ingredient } from '@fim/features/ingredients/core/models';
-import {
-  IngredientsService
-} from '@fim/features/ingredients/core/facades/ingredients.service';
+import { take } from 'rxjs/operators';
+import { ProductsFormComponent } from '@fim/features/products/components/products-form/products-form.component';
+import { ProductsService } from '@fim/features/products/core/facades/products.service';
+import { SnackBarService } from '@fim/features/snack-bar/services/snack-bar.service';
+import { IngredientsFacade } from '@fim/features/ingredients/core/facades/ingredients.facade';
+import { ProductsFacade } from '@fim/features/products/core/facades/products.facade';
+import { ErrorModel } from '@fim/shared/models';
 
 @Component({
   selector: 'fim-products-page',
@@ -26,20 +19,23 @@ export class ProductsPageComponent implements OnDestroy {
     protected productsService: ProductsService,
     protected dialog: MatDialog,
     protected snackBarService: SnackBarService,
-    protected ingredientsService: IngredientsService
+    protected ingredientsFacade: IngredientsFacade,
+    protected productsFacade: ProductsFacade
   ) {
-    this.loadProducts();
-    this.loadIngredients();
+    this.productsFacade.loadProducts();
+    this.ingredientsFacade.loadIngredients();
   }
 
   dialogRef: MatDialogRef<ProductsFormComponent> | null = null;
 
-  productsSource: BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>(
-    []
-  );
-  products$: Observable<Product[]> = this.productsSource.asObservable();
+  products$: Observable<ReadonlyArray<Product> | null> =
+    this.productsFacade.products$;
 
-  ingredients: Ingredient[] = [];
+  isLoadingProducts$: Observable<boolean> =
+    this.productsFacade.isLoadingProducts$;
+
+  loadProductsError$: Observable<ErrorModel> =
+    this.productsFacade.loadingProductsError$;
 
   onClickAddProduct() {
     this.openProductsFormDialog();
@@ -50,23 +46,11 @@ export class ProductsPageComponent implements OnDestroy {
   }
 
   onClickDeleteProduct(product: Product) {
-    this.productsService
-      .deleteProduct(product.id)
-      .pipe(take(1))
-      .subscribe(
-        () => {
-          this.loadProducts();
-          this.openSnackBar('products.form.deleted');
-        },
-        (error) => {
-          this.openSnackBar(error);
-        }
-      );
+    this.productsFacade.deleteProduct(product.id);
   }
 
   openProductsFormDialog(product?: Product) {
     this.dialogRef = this.dialog.open(ProductsFormComponent);
-    this.dialogRef.componentInstance.ingredients = this.ingredients;
     if (product) {
       this.dialogRef.componentInstance.product = product;
     }
@@ -75,7 +59,6 @@ export class ProductsPageComponent implements OnDestroy {
       .pipe(take(1))
       .subscribe(() => {
         this.dialogRef = null;
-        this.loadProducts();
       });
   }
 
@@ -83,24 +66,7 @@ export class ProductsPageComponent implements OnDestroy {
     this.snackBarService.openSnackBar(message);
   }
 
-  loadProducts() {
-    this.productsService
-      .getProducts()
-      .pipe(
-        take(1),
-        tap((ingredients) => this.productsSource.next(ingredients))
-      )
-      .subscribe();
-  }
-
   ngOnDestroy(): void {
     this.dialogRef?.close();
-  }
-
-  private loadIngredients() {
-    this.ingredientsService
-      .getIngredients()
-      .pipe(take(1))
-      .subscribe((ingredients) => (this.ingredients = ingredients));
   }
 }

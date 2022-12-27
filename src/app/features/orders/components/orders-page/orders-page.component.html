@@ -19,5 +19,7 @@
     </div>
 </div>
 <fim-orders-table [data]="orderedProducts$ | async"
+                  [dataLoadErrors]="loadOrdersError$ | async"
+                  [isLoadingData]="isLoadingOrders$ | async"
                   (orderUpdate)="onClickUpdateOrder($event)"></fim-orders-table>
 

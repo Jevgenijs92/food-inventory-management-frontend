@@ -10,6 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Ingredient } from '@fim/features/ingredients/core/models';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { ErrorModel } from '@fim/shared/models';
 
 @Component({
   selector: 'fim-ingredients-table',
@@ -17,13 +18,20 @@ import { MatPaginator } from '@angular/material/paginator';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IngredientsTableComponent {
-
   @Input()
-  set data(ingredients: Ingredient[] | null) {
-    this.dataSource = new MatTableDataSource<Ingredient>(ingredients ?? []);
+  set data(ingredients: ReadonlyArray<Ingredient> | null) {
+    this.dataSource = new MatTableDataSource<Ingredient>(
+      ingredients ? [...ingredients] : []
+    );
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
+
+  @Input()
+  dataLoadErrors: ErrorModel | null = null;
+
+  @Input()
+  isLoadingData: boolean | null = null;
 
   @Output()
   ingredientUpdate: EventEmitter<Ingredient> = new EventEmitter<Ingredient>();

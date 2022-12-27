@@ -10,19 +10,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import {
-  OrdersFormComponent
-} from '../components/orders-form';
+import { OrdersFormComponent } from '../components/orders-form';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import {
-  OrdersTableComponent
-} from '@fim/features/orders/components/orders-table';
+import { OrdersTableComponent } from '@fim/features/orders/components/orders-table';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { SnackBarModule } from '@fim/features/snack-bar/snack-bar.module';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DateRangeFilterComponent } from './date-range-filter/date-range-filter.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @NgModule({
   declarations: [
@@ -47,8 +44,9 @@ import { DateRangeFilterComponent } from './date-range-filter/date-range-filter.
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    SnackBarModule
+    SnackBarModule,
+    NgxSkeletonLoaderModule,
   ],
-  providers: [MatSnackBar]
+  providers: [MatSnackBar],
 })
 export class OrdersComponentsModule {}

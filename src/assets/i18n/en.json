@@ -40,9 +40,20 @@
       "update": "Update",
       "cancel": "Cancel",
       "close": "Close",
-      "error": "Cannot add ingredient",
-      "success": "Successfully added ingredient!",
-      "deleted": "Successfully deleted ingredient!"
+      "action": {
+        "add": {
+          "success": "Successfully added ingredient!",
+          "error": "Cannot add ingredient"
+        },
+        "update": {
+          "success": "Successfully updated ingredient!",
+          "error": "Cannot update ingredient"
+        },
+        "delete": {
+          "success": "Successfully deleted ingredient!",
+          "error": "Cannot delete ingredient"
+        }
+      }
     }
   },
   "products": {
@@ -65,9 +76,20 @@
       "update": "Update",
       "cancel": "Cancel",
       "close": "Close",
-      "error": "Cannot add product",
-      "success": "Successfully added product!",
-      "deleted": "Successfully deleted product!"
+      "action": {
+        "add": {
+          "success": "Successfully added product!",
+          "error": "Cannot add product"
+        },
+        "update": {
+          "success": "Successfully updated product!",
+          "error": "Cannot update product"
+        },
+        "delete": {
+          "success": "Successfully deleted product!",
+          "error": "Cannot delete product"
+        }
+      }
     }
   },
   "orders": {
@@ -80,13 +102,24 @@
       "product": "Product",
       "quantity": "Quantity",
       "sellPrice": "Sell Price",
-      "success": "Successfully added order",
-      "error": "Cannot add order",
       "create": "Create",
       "update": "Update",
       "close": "Close",
-      "deleted": "Successfully deleted order!",
-      "documentNumber": "Document number"
+      "documentNumber": "Document number",
+      "action": {
+        "add": {
+          "success": "Successfully added order!",
+          "error": "Cannot add order"
+        },
+        "update": {
+          "success": "Successfully updated order!",
+          "error": "Cannot update order"
+        },
+        "delete": {
+          "success": "Successfully deleted order!",
+          "error": "Cannot delete order"
+        }
+      }
     },
     "table": {
       "name": "Name",

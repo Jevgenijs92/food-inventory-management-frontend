@@ -4,43 +4,62 @@
             <mat-header-cell *matHeaderCellDef
                              [mat-sort-header]="column"> {{'orders.table.' + column | translate}} </mat-header-cell>
             <ng-container [ngSwitch]="column">
-                <ng-container *ngSwitchCase="'action'">
-                    <mat-cell *matCellDef="let element">
-                        <button mat-icon-button color="primary" (click)="onUpdateOrder(element)">
-                            <mat-icon>update</mat-icon>
-                        </button>
-                    </mat-cell>
-                    <mat-footer-cell *matFooterCellDef></mat-footer-cell>
-                </ng-container>
+                <!-- Date column -->
                 <ng-container *ngSwitchCase="'deliveryDate'">
                     <mat-cell *matCellDef="let element">
                         {{element[column] | date: 'dd/MM/yyyy'}}</mat-cell>
                     <mat-footer-cell *matFooterCellDef></mat-footer-cell>
                 </ng-container>
+
+                <!-- Document number column -->
+                <ng-container *ngSwitchCase="'documentNumber'">
+                    <mat-cell *matCellDef="let element"> {{element[column]}} </mat-cell>
+                    <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+                </ng-container>
+
+                <!-- Name column -->
+                <ng-container *ngSwitchCase="'name'">
+                    <mat-cell *matCellDef="let element"> {{element[column]}} </mat-cell>
+                    <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+                </ng-container>
+
+                <!-- Price column -->
                 <ng-container *ngSwitchCase="'price'">
                     <mat-cell *matCellDef="let element">
                         {{element[column] | currency: 'EUR'}}
                     </mat-cell>
                     <mat-footer-cell *matFooterCellDef class="fw-bold">{{'orders.table.totals' | translate}}</mat-footer-cell>
                 </ng-container>
+
+                <!-- Delivery quantity column -->
+                <ng-container *ngSwitchCase="'deliveryQuantity'">
+                    <mat-cell *matCellDef="let element"> {{element[column]}} </mat-cell>
+                    <mat-footer-cell *matFooterCellDef class="fw-bold">{{getTotalQuantity()}}</mat-footer-cell>
+                </ng-container>
+
+                <!-- Total cost column -->
                 <ng-container *ngSwitchCase="'totalCost'">
                     <mat-cell *matCellDef="let element">
                         {{element[column] | currency: 'EUR'}}
                     </mat-cell>
                     <mat-footer-cell *matFooterCellDef class="fw-bold">{{getTotalAmount('totalCost') | currency: 'EUR'}}</mat-footer-cell>
                 </ng-container>
+
+                <!-- Sell price column -->
                 <ng-container *ngSwitchCase="'sellPrice'">
                     <mat-cell *matCellDef="let element">
                         {{element[column] | currency: 'EUR'}}
                     </mat-cell>
                     <mat-footer-cell *matFooterCellDef class="fw-bold">{{getTotalAmount('sellPrice') | currency: 'EUR'}}</mat-footer-cell>
                 </ng-container>
-                <ng-container *ngSwitchCase="'deliveryQuantity'">
-                    <mat-cell *matCellDef="let element"> {{element[column]}} </mat-cell>
-                    <mat-footer-cell *matFooterCellDef class="fw-bold">{{getTotalQuantity()}}</mat-footer-cell>
-                </ng-container>
-                <ng-container *ngSwitchDefault>
-                    <mat-cell *matCellDef="let element"> {{element[column]}} </mat-cell>
+
+                <!-- Action column -->
+                <ng-container *ngSwitchCase="'action'">
+                    <mat-cell *matCellDef="let element">
+                        <button mat-icon-button color="primary" (click)="onUpdateOrder(element)">
+                            <mat-icon>update</mat-icon>
+                        </button>
+                    </mat-cell>
                     <mat-footer-cell *matFooterCellDef></mat-footer-cell>
                 </ng-container>
             </ng-container>
@@ -51,12 +70,30 @@
         <mat-footer-row *matFooterRowDef="displayedColumns"></mat-footer-row>
 
         <!-- Row shown when there is no matching data. -->
-        <div class="mat-row d-flex justify-content-center" *matNoDataRow>
-            <p class="pt-2 fw-semibold">{{'orders.table.noData' | translate }}</p>
-        </div>
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell pt-3" [attr.colspan]="displayedColumns.length">
+                <ng-container *ngIf="!isLoadingData; else loading">
+                    <div class="d-flex justify-content-center p-2">
+                        <p class="pt-2 fw-semibold">
+                            <ng-container *ngIf="dataLoadErrors?.hasError;else noData">
+                                {{dataLoadErrors?.errorMessage}}
+                            </ng-container>
+                        </p>
+                    </div>
+                </ng-container>
+            </td>
+        </tr>
     </mat-table>
     <mat-paginator [pageSizeOptions]="[5, 10, 20]"
                    showFirstLastButtons
                    aria-label="Select page of ingredients">
     </mat-paginator>
 </div>
+
+<ng-template #loading>
+    <ngx-skeleton-loader count="5" appearance="line"></ngx-skeleton-loader>
+</ng-template>
+
+<ng-template #noData>
+    {{'orders.table.noData' | translate }}
+</ng-template>
