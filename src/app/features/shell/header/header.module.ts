@@ -6,6 +6,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
 import { LanguageSelectorComponentsModule } from '@fim/features/language-selector/components/language-selector-components.module';
+import { MatMenuModule } from '@angular/material/menu';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [HeaderComponent],
@@ -16,6 +18,8 @@ import { LanguageSelectorComponentsModule } from '@fim/features/language-selecto
     TranslateModule,
     RouterModule,
     LanguageSelectorComponentsModule,
+    MatMenuModule,
+    CommonModule,
   ],
   exports: [HeaderComponent],
 })

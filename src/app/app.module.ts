@@ -15,6 +15,7 @@ import { environment } from '../environments/environment';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { MatMenuModule } from '@angular/material/menu';
 
 const devImports = [];
 
@@ -45,6 +46,7 @@ if (!environment.production) {
     AuthModule,
     MatProgressBarModule,
     MatMomentDateModule,
+    MatMenuModule,
   ],
   providers: [...dateProviders],
   bootstrap: [AppComponent],

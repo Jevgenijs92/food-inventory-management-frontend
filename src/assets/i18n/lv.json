@@ -9,7 +9,13 @@
     }
   },
   "header": {
-    "title": "Resursu Vadība"
+    "title": "Resursu Vadība",
+    "menu": {
+      "homepage": "Galvenā",
+      "ingredients": "Izejvielas",
+      "products": "Produkti",
+      "orders": "Pasūtījumi"
+    }
   },
   "homepage": {
     "ingredients": "Izejvielas",

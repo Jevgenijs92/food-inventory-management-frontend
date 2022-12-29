@@ -1,8 +1,26 @@
 <p class="header">
     <mat-toolbar color="primary">
-        <button mat-icon-button aria-label="home icon" [routerLink]="['/']">
-            <mat-icon>home</mat-icon>
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu">
+            <mat-icon>menu</mat-icon>
         </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item aria-label="home icon" [routerLink]="['/']">
+                <mat-icon [ngStyle]="{'color': '#009688'}">home</mat-icon>
+                <span>{{'header.menu.homepage' | translate}}</span>
+            </button>
+            <button mat-menu-item aria-label="ingredients icon" [routerLink]="['/ingredients']">
+                <mat-icon svgIcon="ingredients" [ngStyle]="{'color': '#358600' }"></mat-icon>
+                <span>{{'header.menu.ingredients' | translate}}</span>
+            </button>
+            <button mat-menu-item aria-label="products icon" [routerLink]="['/products']">
+                <mat-icon svgIcon="products" [ngStyle]="{'color': '#96C5F7', 'height': 'auto' }"></mat-icon>
+                <span>{{'header.menu.products' | translate}}</span>
+            </button>
+            <button mat-menu-item aria-label="orders icon" [routerLink]="['/orders']">
+                <mat-icon svgIcon="orders" [ngStyle]="{'color': '#B07BAC', 'height': 'auto' }"></mat-icon>
+                <span>{{'header.menu.orders' | translate}}</span>
+            </button>
+        </mat-menu>
         <span class="d-none d-md-inline">{{'header.title' | translate}}</span>
         <span class="spacer"></span>
         <fim-language-selector class="fs-6 py-2 pe-2"></fim-language-selector>

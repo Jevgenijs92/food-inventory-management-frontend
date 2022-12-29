@@ -9,7 +9,13 @@
     }
   },
   "header": {
-    "title": "Resource Management"
+    "title": "Resource Management",
+    "menu": {
+      "homepage": "Homepage",
+      "ingredients": "Ingredients",
+      "products": "Products",
+      "orders": "Orders"
+    }
   },
   "homepage": {
     "ingredients": "Ingredients",

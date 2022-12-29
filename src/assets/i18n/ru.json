@@ -9,7 +9,13 @@
     }
   },
   "header": {
-    "title": "Управление Ресурсами"
+    "title": "Управление Ресурсами",
+    "menu": {
+      "homepage": "Главная",
+      "ingredients": "Ингредиенты",
+      "products": "Продукция",
+      "orders": "Заказы"
+    }
   },
   "homepage": {
     "ingredients": "Ингредиенты",
