@@ -67,6 +67,7 @@
     "add": "Pievienot",
     "table": {
       "name": "Nosaukums",
+      "ingredientsQuantity": "Izejvielu skaits",
       "price": "Cena",
       "noData": "Nekas netika atrasts",
       "action": "Darbības"

@@ -18,6 +18,11 @@
                     <mat-cell *matCellDef="let element"> {{element[column]}} </mat-cell>
                 </ng-container>
 
+                <!-- Ingredients quantity column -->
+                <ng-container *ngSwitchCase="'ingredientsQuantity'">
+                    <mat-cell *matCellDef="let element"> {{getIngredientsCount(element)}} </mat-cell>
+                </ng-container>
+
                 <!-- price column -->
                 <ng-container *ngSwitchCase="'price'">
                     <mat-cell *matCellDef="let element">{{element[column] | currency: 'EUR'}}</mat-cell>

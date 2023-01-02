@@ -39,7 +39,12 @@ export class ProductsTableComponent {
 
   dataSource!: MatTableDataSource<Product>;
   filter: string | null = null;
-  displayedColumns: string[] = ['name', 'price', 'action'];
+  displayedColumns: string[] = [
+    'name',
+    'ingredientsQuantity',
+    'price',
+    'action',
+  ];
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -59,5 +64,9 @@ export class ProductsTableComponent {
 
   onDeleteProduct(product: Product) {
     this.productDelete.emit(product);
+  }
+
+  getIngredientsCount(product: Product): number {
+    return product?.ingredients?.length || 0;
   }
 }

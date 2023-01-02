@@ -67,6 +67,7 @@
     "add": "Add",
     "table": {
       "name": "Name",
+      "ingredientsQuantity": "Ingredients count",
       "price": "Price",
       "noData": "No data found",
       "action": "Action"
