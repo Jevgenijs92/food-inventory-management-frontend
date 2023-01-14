@@ -67,6 +67,7 @@
     "add": "Pievienot",
     "table": {
       "name": "Nosaukums",
+      "yieldPcs": "Daudzums, gb.",
       "ingredientsQuantity": "Izejvielu skaits",
       "price": "Cena",
       "noData": "Nekas netika atrasts",
@@ -79,6 +80,7 @@
       "price": "Cena",
       "ingredient": "Izejviela",
       "quantity": "Daudzums",
+      "batchQuantity": "Daudzums, gb.",
       "create": "Izveidot",
       "update": "Labot",
       "cancel": "Atcelt",
@@ -107,7 +109,7 @@
       "updateOrder": "Labot Pasūtījumu",
       "date": "Datums",
       "product": "Produkts",
-      "quantity": "Daudzums",
+      "quantity": "Daudzums, gb.",
       "sellPrice": "Pārdošanas summa",
       "create": "Izveidot",
       "update": "Labot",
@@ -131,7 +133,7 @@
     "table": {
       "name": "Nosaukums",
       "deliveryDate": "Datums",
-      "deliveryQuantity": "Daudzums",
+      "deliveryQuantity": "Daudzums, gb.",
       "price": "Cena",
       "totalCost": "Summa (pašizmaksa)",
       "sellPrice": "Pārdošanas summa",

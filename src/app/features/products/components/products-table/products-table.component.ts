@@ -41,6 +41,7 @@ export class ProductsTableComponent {
   filter: string | null = null;
   displayedColumns: string[] = [
     'name',
+    'yieldPcs',
     'ingredientsQuantity',
     'price',
     'action',

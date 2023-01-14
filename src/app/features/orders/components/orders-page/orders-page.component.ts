@@ -82,7 +82,8 @@ export class OrdersPageComponent implements OnDestroy {
             orderId: order.id,
             deliveryDate: order.deliveryDate,
             documentNumber: order.documentNumber,
-            totalCost: product.price * product.deliveryQuantity,
+            totalCost:
+              (product.price * product.deliveryQuantity) / product.yieldPcs,
           })
         );
       });

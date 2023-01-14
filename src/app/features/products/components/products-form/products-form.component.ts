@@ -41,6 +41,7 @@ export class ProductsFormComponent implements AfterViewInit, OnDestroy {
   ) {
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
+      yieldPcs: [1, [Validators.required, Validators.min(1)]],
       ingredients: this.formBuilder.array([]),
       total: [{ value: 0, disabled: true }],
     });
@@ -55,6 +56,7 @@ export class ProductsFormComponent implements AfterViewInit, OnDestroy {
     setTimeout(() => {
       if (this.product) {
         this.form.get('name')?.patchValue(this.product.name);
+        this.form.get('yieldPcs')?.patchValue(this.product.yieldPcs);
         this.product.ingredients.forEach((ingredient) => {
           this.ingredientsArray.push(
             this.getIngredientGroup(

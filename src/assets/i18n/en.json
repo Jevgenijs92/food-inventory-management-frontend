@@ -67,6 +67,7 @@
     "add": "Add",
     "table": {
       "name": "Name",
+      "yieldPcs": "Quantity, pcs",
       "ingredientsQuantity": "Ingredients count",
       "price": "Price",
       "noData": "No data found",
@@ -79,6 +80,7 @@
       "price": "Price",
       "ingredient": "Ingredient",
       "quantity": "Quantity",
+      "batchQuantity": "Quantity, pcs",
       "create": "Create",
       "update": "Update",
       "cancel": "Cancel",
@@ -107,7 +109,7 @@
       "updateOrder": "Update Order",
       "date": "Date",
       "product": "Product",
-      "quantity": "Quantity",
+      "quantity": "Quantity, pcs",
       "sellPrice": "Sell Price",
       "create": "Create",
       "update": "Update",
@@ -131,7 +133,7 @@
     "table": {
       "name": "Name",
       "deliveryDate": "Date",
-      "deliveryQuantity": "Quantity",
+      "deliveryQuantity": "Quantity, pcs",
       "price": "Price",
       "totalCost": "Total Cost",
       "sellPrice": "Sell Price",

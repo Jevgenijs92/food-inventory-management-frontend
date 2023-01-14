@@ -67,6 +67,7 @@
     "add": "Добавить",
     "table": {
       "name": "Название",
+      "yieldPcs": "Количество, шт.",
       "ingredientsQuantity": "Кол-во ингредиентов",
       "price": "Цена",
       "noData": "Результаты не найдены",
@@ -79,6 +80,7 @@
       "price": "Цена",
       "ingredient": "Ингредиент",
       "quantity": "Количество",
+      "batchQuantity": "Количество, шт.",
       "create": "Создать",
       "update": "Изменить",
       "cancel": "Отмена",
@@ -107,7 +109,7 @@
       "updateOrder": "Изменить Заказ",
       "date": "Дата",
       "product": "Продукт",
-      "quantity": "Количество",
+      "quantity": "Кол-во, шт.",
       "sellPrice": "Сумма продажи",
       "create": "Создать",
       "update": "Изменить",
@@ -131,7 +133,7 @@
     "table": {
       "name": "Название",
       "deliveryDate": "Дата",
-      "deliveryQuantity": "Количество",
+      "deliveryQuantity": "Количество, шт.",
       "price": "Цена",
       "totalCost": "Сумма (себестоимость)",
       "sellPrice": "Сумма продажи",

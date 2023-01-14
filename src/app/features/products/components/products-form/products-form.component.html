@@ -8,6 +8,12 @@
                     <input formControlName="name" type="text" matInput/>
                 </mat-form-field>
             </div>
+            <div class="row">
+                <mat-form-field appearance="outline" class="px-1 col-12">
+                    <mat-label>{{'products.form.batchQuantity' | translate}}</mat-label>
+                    <input formControlName="yieldPcs" type="number" matInput/>
+                </mat-form-field>
+            </div>
             <div formArrayName="ingredients" *ngIf="ingredients$ | async as ingredients">
                 <ng-container *ngFor="let ingredientControl of ingredientsArray.controls; index as i">
                     <div class="row" [formGroupName]="i">
