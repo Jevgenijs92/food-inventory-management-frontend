@@ -1,11 +1,17 @@
 {
   "auth": {
     "login": "Ielogoties",
+    "register": "Reģistrēties",
     "username": "Lietotājvārds",
     "password": "Parole",
+    "confirmPassword": "Apstipriniet paroli",
+    "email": "E-pasts",
     "errors": {
       "required": "Obligāts lauks",
-      "invalidCredentials": "Nepareizs lietotājvārds un/vai parole"
+      "invalidCredentials": "Nepareizs lietotājvārds un/vai parole",
+      "email": "Lūdzu ievadiet derīgu e-pastu",
+      "passwordMismatch": "Paroles nesakrīt",
+      "userExists": "Lietotājs ar šādu e-pastu eksistē"
     }
   },
   "header": {

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard, LoginPageComponent } from '@fim/features/auth';
 import { ShellComponent } from '@fim/features/shell';
+import { RegisterPageComponent } from '@fim/features/auth/components/register-page/register-page.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginPageComponent,
+  },
+  {
+    path: 'register',
+    component: RegisterPageComponent,
   },
   {
     path: '**',

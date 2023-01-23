@@ -23,6 +23,11 @@
                     [disabled]="isLoading | async">{{'auth.login' | translate}}
             </button>
         </p>
+        <p class="d-flex justify-content-center">
+            <a [routerLink]="['/register']" class="link-secondary">
+                {{'auth.register' | translate}}
+            </a>
+        </p>
         <mat-error *ngIf="invalidCredentials">{{'auth.errors.invalidCredentials' | translate}}</mat-error>
     </form>
 </div>

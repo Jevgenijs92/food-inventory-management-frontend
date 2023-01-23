@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslateModule } from '@ngx-translate/core';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [LoginPageFormComponent],
@@ -17,6 +18,7 @@ import { TranslateModule } from '@ngx-translate/core';
     ReactiveFormsModule,
     MatButtonModule,
     TranslateModule,
+    RouterModule,
   ],
 })
 export class LoginPageFormModule {}

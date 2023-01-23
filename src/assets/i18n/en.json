@@ -1,11 +1,17 @@
 {
   "auth": {
     "login": "Login",
+    "register": "Sign Up",
     "username": "Username",
     "password": "Password",
+    "confirmPassword": "Confirm password",
+    "email": "Email",
     "errors": {
       "required": "Field is required",
-      "invalidCredentials": "Invalid credentials"
+      "invalidCredentials": "Invalid credentials",
+      "email": "Please enter a valid email",
+      "passwordMismatch": "Passwords do not match",
+      "userExists": "User with such email already exists"
     }
   },
   "header": {

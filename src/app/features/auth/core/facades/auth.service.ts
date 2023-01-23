@@ -33,6 +33,20 @@ export class AuthService {
   private isRefreshingToken$: Observable<boolean> =
     this.isRefreshingTokenSource.asObservable();
 
+  register(params: {
+    username: string;
+    password: string;
+  }): Observable<AuthToken> {
+    const url = `${this.authUrl}/register`;
+    console.log(params);
+    return this.http.post<AuthToken>(url, params).pipe(
+      tap((token) => {
+        this.authStorageService.token = token;
+        this.router.navigate(['']);
+      })
+    );
+  }
+
   login(credentials: {
     username: string;
     password: string;

@@ -1,0 +1,43 @@
+<div class="register-page-form">
+    <form class="p-4" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <p>
+            <mat-form-field appearance="fill">
+                <mat-label>{{'auth.email' | translate}}</mat-label>
+                <input type="email" matInput formControlName="username" required>
+                <mat-error *ngIf="username?.errors?.['required']">
+                    {{'auth.errors.required' | translate}}
+                </mat-error>
+                <mat-error *ngIf="username?.errors?.['email']">
+                    {{'auth.errors.email' | translate}}
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="fill">
+                <mat-label>{{'auth.password' | translate}}</mat-label>
+                <input type="password" matInput formControlName="password" required>
+                <mat-error *ngIf="password?.errors?.['required']">
+                    {{'auth.errors.required' | translate}}
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="fill">
+                <mat-label>{{'auth.confirmPassword' | translate}}</mat-label>
+                <input type="password" matInput formControlName="confirmPassword" required>
+                <mat-error *ngIf="confirmPassword?.errors?.['required']">
+                    {{'auth.errors.required' | translate}}
+                </mat-error>
+                <mat-error *ngIf="confirmPassword?.errors?.['passwordMismatch']">
+                    {{'auth.errors.passwordMismatch' | translate}}
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p class="d-flex justify-content-center">
+            <button type="submit" mat-raised-button color="primary"
+                    [disabled]="isLoading$ | async">{{'auth.register' | translate}}
+            </button>
+        </p>
+        <mat-error class="error__user-exists" *ngIf="userExists && form.untouched">{{'auth.errors.userExists' | translate}}</mat-error>
+    </form>
+</div>
