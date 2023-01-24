@@ -1,5 +1,5 @@
-<div class="login-page-form" [formGroup]="form">
-    <form class="p-4" [formGroup]="form">
+<div class="login-page-form">
+    <form class="p-4" [formGroup]="form" (ngSubmit)="onSubmit()">
         <p>
             <mat-form-field appearance="fill">
                 <mat-label>{{'auth.email' | translate}}</mat-label>
@@ -16,16 +16,16 @@
             <mat-form-field appearance="fill">
                 <mat-label>{{'auth.password' | translate}}</mat-label>
                 <input [type]="passwordVisible ? 'text' : 'password'" matInput formControlName="password" required>
-                <button matSuffix (click)="togglePassword()" mat-icon-button>
+                <a matSuffix (click)="togglePassword()" mat-icon-button tabindex="-1">
                     <mat-icon>remove_red_eye</mat-icon>
-                </button>
+                </a>
                 <mat-error *ngIf="password?.errors?.['required']">
                     {{'auth.errors.required' | translate}}
                 </mat-error>
             </mat-form-field>
         </p>
         <p class="d-flex justify-content-center">
-            <button type="submit" mat-raised-button color="primary" (click)="onSubmit()"
+            <button type="submit" mat-raised-button color="primary"
                     [disabled]="isLoading$ | async">{{'auth.login' | translate}}
             </button>
         </p>
