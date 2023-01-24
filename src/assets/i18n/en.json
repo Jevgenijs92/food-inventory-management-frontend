@@ -9,7 +9,7 @@
     "errors": {
       "required": "Field is required",
       "invalidCredentials": "Invalid credentials",
-      "email": "Please enter a valid email",
+      "email": "Invalid email",
       "passwordMismatch": "Passwords do not match",
       "userExists": "User with such email already exists"
     }

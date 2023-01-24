@@ -6,6 +6,18 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'fim-login-page-form',
   templateUrl: './login-page-form.component.html',
+  styles: [
+    `
+      mat-form-field {
+        width: 200px;
+      }
+
+      mat-error {
+        max-width: 200px;
+        text-align: center;
+      }
+    `,
+  ],
 })
 export class LoginPageFormComponent implements OnInit {
   constructor(
@@ -24,6 +36,8 @@ export class LoginPageFormComponent implements OnInit {
 
   form!: FormGroup;
 
+  passwordVisible: boolean = false;
+
   ngOnInit(): void {
     this._initForm();
   }
@@ -41,7 +55,7 @@ export class LoginPageFormComponent implements OnInit {
     }
   }
 
-  get isLoading(): Observable<boolean> {
+  get isLoading$(): Observable<boolean> {
     return this.loadingService.isLoading$;
   }
 
@@ -51,5 +65,9 @@ export class LoginPageFormComponent implements OnInit {
 
   get password() {
     return this.form.get('password');
+  }
+
+  togglePassword() {
+    this.passwordVisible = !this.passwordVisible;
   }
 }

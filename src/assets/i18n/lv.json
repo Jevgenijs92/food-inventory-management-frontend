@@ -9,7 +9,7 @@
     "errors": {
       "required": "Obligāts lauks",
       "invalidCredentials": "Nepareizs lietotājvārds un/vai parole",
-      "email": "Lūdzu ievadiet derīgu e-pastu",
+      "email": "Nederīgs e-pasts",
       "passwordMismatch": "Paroles nesakrīt",
       "userExists": "Lietotājs ar šādu e-pastu eksistē"
     }

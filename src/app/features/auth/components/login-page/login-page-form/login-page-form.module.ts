@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [LoginPageFormComponent],
@@ -19,6 +20,7 @@ import { RouterModule } from '@angular/router';
     MatButtonModule,
     TranslateModule,
     RouterModule,
+    MatIconModule,
   ],
 })
 export class LoginPageFormModule {}
