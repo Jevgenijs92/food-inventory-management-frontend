@@ -1,0 +1,21 @@
+.error__user-exists {
+  max-width: 200px;
+  text-align: center;
+}
+
+.password-rules {
+  max-width: 200px;
+  overflow-wrap: break-word;
+  font-size: 0.7rem;
+
+  list-style-type: none;
+  padding-inline-start: 8px;
+
+  .error {
+    color: var(--bs-danger);
+  }
+
+  .valid {
+    color: var(--bs-success);
+  }
+}

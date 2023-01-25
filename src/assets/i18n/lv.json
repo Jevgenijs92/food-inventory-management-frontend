@@ -11,7 +11,12 @@
       "invalidCredentials": "Nepareizs lietotājvārds un/vai parole",
       "email": "Nederīgs e-pasts",
       "passwordMismatch": "Paroles nesakrīt",
-      "userExists": "Lietotājs ar šādu e-pastu eksistē"
+      "userExists": "Lietotājs ar šādu e-pastu eksistē",
+      "length": "Satur 8 - 16 characters long",
+      "hasLowercase": "Satur mazos burtus",
+      "hasUppercase": "Satur lielos burtus",
+      "hasNumber": "Satur ciparus",
+      "hasSpecialCharacter": "Satur speciālos simbolus - @$!%*?&"
     }
   },
   "header": {

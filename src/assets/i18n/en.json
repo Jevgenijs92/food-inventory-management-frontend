@@ -11,7 +11,12 @@
       "invalidCredentials": "Invalid credentials",
       "email": "Invalid email",
       "passwordMismatch": "Passwords do not match",
-      "userExists": "User with such email already exists"
+      "userExists": "User with such email already exists",
+      "length": "8 - 16 characters long",
+      "hasLowercase": "Contains lower case letter",
+      "hasUppercase": "Contains upper case letter",
+      "hasNumber": "Contains number",
+      "hasSpecialCharacter": "Contains special character - @$!%*?&"
     }
   },
   "header": {

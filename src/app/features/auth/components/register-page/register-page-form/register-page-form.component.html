@@ -12,15 +12,22 @@
                 </mat-error>
             </mat-form-field>
         </p>
-        <p>
+        <div>
             <mat-form-field appearance="fill">
                 <mat-label>{{'auth.password' | translate}}</mat-label>
                 <input type="password" matInput formControlName="password" required>
-                <mat-error *ngIf="password?.errors?.['required']">
+                <mat-error *ngIf="password?.hasError('required')">
                     {{'auth.errors.required' | translate}}
                 </mat-error>
             </mat-form-field>
-        </p>
+        <ul *ngIf="password?.value?.length > 0" @slide class="password-rules">
+            <li [ngClass]="(password?.hasError('minlength') ||  password?.hasError('maxlength')) ? 'error' : 'valid'">{{'auth.errors.length' | translate}}</li>
+            <li [ngClass]="password?.hasError('hasLowercase') ? 'error' : 'valid'">{{'auth.errors.hasLowercase' | translate}}</li>
+            <li [ngClass]="password?.hasError('hasUppercase') ? 'error' : 'valid'">{{'auth.errors.hasUppercase' | translate}}</li>
+            <li [ngClass]="password?.hasError('hasNumber') ? 'error' : 'valid'">{{'auth.errors.hasNumber' | translate}}</li>
+            <li [ngClass]="password?.hasError('hasSpecialCharacter') ? 'error' : 'valid'">{{'auth.errors.hasSpecialCharacter' | translate}}</li>
+        </ul>
+        </div>
         <p>
             <mat-form-field appearance="fill">
                 <mat-label>{{'auth.confirmPassword' | translate}}</mat-label>
@@ -38,6 +45,7 @@
                     [disabled]="isLoading$ | async">{{'auth.register' | translate}}
             </button>
         </p>
-        <mat-error class="error__user-exists" *ngIf="userExists && form.untouched">{{'auth.errors.userExists' | translate}}</mat-error>
+        <mat-error class="error__user-exists"
+                   *ngIf="userExists && form.untouched">{{'auth.errors.userExists' | translate}}</mat-error>
     </form>
 </div>

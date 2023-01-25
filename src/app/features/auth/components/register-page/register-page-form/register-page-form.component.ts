@@ -1,37 +1,31 @@
 import { Component } from '@angular/core';
-import {
-  AbstractControl,
-  FormGroup,
-  NonNullableFormBuilder,
-  ValidationErrors,
-  Validators,
-} from '@angular/forms';
+import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { LoadingService } from '@fim/core';
 import { AuthService } from '@fim/features/auth';
-
-const passwordMismatch = (
-  control: AbstractControl
-): ValidationErrors | null => {
-  const password = control.get('password');
-  const confirmPassword = control.get('confirmPassword');
-  if (password?.value !== confirmPassword?.value) {
-    confirmPassword?.setErrors({ passwordMismatch: true });
-  } else {
-    confirmPassword?.setErrors(null);
-  }
-  return null;
-};
+import {
+  hasLowercase,
+  hasNumber,
+  hasSpecialCharacter,
+  hasUppercase,
+  passwordMismatch,
+} from '@fim/features/auth/utils';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'fim-register-page-form',
   templateUrl: './register-page-form.component.html',
-  styles: [
-    `
-      .error__user-exists {
-        max-width: 200px;
-        text-align: center;
-      }
-    `,
+  styleUrls: ['./register-page-form.component.scss'],
+  animations: [
+    trigger('slide', [
+      transition(':enter', [
+        style({ height: 0, overflow: 'hidden' }),
+        animate('300ms', style({ height: '*' })),
+      ]),
+      transition(':leave', [
+        style({ height: '*', overflow: 'hidden' }),
+        animate('300ms', style({ height: 0 })),
+      ]),
+    ]),
   ],
 })
 export class RegisterPageFormComponent {
@@ -45,7 +39,18 @@ export class RegisterPageFormComponent {
   ) {
     this.form = this.formBuilder.group({
       username: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.maxLength(20),
+          hasLowercase,
+          hasUppercase,
+          hasNumber,
+          hasSpecialCharacter,
+        ],
+      ],
       confirmPassword: ['', [Validators.required]],
     });
     this.form.setValidators(passwordMismatch);
