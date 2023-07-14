@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { map, take } from 'rxjs/operators';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import {
@@ -16,6 +16,7 @@ import { ProductsFacade } from '@fim/features/products/core/facades/products.fac
 @Component({
   selector: 'fim-orders-page',
   templateUrl: './orders-page.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrdersPageComponent implements OnDestroy {
   constructor(

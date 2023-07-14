@@ -1,4 +1,8 @@
-import { AfterViewInit, Component } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+} from '@angular/core';
 import {
   FormArray,
   FormGroup,
@@ -16,6 +20,7 @@ import { map } from 'rxjs/operators';
 @Component({
   selector: 'fim-orders-form',
   templateUrl: './orders-form.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrdersFormComponent implements AfterViewInit {
   form: FormGroup;

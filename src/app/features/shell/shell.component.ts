@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -14,6 +14,7 @@ const ICONS_PATH = '../assets/icons/';
 @Component({
   selector: 'fim-shell',
   templateUrl: './shell.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShellComponent {
   constructor(

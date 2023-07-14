@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { ErrorModel, ErrorType } from '@fim/shared/models';
 import { ORDERS_FEATURE } from '@fim/features/orders/core/store/orders-store.module';
-import { OrdersState } from '@fim/features/orders/core/store/reducers/orders.reducer';
+import { OrdersState } from '@fim/features/orders/core/store/orders.reducer';
 
 export const selectOrdersState =
   createFeatureSelector<OrdersState>(ORDERS_FEATURE);

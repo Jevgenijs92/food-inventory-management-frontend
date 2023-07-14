@@ -7,7 +7,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Ingredient } from '@fim/features/ingredients/core/models';
+import { Ingredient } from 'src/app/features/ingredients/models';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { ErrorModel } from '@fim/shared/models';

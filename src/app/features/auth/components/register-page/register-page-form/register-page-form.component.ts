@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { LoadingService } from '@fim/core';
 import { AuthService } from '@fim/features/auth';
@@ -15,6 +15,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
   selector: 'fim-register-page-form',
   templateUrl: './register-page-form.component.html',
   styleUrls: ['./register-page-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('slide', [
       transition(':enter', [

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
-import { AuthStorageService } from '../services';
+import { AuthStorageService } from './index';
 import { AuthToken } from '@fim/features/auth';
 import {
   catchError,
@@ -38,7 +38,6 @@ export class AuthService {
     password: string;
   }): Observable<AuthToken> {
     const url = `${this.authUrl}/register`;
-    console.log(params);
     return this.http.post<AuthToken>(url, params).pipe(
       tap((token) => {
         this.authStorageService.token = token;

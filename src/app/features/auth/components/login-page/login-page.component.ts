@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AuthService } from '../../core';
 import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'fim-login-page',
   templateUrl: './login-page.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginPageComponent {
   constructor(protected loginService: AuthService) {}

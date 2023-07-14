@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import * as OrdersActions from '../actions/orders.actions';
+import * as OrdersActions from './orders.actions';
 import { ErrorState, ErrorType } from '@fim/shared/models';
 import { Order } from '@fim/features/orders/core/models';
 

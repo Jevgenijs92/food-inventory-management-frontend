@@ -1,20 +1,25 @@
-import { AfterViewInit, Component } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+} from '@angular/core';
 import {
   Ingredient,
   UnitOfMeasurement,
   UnitOfMeasurementMapping,
-} from '@fim/features/ingredients/core/models';
+} from '../../models';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
 import { AppTranslateService } from '@fim/core/services/app-translate.service';
 import { calculatePricePerUnit } from '@fim/shared/utils';
-import { IngredientsFacade } from '@fim/features/ingredients/core/facades/ingredients.facade';
+import { IngredientsFacade } from '../../facades/ingredients.facade';
 
 @Component({
   selector: 'fim-ingredients-form',
   templateUrl: './ingredients-form.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IngredientsFormComponent implements AfterViewInit {
   unitsOfMeasurement = Object.values(UnitOfMeasurement);

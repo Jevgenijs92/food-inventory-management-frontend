@@ -1,4 +1,9 @@
-import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+} from '@angular/core';
 import {
   FormArray,
   FormGroup,
@@ -7,15 +12,16 @@ import {
 } from '@angular/forms';
 import { combineLatest, Observable, Subject } from 'rxjs';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Product } from '@fim/features/products/core/models';
-import { Ingredient } from '@fim/features/ingredients/core/models';
+import { Product } from '../../core/models';
+import { Ingredient } from '@fim/features/ingredients/models';
 import { debounceTime, map, shareReplay, takeUntil } from 'rxjs/operators';
-import { ProductsFacade } from '@fim/features/products/core/facades/products.facade';
-import { IngredientsFacade } from '@fim/features/ingredients/core/facades/ingredients.facade';
+import { ProductsFacade } from '../../core/facades/products.facade';
+import { IngredientsFacade } from '@fim/features/ingredients/facades/ingredients.facade';
 
 @Component({
   selector: 'fim-products-form',
   templateUrl: './products-form.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductsFormComponent implements AfterViewInit, OnDestroy {
   form: FormGroup;

@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
@@ -14,6 +15,7 @@ import { ErrorModel } from '@fim/shared/models';
 @Component({
   selector: 'fim-products-table',
   templateUrl: './products-table.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductsTableComponent {
   @Input()

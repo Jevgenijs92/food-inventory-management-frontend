@@ -1,9 +1,16 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 
 @Component({
   selector: 'fim-table-actions',
   templateUrl: './table-actions.component.html',
   styleUrls: ['./table-actions.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableActionsComponent {
   @Input()

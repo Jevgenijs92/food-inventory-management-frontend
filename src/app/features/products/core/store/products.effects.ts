@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, mergeMap, switchMap, tap } from 'rxjs/operators';
-import * as ProductsActions from '../actions/products.actions';
+import * as ProductsActions from './products.actions';
 import { of } from 'rxjs';
 import { SnackBarService } from '@fim/features/snack-bar/services/snack-bar.service';
 import { ProductsService } from '@fim/features/products/core/facades/products.service';

@@ -1,12 +1,12 @@
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Ingredient } from '@fim/features/ingredients/core/models';
+import { Ingredient } from '../models';
 import {
   loadingIngredients,
   loadingIngredientsFailure,
   selectIngredients,
-} from '@fim/features/ingredients/core/store/selectors/ingredients.selectors';
-import * as IngredientsActions from '../store/actions/ingredients.actions';
+} from '../store/ingredients.selectors';
+import * as IngredientsActions from '../store/ingredients.actions';
 import { Injectable } from '@angular/core';
 import { ErrorModel } from '@fim/shared/models';
 

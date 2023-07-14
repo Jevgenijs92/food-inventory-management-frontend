@@ -1,4 +1,4 @@
-import { Ingredient } from '@fim/features/ingredients/core/models';
+import { Ingredient } from 'src/app/features/ingredients/models';
 
 export interface Product {
   id: string;

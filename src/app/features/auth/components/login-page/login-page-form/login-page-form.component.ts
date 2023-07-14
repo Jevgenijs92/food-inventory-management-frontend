@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { LoadingService } from '@fim/core';
 import { Observable } from 'rxjs';
@@ -6,6 +13,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'fim-login-page-form',
   templateUrl: './login-page-form.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [
     `
       mat-form-field {

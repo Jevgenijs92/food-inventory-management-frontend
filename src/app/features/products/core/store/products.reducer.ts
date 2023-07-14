@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import * as ProductsActions from '../actions/products.actions';
+import * as ProductsActions from './products.actions';
 import { ErrorState, ErrorType } from '@fim/shared/models';
 import { Product } from '@fim/features/products/core/models';
 

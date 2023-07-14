@@ -1,6 +1,6 @@
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import * as OrdersActions from '../store/actions/orders.actions';
+import * as OrdersActions from '../store/orders.actions';
 import { Injectable } from '@angular/core';
 import { ErrorModel } from '@fim/shared/models';
 import { Order } from '@fim/features/orders/core/models';
@@ -8,7 +8,7 @@ import {
   loadingOrders,
   loadingOrdersFailure,
   selectOrders,
-} from '@fim/features/orders/core/store/selectors/orders.selectors';
+} from '@fim/features/orders/core/store/orders.selectors';
 
 @Injectable({
   providedIn: 'root',

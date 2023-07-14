@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { Product } from '../../core/models';
@@ -6,13 +6,14 @@ import { take } from 'rxjs/operators';
 import { ProductsFormComponent } from '@fim/features/products/components/products-form/products-form.component';
 import { ProductsService } from '@fim/features/products/core/facades/products.service';
 import { SnackBarService } from '@fim/features/snack-bar/services/snack-bar.service';
-import { IngredientsFacade } from '@fim/features/ingredients/core/facades/ingredients.facade';
+import { IngredientsFacade } from '@fim/features/ingredients/facades/ingredients.facade';
 import { ProductsFacade } from '@fim/features/products/core/facades/products.facade';
 import { ErrorModel } from '@fim/shared/models';
 
 @Component({
   selector: 'fim-products-page',
   templateUrl: './products-page.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductsPageComponent implements OnDestroy {
   constructor(

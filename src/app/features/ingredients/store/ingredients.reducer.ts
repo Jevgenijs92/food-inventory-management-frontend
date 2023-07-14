@@ -1,6 +1,6 @@
-import { Ingredient } from '@fim/features/ingredients/core/models';
+import { Ingredient } from '@fim/features/ingredients/models';
 import { createReducer, on } from '@ngrx/store';
-import * as IngredientsActions from '../actions/ingredients.actions';
+import * as IngredientsActions from './ingredients.actions';
 import { ErrorState, ErrorType } from '@fim/shared/models';
 
 export interface IngredientsState {

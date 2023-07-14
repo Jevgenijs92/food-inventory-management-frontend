@@ -1,10 +1,10 @@
 import { Component, OnDestroy } from '@angular/core';
-import { Ingredient } from '@fim/features/ingredients/core/models';
+import { Ingredient } from 'src/app/features/ingredients/models';
 import { Observable } from 'rxjs';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { IngredientsFormComponent } from '../ingredients-form';
 import { take } from 'rxjs/operators';
-import { IngredientsFacade } from '@fim/features/ingredients/core/facades/ingredients.facade';
+import { IngredientsFacade } from '@fim/features/ingredients/facades/ingredients.facade';
 import { ErrorModel } from '@fim/shared/models';
 
 @Component({

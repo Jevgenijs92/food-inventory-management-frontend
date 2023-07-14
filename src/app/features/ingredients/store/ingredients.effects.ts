@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { IngredientsService } from '@fim/features/ingredients/core/facades/ingredients.service';
+import { IngredientsService } from '@fim/features/ingredients/facades/ingredients.service';
 import { catchError, map, mergeMap, switchMap, tap } from 'rxjs/operators';
-import * as IngredientsActions from '../actions/ingredients.actions';
+import * as IngredientsActions from './ingredients.actions';
 import { of } from 'rxjs';
 import { SnackBarService } from '@fim/features/snack-bar/services/snack-bar.service';
-import { Ingredient } from '@fim/features/ingredients/core/models';
+import { Ingredient } from '@fim/features/ingredients/models';
 
 @Injectable()
 export class IngredientsEffects {

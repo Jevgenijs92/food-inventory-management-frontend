@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Ingredient } from '@fim/features/ingredients/core/models';
+import { Ingredient } from '@fim/features/ingredients/models';
 
 export const LOAD_INGREDIENTS = '[Ingredients] Load Ingredients';
 export const LOAD_INGREDIENTS_SUCCESS =
